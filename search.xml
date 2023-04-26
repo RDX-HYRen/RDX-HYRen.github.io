@@ -1,8 +1,1127 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>HOME</title>
-    <url>/2023/04/26/index/</url>
-    <content><![CDATA[]]></content>
+    <title>Python数据结构</title>
+    <url>/2023/04/27/Python%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</url>
+    <content><![CDATA[<h1 id="python-序列"><a href="#python-序列" class="headerlink" title="python 序列"></a>python 序列</h1><p>包括字符串，列表，元组，range对象，字典，集合等数据类型</p>
+<p>补充记忆知识点**整数数据类型：</p>
+<p>0b开头代表二进制       如：0b1001</p>
+<p>0o开头代表八进制       如：0o527</p>
+<p>0x开头代表十六进制    如：0xff5a</p>
+<p>浮点数中的科学记数法：3.14e-2（即为0.0314）</p>
+<p>注意科学计数法幂次必须是整数</p>
+<h1 id="0-序列概述"><a href="#0-序列概述" class="headerlink" title="0.序列概述"></a>0.序列概述</h1><h2 id="0-0常用内建函数"><a href="#0-0常用内建函数" class="headerlink" title="0.0常用内建函数"></a>0.0常用内建函数</h2><p>**int()**将一个字符串或数字暴力转换为整型，即浮点数去除小数点变为整数。</p>
+<p><strong>chr</strong>()可将整数转换成其作为ASCII码对应的字符<br>**ord()**可将字符转换成其对应的ASCII码</p>
+<p>len()可以返回序列的长度</p>
+<p>sum()可以返回数字序列中所有数字的和</p>
+<p>max/min()可以返回序列对象的最大/最小值，通过key确定排序方式</p>
+<p>list()可以强制将可迭代对象转换为列表</p>
+<p>tuple()可以强制将可迭代对象转换为元组</p>
+<p>str()操作可迭代对象，则会把<strong>可迭代对象整体表达</strong>转为字符串，输入迭代器会直接把迭代器存储空间转为字符串。</p>
+<p>总之就是可迭代对象打印出来什么样子，str就把它转为什么样的字符串。</p>
+<p>eval()与前者功能恰好相反，它可以把字符串格式的表达式求值返回。<strong>更广义上来说，eval()函数可以把一段字符串转为可执行的代码。</strong>常用于文件读取后执行其中的内容。</p>
+<p>eval()还可以用于输入字符串快速转为int格式赋值给变量</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(<span class="built_in">str</span>((<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>)))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&quot;(1,2,3,4)&quot;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a=<span class="built_in">str</span>(<span class="built_in">zip</span>(<span class="string">&#x27;123&#x27;</span>,<span class="string">&#x27;abc&#x27;</span>))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(a)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;&lt;zip object at 0x000002446CDA2708&gt;&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x=<span class="number">7</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">eval</span>(<span class="string">&#x27;3*x&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">21</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>n1, n2 = <span class="built_in">eval</span>(<span class="built_in">input</span>(<span class="string">&quot;input two numbers a, b: &quot;</span>))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">input</span> two numbers a, b: <span class="number">0</span>,<span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(n1,n2,sep=<span class="string">&#x27; &#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">0</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>range(start,end,step) 生成一个整数数列，start可以取到，end不能取到（Python的特征），step默认为1，-1则为倒序生成数列。</p>
+<p>help函数调用时内部函数无需带括号，如：help(‘list.sort’)</p>
+<h2 id="0-1基本输入输出函数"><a href="#0-1基本输入输出函数" class="headerlink" title="0.1基本输入输出函数"></a>0.1基本输入输出函数</h2><h3 id="输入函数"><a href="#输入函数" class="headerlink" title="输入函数"></a>输入函数</h3><p>input(“提示语句”)，返回输入的字符串。</p>
+<p>如果要将一次性输入的多个数字转为列表进行后续操作，一般使用如下代码:</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a=<span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>,<span class="built_in">input</span>(<span class="string">&quot;请输入几个数字，以空格间隔&quot;</span>).split(<span class="string">&quot; &quot;</span>)))</span><br></pre></td></tr></table></figure>
+
+<p>解析：用户字符串先输入input函数，然后对字符串进行split方法，以空格为间隔符拆分，用map函数映射批量转整型数字，然后把迭代器转为list列表存储。</p>
+<h3 id="输出函数"><a href="#输出函数" class="headerlink" title="输出函数"></a>输出函数</h3><p>print()函数可以自由地输出各种序列，并且可以在不同序列之间插入字符串连接。</p>
+<p>默认每次进行print()函数后，都会自动连接一个**换行符”\n”**。如果不想下次输出换行，则可以设置end参数：</p>
+<p>print(“  “，end=””)则强制将结尾符由/n改为空字符。如果下次输出想要间隔，则可以设置end=“ ”</p>
+<h3 id="format格式化模板"><a href="#format格式化模板" class="headerlink" title="format格式化模板"></a>format格式化模板</h3><p>格式化输出模板：print(“dviding {} by {}”.format(对象0, 对象1….对象n))</p>
+<p>若在{}中输入数字，则为对象的索引，可以按索引填充字符串。</p>
+<p>除此之外，格式化模板提供格式符，可以在{}中输入统一格式：</p>
+<p>{序号：【对齐说明符】【符号说明符】【最小宽度说明符】【.】【精度说明符】【类型说明符】}</p>
+<p>例如：{0：#&gt;6.2f}  代表序号为0，右对齐并以#填充空格，输入最小长度为6位，2位小数，浮点数类型</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&gt;&gt;&gt; print(&quot;输出结果为 &#123;0:#&gt;6.2f&#125;&quot;.format(3.1415926))</span><br><span class="line">&gt;&gt;&gt; ##3.14</span><br></pre></td></tr></table></figure>
+
+<p>【对齐说明符】：^居中对齐；&lt;左对齐；&gt;右对齐</p>
+<p>【类型说明符】：f浮点小数；e科学记数法；%百分数；d十进制；x十六进制；o八进制；b二进制</p>
+<h2 id="0-2可迭代对象的映射批处理"><a href="#0-2可迭代对象的映射批处理" class="headerlink" title="0.2可迭代对象的映射批处理"></a>0.2可迭代对象的映射批处理</h2><p>map(f, iterable)：接受一个函数f和一个可迭代对象并通过将f依次作用在可迭代对象的每一个元素上得到一个新的<strong>迭代器对象</strong>（需要通过list等方法转化为列表等形式，但是不能用str()直接转字符串，需要用str=’’.join(迭代器)）。<br>应用举例：将输入的字符串列表转化为整数列表</p>
+<h2 id="0-3赋值、浅拷贝与深拷贝"><a href="#0-3赋值、浅拷贝与深拷贝" class="headerlink" title="0.3赋值、浅拷贝与深拷贝"></a>0.3赋值、浅拷贝与深拷贝</h2><p>赋值：b=a</p>
+<p>是直接把b的内存空间指向a，<strong>两者完全公用一个内存空间</strong>，一荣俱荣，一损俱损。他们之间存在着不可磨灭的纽带，修改其中任何一个，另外一个也会跟着变化。</p>
+<p>浅拷贝时，<strong>内部复杂元素</strong>仍使用同一内存空间，一个发生更改，其他也会跟着一起变化。因此容易出现易忽视的未知bug。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a=[<span class="number">1</span>,<span class="number">2</span>,[<span class="number">3</span>,<span class="number">4</span>]]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b=a.copy()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b[<span class="number">0</span>],b[<span class="number">2</span>][<span class="number">0</span>]=<span class="number">5</span>,<span class="number">5</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(a)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>[<span class="number">1</span>,<span class="number">2</span>,[<span class="number">5</span>,<span class="number">4</span>]]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(b)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>[<span class="number">5</span>,<span class="number">2</span>,[<span class="number">5</span>,<span class="number">4</span>]]</span><br></pre></td></tr></table></figure>
+
+<p>在此案例中，列表内部嵌套的列表在拷贝后仍然使用同一内存空间，因而b的[3,4]变更为[5,4]时，a对应位置的[3,4]也变更为[5,4]。</p>
+<p>如果不想因为浅拷贝同内存空间导致变量牵连，应使用深拷贝，开辟完全独立的新内存空间，互不干扰：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> copy</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a=[<span class="number">1</span>,<span class="number">2</span>,[<span class="number">3</span>,<span class="number">4</span>]]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b=copy.deepcopy(a)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(b)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>[<span class="number">1</span>,<span class="number">2</span>,[<span class="number">3</span>,<span class="number">4</span>]]</span><br></pre></td></tr></table></figure>
+
+<h2 id="0-4-序列的通用操作"><a href="#0-4-序列的通用操作" class="headerlink" title="0.4 序列的通用操作"></a>0.4 序列的通用操作</h2><h3 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h3><p>从左往右数，序列的索引为0,1,2,3,4,……..（与实际日常排序比，均少1，因为第一个元素的索引是0）</p>
+<p>另外还支持负数索引：……-4,-3,-2,-1，最后一个数的索引为-1.从右往左数</p>
+<p>索引的使用为[]方括号，例如：序列[index]</p>
+<h3 id="切片"><a href="#切片" class="headerlink" title="切片"></a>切片</h3><p>序列索引的升级版，可以设置初始位置索引和终止位置索引，再设置一个步长。</p>
+<p>格式也是方括号：序列[strat : end : step]</p>
+<h3 id="重复"><a href="#重复" class="headerlink" title="重复"></a>重复</h3><p>对序列使用乘法符号，则重复序列并连接为更长的序列。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>‘Python’*<span class="number">2</span></span><br><span class="line">&gt;&gt;&gt;<span class="string">&#x27;PythonPython&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="连接"><a href="#连接" class="headerlink" title="连接"></a>连接</h3><p>同类型序列用加法符号可以直接连接。此处不再赘述，详情见str节的连接字符串部分。</p>
+<h3 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h3><p>sorted(iter,key,reverse)</p>
+<p>内置函数，可以把任意序列iter中的元素强制排序，并转化为列表返回。注意这种方法的返回对象是列表，而非迭代器或者别的。</p>
+<p>可选参数key可以指定排序方式，而reverse控制排序的正反向。</p>
+<p>key=str/lambda表达式</p>
+<p>​        按长度排序：key=lambda x:len(x)</p>
+<p>​        按列表内置元组第三个元素排序：key=lambda s: s[2]</p>
+<p>倒序：reverse=True</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&gt;&gt; students = [(<span class="string">&#x27;john&#x27;</span>, <span class="string">&#x27;A&#x27;</span>, <span class="number">15</span>), (<span class="string">&#x27;jane&#x27;</span>, <span class="string">&#x27;B&#x27;</span>, <span class="number">12</span>), (<span class="string">&#x27;dave&#x27;</span>, <span class="string">&#x27;B&#x27;</span>, <span class="number">10</span>)]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">sorted</span>(students, key=<span class="keyword">lambda</span> s: s[<span class="number">2</span>])        <span class="comment"># 按年龄排序</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>[(<span class="string">&#x27;dave&#x27;</span>, <span class="string">&#x27;B&#x27;</span>, <span class="number">10</span>), (<span class="string">&#x27;jane&#x27;</span>, <span class="string">&#x27;B&#x27;</span>, <span class="number">12</span>), (<span class="string">&#x27;john&#x27;</span>, <span class="string">&#x27;A&#x27;</span>, <span class="number">15</span>)]</span><br></pre></td></tr></table></figure>
+
+<p>也常用于字典的排序。可以先用dict.keys()或dict.values()提取出键或者值进行排序，也可以用dict.items同时提取键值对，再用key加lambda匿名函数指定按键还是值排序：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">dict</span>=&#123;<span class="string">&#x27;a&#x27;</span>:<span class="number">2</span>,<span class="string">&#x27;b&#x27;</span>:<span class="number">3</span>,<span class="string">&#x27;c&#x27;</span>:<span class="number">1</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">sorted</span>(<span class="built_in">dict</span>.keys())</span><br><span class="line">[<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">sorted</span>(<span class="built_in">dict</span>.values())</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">sorted</span>(<span class="built_in">dict</span>.items(),key=<span class="keyword">lambda</span> x:x[<span class="number">1</span>],reverse=<span class="literal">True</span>)</span><br><span class="line">[(<span class="string">&#x27;b&#x27;</span>, <span class="number">3</span>), (<span class="string">&#x27;a&#x27;</span>, <span class="number">2</span>), (<span class="string">&#x27;c&#x27;</span>, <span class="number">1</span>)]  <span class="comment">#按值倒序排列</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="0-5-可修改与不可修改类型"><a href="#0-5-可修改与不可修改类型" class="headerlink" title="0.5 可修改与不可修改类型"></a>0.5 可修改与不可修改类型</h2><h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p>可修改：list, dict, set, 大部分自定义类型，前三种可以用解析方法创建</p>
+<p>不可修改： int，bool，float，tuple，str，frozenset</p>
+<p>本质：不可变的是每一个元组元素到实际对象（值）的引用/绑定关系</p>
+<h3 id="对运行效率的影响"><a href="#对运行效率的影响" class="headerlink" title="对运行效率的影响"></a>对运行效率的影响</h3><p>对于不可变类型反复修改时会反复创建新对象，降低运行效率。</p>
+<h2 id="0-6-迭代器对象与可迭代对象"><a href="#0-6-迭代器对象与可迭代对象" class="headerlink" title="0.6 迭代器对象与可迭代对象"></a>0.6 迭代器对象与可迭代对象</h2><h3 id="迭代器对象"><a href="#迭代器对象" class="headerlink" title="迭代器对象"></a>迭代器对象</h3><p>指向可迭代对象中某个位置，通过next()函数访问下一个位置的元素，直到没有元素抛出StopIteration</p>
+<p>相当于使用时指针向后移动，移动到末尾则迭代器任务完成，无法继续使用。</p>
+<h3 id="可迭代对象"><a href="#可迭代对象" class="headerlink" title="可迭代对象"></a>可迭代对象</h3><p>通过iter()函数或self.__iter__()返回一个迭代器对象</p>
+<h3 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h3><p>迭代器只能用一次：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>x = <span class="built_in">iter</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(<span class="built_in">list</span>(x))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(<span class="built_in">list</span>(x))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>[]</span><br></pre></td></tr></table></figure>
+
+<h3 id="生成迭代器对象的函数"><a href="#生成迭代器对象的函数" class="headerlink" title="生成迭代器对象的函数"></a>生成迭代器对象的函数</h3><h4 id="倒序"><a href="#倒序" class="headerlink" title="倒序"></a>倒序</h4><p>reversed()函数返回倒向排序的<strong>迭代器对象</strong>，需用list()等转化为相应所需形式</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&gt;&gt;&gt;x=[a,b,c,d]</span><br><span class="line">&gt;&gt;&gt;<span class="built_in">reversed</span>(x)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>&lt;list_reverseiterator <span class="built_in">object</span> at <span class="number">0x0000000002FA0448</span>&gt;</span><br><span class="line">&gt;&gt;&gt;<span class="built_in">list</span>(<span class="built_in">reversed</span>(x))</span><br><span class="line">&gt;&gt;&gt;[d,c,b,a]</span><br></pre></td></tr></table></figure>
+
+<h4 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h4><p>enumerate()函数用于枚举可迭代对象中的元素，返回<strong>迭代器对象</strong>，每个元素都是一个包含索引和值的元组</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>x=<span class="built_in">enumerate</span>(<span class="string">&#x27;abcd&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>&lt;enumberate <span class="built_in">object</span> at <span class="number">0x0000000002FA0448</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">list</span>(x)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>[(<span class="number">1</span>,<span class="string">&#x27;a&#x27;</span>),(<span class="number">2</span>,<span class="string">&#x27;b&#x27;</span>),(<span class="number">3</span>,<span class="string">&#x27;c&#x27;</span>),(<span class="number">4</span>,<span class="string">&#x27;d&#x27;</span>)]</span><br></pre></td></tr></table></figure>
+
+<h4 id="压缩"><a href="#压缩" class="headerlink" title="压缩"></a>压缩</h4><p>zip(a,b)函数像一个拉链，将多个可迭代对象的对应位置元素组合为一个元组，返回一个<strong>迭代器对象</strong>。</p>
+<p>当多个输入的可迭代对象长度不同时，以最短的进行匹配。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>x=<span class="built_in">zip</span>(<span class="string">&#x27;abcd&#x27;</span>,<span class="string">&#x27;123&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>&lt;enumberate <span class="built_in">object</span> at <span class="number">0x0000000002FA0448</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">list</span>(x)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>[(<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;1&#x27;</span>),(<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;2&#x27;</span>),(<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;3&#x27;</span>)]</span><br></pre></td></tr></table></figure>
+
+<h4 id="映射"><a href="#映射" class="headerlink" title="映射"></a>映射</h4><p>map(f, iterable)函数用于将某个函数一一映射到序列上进行操作，返回一个<strong>迭代器对象</strong>。</p>
+<p>常用于字符串拆分后批量转int数字，来获取一次输入多个值形成列表。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a=<span class="built_in">list</span>((<span class="built_in">map</span>(<span class="built_in">int</span>,<span class="built_in">input</span>().split(<span class="string">&#x27;,&#x27;</span>)))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span> </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="1-列表List"><a href="#1-列表List" class="headerlink" title="1.列表List [ ]"></a>1.列表List [ ]</h1><h2 id="1-1列表的方法"><a href="#1-1列表的方法" class="headerlink" title="1.1列表的方法"></a>1.1列表的方法</h2><h3 id="1）类似数组利用下标赋值"><a href="#1）类似数组利用下标赋值" class="headerlink" title="1）类似数组利用下标赋值"></a>1）类似数组利用下标赋值</h3><h3 id="2）添加元素："><a href="#2）添加元素：" class="headerlink" title="2）添加元素："></a>2）添加元素：</h3><p><strong>list.append(obj)：</strong></p>
+<p>​      在列表结尾添加新元素<br><strong>list.insert(index, obj)：</strong></p>
+<p>​      在列表中某一位置插入元素，插入后下标为index，若index过大则插在最后</p>
+<h3 id="3）删除元素："><a href="#3）删除元素：" class="headerlink" title="3）删除元素："></a>3）删除元素：</h3><p><strong>list.pop(index)：</strong></p>
+<p>​      删除列表中下标为index的元素，<strong>不写index默认删除最后一项</strong>，<strong>并返回删除元素的值</strong>（pop:弹出）</p>
+<p><strong>list.remove(obj)：</strong></p>
+<p>​      删除列表中等于obj的元素</p>
+<h3 id="4）列表反序："><a href="#4）列表反序：" class="headerlink" title="4）列表反序："></a>4）列表反序：</h3><p><strong>list.reserve()：</strong></p>
+<p>与内建函数reserved(list)不同：使用list.reserve()方法，则会直接反序原列表，因为列表是可变对象。</p>
+<h3 id="5）列表排序"><a href="#5）列表排序" class="headerlink" title="5）列表排序"></a>5）列表排序</h3><p><strong>list.sort(key=None/len/str , reverse=True/False)：</strong></p>
+<p>与内建函数sorted(list)不同：使用list.sort()方法，则会直接排序原列表，但这样做会覆盖原列表。</p>
+<h2 id="1-2列表使用"><a href="#1-2列表使用" class="headerlink" title="1.2列表使用"></a>1.2列表使用</h2><p>1.成员判断(in)，序列连接(+)，序列重复(*)<br>2.整体操作：<br>list.sort()，list.reverse()，list.extend(iterable)（将可迭代对象分割为列表并合并入原列表），其返回值均为none，只修改原列表；<br>sorted(list)返回新列表，reversed(list)返回反转列表的迭代器，len(list)返回列表元素个数。</p>
+<p>3.list.count()可用于计数</p>
+<p>4.list.index()可用于查找<strong>（列表没有find方法)，</strong>list.clear()可用于清空列表。</p>
+<p>5.统计操作：max(list), sum(list)</p>
+<h2 id="1-25-列表比较"><a href="#1-25-列表比较" class="headerlink" title="1.25 列表比较"></a>1.25 列表比较</h2><p>列表的值比较结果为其逐元素比较的结果：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line">b = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a == b</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="literal">True</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a <span class="keyword">is</span> b</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="literal">False</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="1-3创建列表"><a href="#1-3创建列表" class="headerlink" title="1.3创建列表"></a>1.3创建列表</h2><h3 id="列表解析"><a href="#列表解析" class="headerlink" title="列表解析"></a>列表解析</h3><p>列表解析：利用循环生成列表的一种简洁方式<br>公式：newlist = [expression1 for item1 in iterable1 for item2 in iter2 … if condition == True else exp2]<br>可以有多个for语句，从左到右依次执行（相当于嵌套循环）<br>可以有复杂的条件判断表达式（if-else)</p>
+<h3 id="其他方法"><a href="#其他方法" class="headerlink" title="其他方法"></a>其他方法</h3><p>关于高维列表：list(zip(*matrix))可以直接返回转置后的矩阵<br>列表切片：newlist = listA[start : end : step]，其中start到end为左闭右开区间<br>若start、end为负数则为倒数第x个，但此时step仍默认为1不是-1<br>列表复制：copy浅拷贝，deepcopy深拷贝<br>可通过list()将range对象、字符串、可迭代对象转化为列表。</p>
+<p>创建多维列表：alist = [[]]*n可以创建一个n行矩阵</p>
+<h1 id="2-字符串String-“-“"><a href="#2-字符串String-“-“" class="headerlink" title="2.字符串String  “ “"></a>2.字符串String  “ “</h1><p>list等<strong>可迭代对象</strong>和str的转化：x.join(iterable)，将list等<strong>可迭代对象</strong>中的元素用字符串x拼接起来<br>例：’’ ‘’.join(reversed(astr))</p>
+<p>字符串是<strong>不可变对象</strong>，因而字符串使用字符串对象的方法进行操作，格式为str.方法名()，涉及“修改”字符串则是通过对应方法返回修改后的新字符串。若确实想修改原字符串，则可用赋值语句：</p>
+<p>str=str.方法名()</p>
+<p>str =”” .join(函数名(Str))—函数返回的可迭代对象通过join组合为字符串，不能直接str(可迭代对象)。并且迭代器输出的值也必须是字符串类型，不能是其他类型的数据（如列表拆分出的int）。</p>
+<p>不可使用索引直接修改字符串中的某一部分。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>Str=<span class="string">&quot;abcde&quot;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Str[<span class="number">1</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;b&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Str[<span class="number">1</span>]=c</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Traceback (most recent call last):</span><br><span class="line">  File <span class="string">&quot;&lt;pyshell#2&gt;&quot;</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    Str[<span class="number">1</span>]=c</span><br><span class="line">NameError: name <span class="string">&#x27;c&#x27;</span> <span class="keyword">is</span> <span class="keyword">not</span> defined</span><br><span class="line">----------------------------------------------------------------------------</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Str=<span class="string">&quot;abcde&quot;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Str=Str.upper()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Str</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;ABCDE&#x27;</span></span><br><span class="line">----------------------------------------------------------------------------</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Str=<span class="string">&quot;abcde&quot;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Str=<span class="string">&#x27;&#x27;</span>.join(<span class="built_in">reversed</span>(Str))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Str</span><br><span class="line">&gt;&gt;&gt;<span class="string">&#x27;edcba&#x27;</span> </span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-0-字符串的表示"><a href="#2-0-字符串的表示" class="headerlink" title="2.0 字符串的表示"></a>2.0 字符串的表示</h2><ol>
+<li><p>str’1’ng1: “str’1’ng1”<br>也可以用’str”i”ng’表示内部有引号的字符串</p>
+</li>
+<li><p>三引号可以在字符串中换行，输出时也换行，换行即为一个换行符\n</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a=<span class="string">&#x27;&#x27;&#x27;abc</span></span><br><span class="line"><span class="string">12\t3&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(<span class="built_in">len</span>(a))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">8</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="2-1查找-计数"><a href="#2-1查找-计数" class="headerlink" title="2.1查找/计数"></a>2.1查找/计数</h2><p><strong>str.find()<strong>和</strong>rfind()</strong></p>
+<p>​      查找指定字符串在指定范围内首次出现的位置，返回被查找对象的索引数字。如用rfind()则倒序查找返回最后一次出现的位置</p>
+<p><strong>str.index()<strong>和</strong>rindex()</strong></p>
+<p>​       与find()基本一致，但index方法找不到直接报错，<strong>find方法找不到返回-1</strong><br><strong>str.count()：</strong></p>
+<p>​       统计特定字串出现个数<br><strong>str.startswith/endswith()：</strong></p>
+<p>​       判断字符串是否由特定字串开始/结束，返回布尔值</p>
+<h2 id="2-2切分"><a href="#2-2切分" class="headerlink" title="2.2切分"></a>2.2切分</h2><p><strong>str.split()：</strong></p>
+<p>​      将字符串按照特定字串分割为新的字符串列表，不包含给定字串<br><strong>str.partition/rpartition()：</strong></p>
+<p>​      将字符串按照特定字串分割为新的<strong>三元字符串元组</strong>返回（左切片，字串，右切片），左切片和右切片全部合并为一整个字符串，如使用rpartition()则从右向左搜索分割字串。</p>
+<h2 id="2-3替换"><a href="#2-3替换" class="headerlink" title="2.3替换"></a>2.3替换</h2><p><strong>str.replace(old, new, maxnum)：</strong></p>
+<p>​       将字符串中的old字串替换为new字串，可设置最大替换次数，返回新字符串<br><strong>注意：若要替换单词，如果不将目标字串两端加空格的话包含该字串的单词中的字串也会被替换</strong></p>
+<h2 id="2-4调整-判断大小写"><a href="#2-4调整-判断大小写" class="headerlink" title="2.4调整/判断大小写"></a>2.4调整/判断大小写</h2><p><strong>str.upper/lower()：</strong></p>
+<p>​      将字符串中所有字母全部转化为大/小写；</p>
+<p><strong>str.swapcase()：</strong></p>
+<p>​      将字符串中大写变小写，小写变大写；<br><strong>str.title()：</strong></p>
+<p>​      将字符串中所有单词（通过空格和 ‘ 分割）的首字母大写；</p>
+<p><strong>str.capitalize()：</strong></p>
+<p>​      仅将字符串的首字母大写；<br><strong>str.istitle/isupper/islower()：</strong></p>
+<p>​       判断字符串是否为对应类型，返回布尔值</p>
+<h2 id="2-5调整长度和空白符"><a href="#2-5调整长度和空白符" class="headerlink" title="2.5调整长度和空白符"></a>2.5调整长度和空白符</h2><p><strong>str.strip/rstrip/lstrip()：</strong></p>
+<p>​      去掉字符串两侧或右侧或左侧的空白字符（空格、制表符、换行符）<br><strong>str.zfill(int)：</strong></p>
+<p>​      在左边填充 0 使其长度变为 width，正负值前缀的处理方式是在正负符号之后填充而非在之前，若指定长度过短则返回原字符串<br>​      整数左边去0，直接int()即可</p>
+<h2 id="2-6-字符串的表达式求值输出"><a href="#2-6-字符串的表达式求值输出" class="headerlink" title="2.6 字符串的表达式求值输出"></a>2.6 字符串的表达式求值输出</h2><p>f”str1{exp}str2”在字符串求值时对exp表达式求值</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>name = <span class="string">&quot;python&quot;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">f&quot;dear <span class="subst">&#123;name&#125;</span>&quot;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&quot;dear python&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-7-字符串的连接"><a href="#2-7-字符串的连接" class="headerlink" title="2.7 字符串的连接"></a>2.7 字符串的连接</h2><p>简单的字符串合并可以使用“+”连接，但是字符串为不可变对象因此应该把合并结果赋值给新的字符串。</p>
+<p><strong>str.join()：</strong></p>
+<p>join()方法用于<strong>将可迭代对象的元素</strong>按照指定的<strong>连接符</strong>（字符串）连接为新字符串。</p>
+<p>本质上相当于被操作字符串填充到可迭代对象的间隙中作为分隔符了。</p>
+<p>更重要的应用是把迭代器转为字符串的代码str=””.join(迭代器)）【这是将可迭代对象转为不可迭代对象】</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>x=<span class="string">&quot;abc&quot;</span>+<span class="string">&quot;123&quot;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(x)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&quot;abc123&quot;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x=<span class="string">&#x27;sep&#x27;</span>.join([<span class="string">&quot;1&quot;</span>,<span class="string">&quot;2&quot;</span>,<span class="string">&quot;3&quot;</span>,<span class="string">&quot;4&quot;</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(x)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&quot;1sep2sep3sep4&quot;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-8-字符串中的转义字符"><a href="#2-8-字符串中的转义字符" class="headerlink" title="2.8 字符串中的转义字符"></a>2.8 字符串中的转义字符</h2><h3 id="转义字符的应用"><a href="#转义字符的应用" class="headerlink" title="转义字符的应用"></a>转义字符的应用</h3><p>\t：水平制表符，可以上下对齐（用于制表）<br>\n：换行符</p>
+<p>注：只需要一个换行符的时候，直接输入print()即默认含一个换行符</p>
+<p>\x64：字母d的十六进制ascii码，输出时直接变成d，换成\xn则输出以n为ascii码的符号。<br>在””中如果要表示”，则要写作\”</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="number">10</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,i+<span class="number">1</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;&#123;&#125;x&#123;&#125;=&#123;&#125;\t&#x27;</span>.<span class="built_in">format</span>(j,i,i*j),end=<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>()</span><br></pre></td></tr></table></figure>
+
+<p>案例为打印九九乘法表的代码，使用制表符\t便可输出对齐的乘法表，无需计算空格数量。</p>
+<h3 id="阻止解释转义字符：在字符串前面加r"><a href="#阻止解释转义字符：在字符串前面加r" class="headerlink" title="阻止解释转义字符：在字符串前面加r"></a>阻止解释转义字符：在字符串前面加r</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(<span class="string">r&quot;Hello, \t my friend, \n \t\t Greetings!&quot;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&quot;Hello, \t my friend, \n \t\t Greetings!&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="3-元组Tuple"><a href="#3-元组Tuple" class="headerlink" title="3.元组Tuple  ( )"></a>3.元组Tuple  ( )</h1><h2 id="3-1组合与拆分"><a href="#3-1组合与拆分" class="headerlink" title="3.1组合与拆分"></a>3.1组合与拆分</h2><p>packing：利用元组将一组数据组合成一个对象 例：atuple = (obj1, obj2)<br>unpacking：将元组赋值给多个独立变量 例：x, y = atuple，则x = obj1, y = obj2<br>另例：x, y = input().split()，输入1 2，则x = ‘1’, y = ‘2’</p>
+<h2 id="3-2元组性质"><a href="#3-2元组性质" class="headerlink" title="3.2元组性质"></a>3.2元组性质</h2><p>可通过下标访问，可切片，可通过tuple()将list，str类型转化为元组<br>len(atuple)可获取元组元素个数，sorted()由小到大排序, reversed()反转元组（利用tuple()转换为元组）</p>
+<p>以上均为元组作为序列的基本性质，不是元组的特殊性质。</p>
+<p>元组是不可修改对象，故没有append()，pop()，insert()等方法，只能使用内建函数将结果转移至其他序列。</p>
+<p><strong>元组的一个特点是，虽然它本身是不可变对象，但其内部的可变对象仍然可修改。</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>tup=([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],<span class="string">&#x27;123&#x27;</span>,(<span class="string">&#x27;1&#x27;</span>,<span class="string">&#x27;2&#x27;</span>,<span class="string">&#x27;3&#x27;</span>))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>tup[<span class="number">0</span>][<span class="number">1</span>]=<span class="number">0</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(tup)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>([<span class="number">1</span>, <span class="number">0</span>, <span class="number">3</span>], <span class="string">&#x27;123&#x27;</span>, (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;3&#x27;</span>))</span><br></pre></td></tr></table></figure>
+
+<p>元组最常用的是作为多维数组，形成矩阵：</p>
+<p>（ (1 , 0) , ( 0 , 1 ) ）：一个二维数组，同时可以表示一个二阶矩阵。</p>
+<h1 id="4-字典Dict"><a href="#4-字典Dict" class="headerlink" title="4.字典Dict { }"></a>4.字典Dict { }</h1><h2 id="4-1键值对访问"><a href="#4-1键值对访问" class="headerlink" title="4.1键值对访问"></a>4.1键值对访问</h2><p>键的内容一般为字符串、整型数字、元组等<strong>不可变对象。</strong></p>
+<p>值可以重复，但是键不可重复。</p>
+<p>adict = {1 : 1, 2 : 4, 3 : 9}，则adict[3] = 9，代码直接由键访问值。</p>
+<h2 id="4-2创建字典"><a href="#4-2创建字典" class="headerlink" title="4.2创建字典"></a>4.2创建字典</h2><p>直接创建： adict = {1 : 1, 2 : 4, 3 : 9}<br>从<strong>一个列表</strong>（key）创建：令d={}，对于key列表中的元素item，直接用赋值法更新其值：d[item]=…<br>从<strong>两个列表</strong>（key-value）列表创建：bdict = <strong>dict</strong>(<strong>zip</strong>(keylist, valuelist)) ，其中两个列表一般等长<br>从<strong>一个元素全为二元元组的列表创建</strong>：cdict = <strong>dict</strong>(tuplelist)，key为所有元组0号，value为所有元组1号，对应关系不变<br><strong>字典解析</strong>：公式：newdict = {expr : expr for item in iterable if condition == True}<br>                  例：adict = {x : x ** 2 for x in range(1, 4) if True}，则 adict = {1 : 1, 2 : 4, 3 : 9}<br><strong>多重对应关系，可以考虑字典套字典</strong></p>
+<h2 id="4-3元素修改"><a href="#4-3元素修改" class="headerlink" title="4.3元素修改"></a>4.3元素修改</h2><p>直接赋值：adict[3] = 6，则adict = {1:1, 2:4, 3:6}<br>删除键值对：adict.pop(key)，则先返回key对应的值，再删除对应键值对（弹出）</p>
+<h2 id="4-4获取元素信息"><a href="#4-4获取元素信息" class="headerlink" title="4.4获取元素信息"></a>4.4获取元素信息</h2><p><strong>dict.get(key,default=None)</strong></p>
+<p>​      以直接返回key对应的值。若未查找到则返回default的值。</p>
+<p><strong>dict.keys/values()</strong>—-注意单词复数形式</p>
+<p>​      返回一个含有所有key/value值的<strong>view对象</strong>，需用list()等转化为键/值组成的列表。<br><strong>dict.items()</strong>—-注意单词复数形式</p>
+<p>​      返回一个含有所有键值对元组的<strong>view对象</strong>，需用list()等转化为<strong>键值对元组</strong>作为元素组成的列表。</p>
+<h2 id="4-5-字典的合并更新"><a href="#4-5-字典的合并更新" class="headerlink" title="4.5 字典的合并更新"></a>4.5 字典的合并更新</h2><p><strong>dict.update(dict2):</strong></p>
+<p>​      将dict2的键值对更新进dict，如果已经存在对应的键，就更新值。</p>
+<h1 id="5-集合Set-Frozenset"><a href="#5-集合Set-Frozenset" class="headerlink" title="5.集合Set/Frozenset { }"></a>5.集合Set/Frozenset { }</h1><p>分为可变集合（set）和不可变集合（frozenset），可迭代。、</p>
+<p>集合与数学上的定义一致，有两个显著特征：<strong>元素去重，无序</strong></p>
+<p>所以和其他序列不同的是，它作为一个无序序列<strong>不存在索引、切片</strong>。</p>
+<h2 id="5-1创建集合（自动去重）"><a href="#5-1创建集合（自动去重）" class="headerlink" title="5.1创建集合（自动去重）"></a>5.1创建集合（自动去重）</h2><p>例：aset = {1, 1, 2}，则aset = {1, 2}、</p>
+<p><strong>常用集合作为自动去重工具</strong>，例如有一个列表x需要把重复元素删去，则先set(x)再list(x)即可。</p>
+<h2 id="5-2集合基本操作"><a href="#5-2集合基本操作" class="headerlink" title="5.2集合基本操作"></a>5.2集合基本操作</h2><p>len(set)返回集合元素个数<br>修改元素：set.add/remove(obj)：添加/删除指定元素<br>                  set.pop()<strong>随机</strong>删除一个元素并返回删掉的元素：毕竟是无序序列，没法指定删掉哪个。<br>                  set.clear()清空集合<br>元素判断：in/ not in，返回布尔值<br>子集判断：aset.issubset(bset)判断aset是否为bset子集；aset.superset(bset)判断aset是否包含bset<br><strong>集合排序：sorted(aset)返回一个排好序的列表</strong></p>
+<p>​                  虽然集合是无序的，但是对它使用sorted()内建函数则会强制排序并变更为有序的列表。</p>
+<h2 id="5-3集合运算"><a href="#5-3集合运算" class="headerlink" title="5.3集合运算"></a>5.3集合运算</h2><p>适用于可变与不可变集合的常见通用方法为：</p>
+<p><strong>交集：aset.intersection(bset, cset, …)：</strong></p>
+<p>​          返回一个新的集合对象，即求交集aset&amp;bset&amp;cset…的结果<br><strong>并集：aset.union(bset, cset, …)：</strong></p>
+<p>​          返回一个新的集合对象，即求并集aset|bset|cset….的结果<br><strong>差集：aset.difference(bset, cset, …)：</strong></p>
+<p>​          返回一个新的集合对象，即求差集aset - bset - cset - …的结果<br>​           aset.symmetric_difference(bset)，返回一个新的集合对象，即aset和bset对称差的结果</p>
+<p>对于可变集合，则可特殊地写出修改方法：</p>
+<p><strong>交集：aset.intersection_update(bset, cset, …)</strong></p>
+<p><strong>并集：aset.update(bset, cset, …)</strong></p>
+<p><strong>差集：aset.difference_update(bset, cset, …)</strong></p>
+<h1 id="6-文件操作"><a href="#6-文件操作" class="headerlink" title="6.文件操作"></a>6.文件操作</h1><h2 id="打开文件"><a href="#打开文件" class="headerlink" title="打开文件"></a>打开文件</h2><p>有open(”file.txt”)和with open(“file.txt”) as f两种用法，推荐后一种,因为with open() as的打开方式会在结束后自动关闭文件。<br>打开文件常用模式：（必须作为字符串写入括号参数）</p>
+<table>
+<thead>
+<tr>
+<th>模式</th>
+<th>r</th>
+<th>r+</th>
+<th>w</th>
+<th>w+</th>
+<th>a</th>
+<th>a+</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>读</td>
+<td>+</td>
+<td>+</td>
+<td></td>
+<td>+</td>
+<td></td>
+<td>+</td>
+</tr>
+<tr>
+<td>写</td>
+<td></td>
+<td>+</td>
+<td>+</td>
+<td>+</td>
+<td>+</td>
+<td>+</td>
+</tr>
+<tr>
+<td>创建</td>
+<td></td>
+<td></td>
+<td>+</td>
+<td>+</td>
+<td>+</td>
+<td>+</td>
+</tr>
+<tr>
+<td>覆盖</td>
+<td></td>
+<td></td>
+<td>+</td>
+<td>+</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>指针在开始</td>
+<td>+</td>
+<td>+</td>
+<td>+</td>
+<td>+</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>指针在结尾</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>例如：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;test.txt&#x27;</span>,<span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="built_in">print</span>(f.read())</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="读取文件内容"><a href="#读取文件内容" class="headerlink" title="读取文件内容"></a>读取文件内容</h2><h4 id="f-read"><a href="#f-read" class="headerlink" title="f.read()"></a>f.read()</h4><p>直接将文本中的全部内容读取进来变成一个换行的字符串，但输出时没有一般字符串类型自带的引号</p>
+<h4 id="f-readline"><a href="#f-readline" class="headerlink" title="f.readline()"></a>f.readline()</h4><p>readline方法从文件中读取整行，包括换行符’\n’<br>多次使用时，readline记住上一次读取的位置，继续读取下一行</p>
+<h4 id="f-readlines"><a href="#f-readlines" class="headerlink" title="f.readlines()"></a>f.readlines()</h4><p>readlines方法读取所有行，返回的是所有行的字符串组成的列表。</p>
+<h2 id="文件改写"><a href="#文件改写" class="headerlink" title="文件改写"></a>文件改写</h2><h4 id="f-write"><a href="#f-write" class="headerlink" title="f.write()"></a>f.write()</h4><figure class="highlight text"><table><tr><td class="code"><pre><span class="line">f.write(str) # f为文件对象，str为要写入的字符串</span><br></pre></td></tr></table></figure>
+
+<h2 id="文件关闭"><a href="#文件关闭" class="headerlink" title="文件关闭"></a>文件关闭</h2><h4 id="f-close"><a href="#f-close" class="headerlink" title="f.close()"></a>f.close()</h4><p>常常搭配try：f = open() +finally:f.close()使用，但如果使用with语句可以自动关闭文件无需close()</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    f = <span class="built_in">open</span>(<span class="string">&#x27;xxx&#x27;</span>)</span><br><span class="line">    data = f.read()</span><br><span class="line"><span class="keyword">except</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;fail to open&#x27;</span>)</span><br><span class="line"><span class="keyword">finally</span>:</span><br><span class="line">    f.close()</span><br><span class="line">-------------------------------------------------------------------------</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;1.txt&quot;</span>) <span class="keyword">as</span> file:</span><br><span class="line">    data = file.read()</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><p>1.matrix = [ [1,2,3,4], [5,6,7,8], [9,10,11,12] ]用列表解析一行实现矩阵转置<br>用zip实现矩阵转置</p>
+]]></content>
+      <categories>
+        <category>计算机科学</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+        <tag>编程</tag>
+        <tag>学习笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Python算法结构与常用库</title>
+    <url>/2023/04/27/Python%E7%AE%97%E6%B3%95%E6%A8%A1%E5%9D%97%E4%B8%8E%E5%B8%B8%E7%94%A8%E5%BA%93/</url>
+    <content><![CDATA[<h1 id="python-算法模块与常用库"><a href="#python-算法模块与常用库" class="headerlink" title="python 算法模块与常用库"></a>python 算法模块与常用库</h1><p>包括各种常用算法案例，以及常用库的使用说明</p>
+<h1 id="1-常用算法实例"><a href="#1-常用算法实例" class="headerlink" title="1.常用算法实例"></a>1.常用算法实例</h1><h2 id="1-1质数判断算法"><a href="#1-1质数判断算法" class="headerlink" title="1.1质数判断算法"></a>1.1质数判断算法</h2><p>基本思路：首先用if判断最特殊的0和1，它们都不是质数。</p>
+<p>其次，再使用循环对每个数的可能因数全部进行判断，从2到x-1，如果循环途中发现有可以整除（即为x的因数），则返回False并跳出循环。</p>
+<p>如果循环结束也没有跳出，那么说明没有因数，x是质数，返回True。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">isprime</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">if</span> x==<span class="number">0</span> <span class="keyword">or</span> x==<span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>,x):</span><br><span class="line">            <span class="keyword">if</span> x%i==<span class="number">0</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="1-2进制算法"><a href="#1-2进制算法" class="headerlink" title="1.2进制算法"></a>1.2进制算法</h2><h3 id="十进制转N进制"><a href="#十进制转N进制" class="headerlink" title="十进制转N进制"></a>十进制转N进制</h3><p>总思路为逆向取余法，对十进制数字反复除以进制数n，直至整除为0，将余数逆向排列，即可得到n进制转换结果。需要注意的是超过十进制转换时，需要把超过10的余数转换为字母表达。这一部分使用循环进行余数序列的对应替换。<strong>另一种算法是直接用列表解析生成对照序列，再利用序列的索引进行一一对应替换。</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a=<span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;请输入要转换的十进制数&quot;</span>))</span><br><span class="line">n=<span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;要转换为几进制数？&quot;</span>))</span><br><span class="line">b=[]</span><br><span class="line">Str=<span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    b.append(a%n)</span><br><span class="line">    a=a//n</span><br><span class="line">    <span class="keyword">if</span> a&lt;n:</span><br><span class="line">        b.append(a)</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(b)):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>,<span class="number">36</span>):</span><br><span class="line">        letter=<span class="built_in">chr</span>(<span class="built_in">ord</span>(<span class="string">&#x27;a&#x27;</span>)+(j-<span class="number">10</span>))</span><br><span class="line">        <span class="keyword">if</span> b[-<span class="number">1</span>-i]==j:</span><br><span class="line">            b[-<span class="number">1</span>-i]=letter</span><br><span class="line">    <span class="built_in">print</span>(b[-<span class="number">1</span>-i],end=<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">--------------------------------------------------------------------------</span><br><span class="line">a=<span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;请输入要转换的十进制数&quot;</span>))</span><br><span class="line">n=<span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;要转换为几进制数？&quot;</span>))</span><br><span class="line">b=[]</span><br><span class="line">base=[<span class="built_in">str</span>(x) <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>)]+[<span class="built_in">chr</span>(x) <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">ord</span>(<span class="string">&#x27;a&#x27;</span>),<span class="built_in">ord</span>(<span class="string">&#x27;a&#x27;</span>)+<span class="number">26</span>)]</span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    b.append(base[a%n-<span class="number">1</span>])</span><br><span class="line">    a=a//n </span><br><span class="line">    <span class="keyword">if</span> a&lt;n:</span><br><span class="line">        b.append(base[a-<span class="number">1</span>])</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"><span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(b)):</span><br><span class="line">    <span class="built_in">print</span>(b[-<span class="number">1</span>-k],end=<span class="string">&#x27;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="N进制转十进制"><a href="#N进制转十进制" class="headerlink" title="N进制转十进制"></a>N进制转十进制</h3><p>主要思路为：位权展开法，每一位乘上对应的权。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">n=<span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;您将要输入N进制数N=？&quot;</span>))</span><br><span class="line">a=<span class="built_in">input</span>(<span class="string">&quot;请输入要转换为十进制的N进制数&quot;</span>)</span><br><span class="line">base=[<span class="built_in">str</span>(x) <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>)]+[<span class="built_in">chr</span>(x) <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">ord</span>(<span class="string">&#x27;a&#x27;</span>),<span class="built_in">ord</span>(<span class="string">&#x27;a&#x27;</span>)+<span class="number">26</span>)]</span><br><span class="line">a=<span class="built_in">list</span>(a)</span><br><span class="line">b=[]</span><br><span class="line">s=<span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(a)-<span class="number">1</span>,-<span class="number">1</span>,-<span class="number">1</span>):</span><br><span class="line">    a[i]=<span class="built_in">int</span>(base.index(a[i]))</span><br><span class="line">    s=s+<span class="built_in">int</span>(a[i])*(n**(<span class="built_in">len</span>(a)-<span class="number">1</span>-i))</span><br><span class="line"><span class="built_in">print</span>(s)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="1-3因子算法"><a href="#1-3因子算法" class="headerlink" title="1.3因子算法"></a>1.3因子算法</h2><h3 id="最小公倍数算法："><a href="#最小公倍数算法：" class="headerlink" title="最小公倍数算法："></a>最小公倍数算法：</h3><p>设置循环从较大数开始找，直到找到最小公倍数跳出循环。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">gbs</span>(<span class="params">a,b</span>):</span><br><span class="line">    <span class="keyword">if</span> a&lt;b:</span><br><span class="line">        a,b=b,a</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(a+<span class="number">1</span>,a*b+<span class="number">1</span>):</span><br><span class="line">        <span class="keyword">if</span> i%a==<span class="number">0</span> <span class="keyword">and</span> i%b==<span class="number">0</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;最小公倍数为&quot;</span>,i)</span><br><span class="line">            <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="最大公约数算法："><a href="#最大公约数算法：" class="headerlink" title="最大公约数算法："></a>最大公约数算法：</h3><p>设置循环从较小数开始倒序找，直到找到最大公约数跳出循环</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">gys</span>(<span class="params">a,b</span>):</span><br><span class="line">    <span class="keyword">if</span> a&lt;b:</span><br><span class="line">        a,b=b,a</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(b,<span class="number">0</span>,-<span class="number">1</span>):</span><br><span class="line">        <span class="keyword">if</span> a%i==<span class="number">0</span> <span class="keyword">and</span> b%i==<span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> i</span><br><span class="line">            <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="辗转相除法："><a href="#辗转相除法：" class="headerlink" title="辗转相除法："></a>辗转相除法：</h3><p>更简洁高效的最大公约数算法。原理是以较大数除以较小数开始循环，每次将除数移交给被除数，再把余数移交给除数，辗转相除，直到余数为0，则最后一次的除数就是最大公约数。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">gys</span>(<span class="params">a,b</span>):</span><br><span class="line">    <span class="keyword">if</span> a&lt;b:</span><br><span class="line">        a,b=b,a</span><br><span class="line">    <span class="keyword">while</span> b: </span><br><span class="line">        a,b=b,a%b</span><br><span class="line"><span class="keyword">return</span> a</span><br></pre></td></tr></table></figure>
+
+<h3 id="用最大公约数求最小公倍数："><a href="#用最大公约数求最小公倍数：" class="headerlink" title="用最大公约数求最小公倍数："></a>用最大公约数求最小公倍数：</h3><p>两个数的最大公约数与最小公倍数的乘积，即为两个数的乘积：</p>
+<p>axb=(最大公约数)x(最小公倍数)</p>
+<h2 id="1-4-回文算法"><a href="#1-4-回文算法" class="headerlink" title="1.4 回文算法"></a>1.4 回文算法</h2><p>pythond的回文算法非常简单，转换为列表利用内置的颠倒函数便可轻松实现。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">hws</span>(<span class="params">x</span>):</span><br><span class="line">    x=<span class="built_in">list</span>(<span class="built_in">str</span>(x))</span><br><span class="line">    y=<span class="built_in">list</span>(<span class="built_in">reversed</span>(x))</span><br><span class="line">    <span class="keyword">if</span> x==y:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure>
+
+<p>或者，也可以使用索引进行一一对比，采用递归思路：</p>
+<p>从两端向中间递归，如果发现不同就触发return回False；如果一直递归到最中间也没找到不同，就返回Ture。每次递归把输入字符串去除首尾，进行下一轮迭代；返回结果时，反向从内向外报告。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">hws</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(x)&lt;<span class="number">2</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="keyword">if</span> x[<span class="number">0</span>]!=x[-<span class="number">1</span>]:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">return</span> hws(x[<span class="number">1</span>:-<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="1-5-排序算法"><a href="#1-5-排序算法" class="headerlink" title="1.5 排序算法"></a>1.5 排序算法</h2><p>Python自带有各种序列的排序方法函数，但是出于对算法的理解角度，也应该掌握各类排序算法。</p>
+<h3 id="冒泡排序法"><a href="#冒泡排序法" class="headerlink" title="冒泡排序法"></a>冒泡排序法</h3><p>双重循环结构，每次都将序列最左边的数向右进行冒泡（相邻比较，如果左边小于右边，就交换，等效于较大数向右移动）。此过程中较大数会慢慢“浮”到序列右端，很像冒泡。</p>
+<p>外层循环：循环n=len(arr)次，确保每个值都会进行排序。</p>
+<p>内层循环：跟外层循环进行的次数有关。外层循环每冒泡一次，则最右端就会确定一个较大值的位置，无需继续冒泡。</p>
+<p>注意：列表在函数中相当于全局变量，被修改则会牵连原列表，因而无需返回值。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">bubbleSort</span>(<span class="params">arr</span>):</span><br><span class="line">    n=<span class="built_in">len</span>(arr)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,n-i-<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">if</span> arr[j]&gt;arr[j+<span class="number">1</span>]:</span><br><span class="line">                arr[j],arr[j+<span class="number">1</span>]=arr[j+<span class="number">1</span>],arr[j]</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="插入排序法"><a href="#插入排序法" class="headerlink" title="插入排序法"></a>插入排序法</h3><p>类似于我们平时打牌时对扑克牌进行排序，每次插入一个新值，需要找到其适当的中间位置并插入。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">insertSort</span>(<span class="params">arr</span>):</span><br><span class="line">    length=<span class="built_in">len</span>(arr)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,length):</span><br><span class="line">        x=arr[i]</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(i,-<span class="number">1</span>,-<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">if</span> x&lt;arr[j-<span class="number">1</span>]:</span><br><span class="line">                arr[j]=arr[j-<span class="number">1</span>]</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        arr[j]=x</span><br></pre></td></tr></table></figure>
+
+<p>这串代码的逻辑是，序列分为两个区域：左边为已排序区，右边为待排序区。第一层循环的参数i控制正在插空的被排序对象是第几个，第二层循环的参数j倒序变化，控制插空位移。首先，i从1开始取，0号元素已经默认为排序区；然后，指针i不断向右移动，先把待排序对象arr[i]单独取出来，和已排序区进行从右向左的插空判断： </p>
+<p><strong>如果待排序对象arr[i]过小，</strong>arr[j-1]向右移动来为将来的arr[i]插入提供空位。不必担心arr[i]本身会因为移动而被替换，因为已经用x来存储arr[i]。</p>
+<p><strong>如果待排序对象arr[i]过大</strong>，直接跳出循环，找到插入位置了，就把arr[i]=x放在arr[j]这个位置插入。内层循环结束，进入下一轮arr[i+1]的插入。</p>
+<h2 id="1-6-查找算法"><a href="#1-6-查找算法" class="headerlink" title="1.6 查找算法"></a>1.6 查找算法</h2><h3 id="二分查找法"><a href="#二分查找法" class="headerlink" title="二分查找法"></a>二分查找法</h3><p>对有序数组进行快速查找时，使用二分法可以大大提高效率，每次比较都可以使搜索范围缩小一半。</p>
+<p>案例代码使用递归函数，输入：查找序列arr, 序列待查找对象x。l与r是函数内部的形参</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">binarySearch</span>(<span class="params">arr,l,r,x</span>):</span><br><span class="line">    <span class="keyword">if</span> r&gt;=l:</span><br><span class="line">        mid=<span class="built_in">int</span>(l+(r-l)/<span class="number">2</span>)</span><br><span class="line">        <span class="keyword">if</span> arr[mid]==x:</span><br><span class="line">            <span class="keyword">return</span> mid</span><br><span class="line">        <span class="keyword">elif</span> arr[mid]&gt;x:</span><br><span class="line">            <span class="keyword">return</span> binarySearch(arr,<span class="number">1</span>,mid-<span class="number">1</span>,x)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> binarySearch(arr,mid+<span class="number">1</span>,r,x)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="1-7-累加算法"><a href="#1-7-累加算法" class="headerlink" title="1.7 累加算法"></a>1.7 累加算法</h2><p>这个就不写了，简单的循环即可。主要任务是找数列递推公式，比如下面这个斐波那契数列:</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">nterms=<span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;你需要几项斐波那契数列？&quot;</span>))</span><br><span class="line">n1，n2=<span class="number">0</span>，<span class="number">1</span></span><br><span class="line">count=<span class="number">2</span></span><br><span class="line"><span class="keyword">if</span> nterms&lt;=<span class="number">0</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;输入不合法，请输入一个正数&quot;</span>)</span><br><span class="line"><span class="keyword">elif</span> nterms==<span class="number">1</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;斐波那契数列：&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(n1)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;斐波那契数列：&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(n1,<span class="string">&quot;,&quot;</span>,n2,end=<span class="string">&#x27; &#x27;</span>)</span><br><span class="line">    <span class="keyword">while</span> count&lt;nterms:</span><br><span class="line">        nth=n1+n2</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;,&quot;</span>,nth,end=<span class="string">&#x27; &#x27;</span>)</span><br><span class="line">        n1，n2=n2，nth</span><br><span class="line">        count+=<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="2-常用库函数"><a href="#2-常用库函数" class="headerlink" title="2.常用库函数"></a>2.常用库函数</h1><p>库的使用：import 库名称;  使用库函数时为:  库名称.函数名()</p>
+<h2 id="2-1-math库"><a href="#2-1-math库" class="headerlink" title="2.1 math库"></a>2.1 math库</h2><p>math库的函数主要用于数学计算，包含常用的数学常数以及常用数学函数：指对数、三角函数等</p>
+<h3 id="指对数"><a href="#指对数" class="headerlink" title="指对数"></a>指对数</h3><p>math.exp(x):  返回自然对数的x次幂</p>
+<p>math.pow(x,y):  返回x的y次幂</p>
+<p>math.sqrt(x):  返回x的平方根</p>
+<h3 id="三角函数"><a href="#三角函数" class="headerlink" title="三角函数"></a>三角函数</h3><p>sin(x),cos(x),tan(x)：三角函数</p>
+<p>asin(x),acos(x),atan(x)：反三角函数</p>
+<h3 id="数值表示函数"><a href="#数值表示函数" class="headerlink" title="数值表示函数"></a>数值表示函数</h3><p>math.fabs(x):  返回x的绝对值</p>
+<p>math.gcd(a,b):  返回a和b的最大公约数</p>
+<p>math.floor(): 向下取整</p>
+<p>math.ceil():  向上取整</p>
+<h2 id="2-2-random库"><a href="#2-2-random库" class="headerlink" title="2.2 random库"></a>2.2 random库</h2><p>randint(a,b):  返回一个a到b之间的随机整数</p>
+<p>uniform(a,b):  返回一个a到b之间的随机小数</p>
+<p>random():  随机生成一个[0,1.0]之间的小数</p>
+<h2 id="2-3-os库"><a href="#2-3-os库" class="headerlink" title="2.3 os库"></a>2.3 os库</h2><p>os.getcwd()： 获取当前工作目录，默认为程序所在目录</p>
+<p>os.chdir(’新目录‘):  更改当前工作目录至新目录</p>
+<p>os.listdir():  列出当前工作目录下的文件或文件夹</p>
+<p>os.rmdir(‘某目录’)：删除目录</p>
+<p>os.remove(‘某文件’):  删除文件</p>
+<h2 id="2-4-datetime库"><a href="#2-4-datetime库" class="headerlink" title="2.4 datetime库"></a>2.4 datetime库</h2><p>该库分为三个类：date , time , datetime</p>
+<p>使用案例：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line">newdt=datetime.datetime.now()</span><br><span class="line"><span class="comment">#代表datetime库中datetime类下的now方法，获取日期和时间</span></span><br><span class="line"><span class="built_in">print</span>(datetime.datetime.time(newdt))</span><br><span class="line"><span class="comment">#代表datetime库中datetime类下的time方法，拆出字符串中的时间</span></span><br><span class="line">datetime.timedelta(weeks,days,hours,minutes,seconds)</span><br><span class="line"><span class="comment">#用于计算时间差的函数，该函数会自动计算某段时间前的时间。</span></span><br></pre></td></tr></table></figure>
+
+<p>此外，time库也有一些常用的函数，比如time.sleep()，可以使程序暂停休眠一段时间再继续运行</p>
+<h2 id="2-5-NumPy库"><a href="#2-5-NumPy库" class="headerlink" title="2.5 NumPy库"></a>2.5 NumPy库<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210626200200930.png" alt="image-20210626200200930" style="zoom:25%;" /></h2><p>用于科学计算的基础包，可以处理矩阵和数组</p>
+<p><strong>NumPy 的主要对象：</strong></p>
+<p>同构多维数组（元素表）。所有类型都相同，由非负整数元组索引。在NumPy维度中称为<strong>轴</strong>。</p>
+<p>​    例如，3D空间中的点的坐标[1, 2, 1]具有一个轴。该轴有3个元素，所以我们说它的长度为3。在下面所示的例子中，数组有2个轴。第一轴的长度为2，第二轴的长度为3。</p>
+<p>[[ 1, 0, 0],</p>
+<p> [ 0, 1, 2]]</p>
+<p>拥有数组创建、数组打印、数组操作等功能，可用于线性代数计算、矩阵操作等。</p>
+<h2 id="2-6-SciPy-library库"><a href="#2-6-SciPy-library库" class="headerlink" title="2.6 SciPy library库"></a>2.6 SciPy library库<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210626200614717.png" alt="image-20210626200614717" style="zoom:25%;" /></h2><p>基于NumPy的拓展模块，增加了数学和工程上的运算，比如拟合、<strong>积分</strong>、常微分方程求解、插值等。</p>
+<p>简单的定积分：SciPy的子模块integrate中的quad()函数</p>
+<p>quad(f,a,b)：对函数f从a积分到b</p>
+<p>dblquad(f,a,b,g,h): 计算二重积分，二元函数f，x从a积分到b，y从g(x)积分到h(x)</p>
+<h2 id="2-7-Matplotlib-库"><a href="#2-7-Matplotlib-库" class="headerlink" title="2.7 Matplotlib 库"></a>2.7 Matplotlib 库<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210626201253294.png" alt="image-20210626201253294" style="zoom:25%;" /></h2><p>主要用于绘图，可以简单高效地将数据图形化，可视化。</p>
+<p>最常用plot()命令</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#pyplot生成可视化效果：</span></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">plt.plot([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>])</span><br><span class="line">plt.ylabel(<span class="string">&#x27;some numbers&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210626201558056.png" alt="image-20210626201558056"></p>
+<p>可以设置绘图的各种参数，如线形、颜色、坐标轴等。</p>
+<p>除此之外，还可以绘制各种统计图、三维曲线、曲面等。</p>
+<h2 id="2-8-Pandas库"><a href="#2-8-Pandas库" class="headerlink" title="2.8 Pandas库"></a>2.8 Pandas库<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210626202023168.png" alt="image-20210626202023168" style="zoom:25%;" /></h2><p>主要用于数据挖掘和数据分析，大数据处理统计。</p>
+<p>其主要的两大模块为：Series和DataFrame</p>
+<p>Series是类似于<strong>一维数组</strong>的对象，是由一组数据以及一组一直相关的数据标签（索引）组成的。索引是默认从0开始的整数序列，Series是一种<strong>有序的变长字典</strong>。</p>
+<p>DataFrame是一个<strong>表格型的数据结构</strong>，包含一组有序序列，并且同时拥有行索引和列索引。</p>
+]]></content>
+      <categories>
+        <category>计算机科学</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+        <tag>编程</tag>
+        <tag>学习笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>普通地质学学习笔记</title>
+    <url>/2023/04/27/%E6%99%AE%E9%80%9A%E5%9C%B0%E8%B4%A8%E5%AD%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h1 id="普通地质学学习笔记"><a href="#普通地质学学习笔记" class="headerlink" title="普通地质学学习笔记"></a>普通地质学学习笔记</h1><h2 id="一-绪论"><a href="#一-绪论" class="headerlink" title="一.绪论"></a>一.绪论</h2><h3 id="1-1研究内容与方法"><a href="#1-1研究内容与方法" class="headerlink" title="1-1研究内容与方法"></a>1-1研究内容与方法</h3><h4 id="地球的物质："><a href="#地球的物质：" class="headerlink" title="地球的物质："></a>地球的物质：</h4><p>元素-矿物-岩石-地壳</p>
+<p>五大类岩石</p>
+<p>三大类岩石</p>
+<h4 id="地球的结构："><a href="#地球的结构：" class="headerlink" title="地球的结构："></a>地球的结构：</h4><p>固体地球（地壳、地幔、地核）、大气圈、水圈、生物圈</p>
+<h4 id="地球的构造："><a href="#地球的构造：" class="headerlink" title="地球的构造："></a>地球的构造：</h4><p>层圈分布、运动变化、动力</p>
+<h4 id="地质事件："><a href="#地质事件：" class="headerlink" title="地质事件："></a>地质事件：</h4><p>构造–岩浆事件</p>
+<h3 id="1-2我国地学研究的地域优势"><a href="#1-2我国地学研究的地域优势" class="headerlink" title="1-2我国地学研究的地域优势"></a>1-2我国地学研究的地域优势</h3><p><strong>青藏高原、黄土高原、秦岭大别山高压-超高压变质带、云南澄江及辽西热河动物群、陆相生油盆地、滇黔桂喀斯特地貌、华南花岗岩</strong></p>
+<h2 id="二-矿物"><a href="#二-矿物" class="headerlink" title="二.矿物"></a>二.矿物</h2><h3 id="2-1绪论"><a href="#2-1绪论" class="headerlink" title="2-1绪论"></a>2-1绪论</h3><p>克拉克值（ppm）：地壳元素丰度（单位：g/t或百万分之一）</p>
+<h3 id="2-2矿物的概念"><a href="#2-2矿物的概念" class="headerlink" title="2-2矿物的概念"></a>2-2矿物的概念</h3><p><strong>晶体：</strong></p>
+<p>其内部的原子或离子在三维空间呈周期性平移重复排列的固体</p>
+<p><strong>矿物：</strong></p>
+<p>****<strong>由地质作用形成的</strong>、在正常情况下呈结晶质的元素或无机化合物</p>
+<p><strong>煤是有机化合物，不是矿物；冰是固体结晶，是矿物</strong></p>
+<p><strong>准矿物:</strong></p>
+<p>在产出状态、成分和化学组成等方面均与矿物有相同的特征，但不具有标准结晶的均匀固体。<strong>如蛋白石、玛瑙等</strong></p>
+<h3 id="2-3矿物的基本特征（6）"><a href="#2-3矿物的基本特征（6）" class="headerlink" title="2-3矿物的基本特征（6）"></a>2-3矿物的基本特征（6）</h3><p><strong>1.最基本特征：地质作用、有序结构、无机、固体</strong></p>
+<p><strong>2.自然界的绝大多数矿物都是晶体（准晶体很少）</strong></p>
+<p>肉眼常见矿物：</p>
+<p>石英、长石、云母（花岗岩）</p>
+<p>方解石（石灰岩）</p>
+<p>橄榄石、辉石、角闪石（岩浆岩）</p>
+<p>黄铁矿、赤铁矿、磁铁矿</p>
+<p>注意：纯黄铁矿中含有46.67%的铁和53.33%的硫。一般将黄铁矿作为生产硫磺和硫酸的原料，<strong>而不是用作提炼铁的原料</strong>，因为提炼铁有更好的铁矿石。</p>
+<p><strong>3.矿物的化学成分基本稳定，但多含有杂质</strong></p>
+<p><strong>4.矿物具有同质多象的特征</strong></p>
+<p><strong>5.常见矿物可以分为三大类</strong></p>
+<p>自然元素矿物</p>
+<p>简单分子化合物（氧化物、氢氧化物、硫化物、卤化物）</p>
+<p>含氧盐矿物（硅酸盐矿物、碳酸盐矿物、硫酸盐矿物）</p>
+<p><strong>6.符合特定条件</strong>（色彩鲜艳、折光率高、透明度高、硬度高、化学性质稳定）的矿物，可成为宝玉石</p>
+<h3 id="2-4-矿物的鉴定特征"><a href="#2-4-矿物的鉴定特征" class="headerlink" title="2-4 矿物的鉴定特征"></a>2-4 矿物的鉴定特征</h3><p><strong>看、掂、刻</strong></p>
+<h4 id="2-4-0外形："><a href="#2-4-0外形：" class="headerlink" title="2-4-0外形："></a>2-4-0外形：</h4><p>单晶体（一维方向伸展：针状；二维方向伸展：片状、板状；三维方向伸展：粒状）</p>
+<p>集合体（一维：纤维状；二维：鳞片状；三维的：粒状）</p>
+<p>特殊形态集合体：放射状；晶簇状；鲕（er）状（如下图）豆状；钟乳状；葡萄状；结核状</p>
+<img src="https://bkimg.cdn.bcebos.com/pic/caef76094b36acafdc2f276c7cd98d1000e99c57?x-bce-process=image/watermark,image_d2F0ZXIvYmFpa2UxMTY=,g_7,xp_5,yp_5/format,f_auto" alt="img" style="zoom:50%;" />
+
+<h4 id="2-4-1光学特征："><a href="#2-4-1光学特征：" class="headerlink" title="2-4-1光学特征："></a><strong>2-4-1光学特征：</strong></h4><p><strong>透明度：</strong>光线是否能透过矿物0.03mm的薄片</p>
+<p><strong>光泽：</strong>矿物的反光能力（金属光泽/非金属光泽）</p>
+<p>非金属光泽：玻璃光泽（长石）、油脂光泽（石英断口）、丝绢光泽（云母）、土状光泽（高岭土）</p>
+<p><strong>颜色：</strong></p>
+<p>自色：化学成分及结构决定的矿物本色</p>
+<p>他色：混入微量元素、杂质后的矿物颜色</p>
+<p>假色：表面氧化或吸附他物的颜色</p>
+<p>条痕色：矿物粉末的颜色。用瓷板划之得到条痕色（硬度要低于瓷板5~6，透明矿物多硬度高于瓷板）</p>
+<p><strong>双折射：</strong>不同方向折射率不一样产生光程差，呈现双影（如冰洲石，无色透明的方解石变种）</p>
+<img src="https://bkimg.cdn.bcebos.com/pic/2f738bd4b31c8701255209ab267f9e2f0608ff93?x-bce-process=image/watermark,image_d2F0ZXIvYmFpa2UxMTY=,g_7,xp_5,yp_5/format,f_auto" alt="img" style="zoom: 50%;" />
+
+<p><strong>荧光：</strong>切断光源后发光消失（如白钨矿和萤石紫外线下发荧光，金刚石在X射线下发蓝色荧光）</p>
+<p><strong>磷光：</strong>切断光源后仍然发光片刻</p>
+<h4 id="2-4-2力学性质："><a href="#2-4-2力学性质：" class="headerlink" title="2-4-2力学性质："></a><strong>2-4-2力学性质：</strong></h4><p><strong>硬度：</strong>莫氏硬度十级</p>
+<p>1级：滑石                                           6级：长石</p>
+<p>2级：石膏                                           7级：石英</p>
+<p>3级：方解石                                       8级：黄晶</p>
+<p>4级：萤石                                           9级：刚玉</p>
+<p>5级：磷灰石                                       10级：金刚石</p>
+<p>鉴定工具：指甲（2.5），小刀（5~5.5），玻璃（6）</p>
+<p><strong>解理：</strong>外力打击下矿物沿质点结合力最弱网面的定向开裂构造。</p>
+<p>极完全解理、完全解理、无解理<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210806172912573.png" alt="image-20210806172912573"></p>
+<p>辉石解理夹角：87°（约直角）、角闪石解理夹角：56°（约60°）</p>
+<p><strong>断口：</strong>外力下矿物不规则裂开，解理不发育</p>
+<p>石英有断口，长石会定向开裂</p>
+<p><strong>弹性：</strong>受力后恢复原状（如云母）</p>
+<p><strong>挠性（范性）：</strong>受力不能恢复原状（如蛭石）</p>
+<p><strong>延展性：</strong>可用外力任意改变性质形状（如黄金）</p>
+<h3 id="2-5矿物的用途"><a href="#2-5矿物的用途" class="headerlink" title="2-5矿物的用途"></a>2-5矿物的用途</h3><h4 id="2-5-1环境气候示踪矿物"><a href="#2-5-1环境气候示踪矿物" class="headerlink" title="2-5-1环境气候示踪矿物"></a>2-5-1环境气候示踪矿物</h4><p>干旱炎热：石膏、石盐</p>
+<p>海洋环境：方解石</p>
+<p>板块边界俯冲带：蓝闪石、硬玉（高压低温）</p>
+<p>大陆地壳深俯冲：柯石英、金刚石（超高压）</p>
+<h4 id="2-5-2常见宝玉石："><a href="#2-5-2常见宝玉石：" class="headerlink" title="2-5-2常见宝玉石："></a>2-5-2常见宝玉石：</h4><p>硬玉（翡翠）：一种呈隐晶致密的纤维状辉石微晶集合体（成分：单斜辉石中的碱性辉石）（硬度6.5~7）</p>
+<p>软玉（缅玉、和田玉、昆仑玉）：一种呈纤维状的阳起石或透闪石微晶集合体。（硬度5.5~6）</p>
+<h2 id="三-岩浆作用和火成岩"><a href="#三-岩浆作用和火成岩" class="headerlink" title="三.岩浆作用和火成岩"></a>三.岩浆作用和火成岩</h2><h3 id="3-1喷出作用与喷出岩"><a href="#3-1喷出作用与喷出岩" class="headerlink" title="3-1喷出作用与喷出岩"></a>3-1喷出作用与喷出岩</h3><h4 id="3-1-1岩浆的定义："><a href="#3-1-1岩浆的定义：" class="headerlink" title="3-1-1岩浆的定义："></a>3-1-1岩浆的定义：</h4><p>形成于地表下50km~200km，具有较大粘性的高温熔融硅酸盐物质</p>
+<p>形成条件：650~1400℃，压力1.0GPa</p>
+<h5 id="岩浆作用："><a href="#岩浆作用：" class="headerlink" title="岩浆作用："></a>岩浆作用：</h5><p>岩浆发育、运动、固结成火成岩的作用</p>
+<p>火山作用：岩浆喷出地表的过程</p>
+<p>侵入作用：岩浆在地下深处冷凝结晶固结的过程</p>
+<h4 id="3-1-2火成岩的定义："><a href="#3-1-2火成岩的定义：" class="headerlink" title="3-1-2火成岩的定义："></a>3-1-2火成岩的定义：</h4><p>火山岩：岩浆喷出地表、冷凝固结形成的岩石</p>
+<p>1）火山碎屑岩：喷至空中炸碎的岩浆与围岩碎块堆积而成</p>
+<p>2）熔岩：岩浆在地表溢流冷凝成岩</p>
+<p>侵入岩：地下深处冷凝结晶形成的岩浆岩</p>
+<h5 id="火山喷发物的构成："><a href="#火山喷发物的构成：" class="headerlink" title="火山喷发物的构成："></a>火山喷发物的构成：</h5><p>岩浆：</p>
+<p>固体：火山通道周围的岩石落入岩浆后，喷发至空中</p>
+<p>凝灰岩（火山灰）：颗粒&lt;2mm</p>
+<p>火山角砾岩:2~50mm</p>
+<p>火山集块岩：&gt;50mm</p>
+<p>火山弹：呈纺锤状</p>
+<p>浮岩：气体快速逃逸，有大量孔洞冷凝呈火山渣</p>
+<h5 id="喷发条件："><a href="#喷发条件：" class="headerlink" title="喷发条件："></a>喷发条件：</h5><p>地壳运动</p>
+<p>岩浆粘度：</p>
+<p>硅氧四面体（SiO2）含量高，粘度大，难流动，呈酸性，呈花岗质，多喷发相（高粘度到达地面后会猛烈喷发）。</p>
+<p>硅氧四面体（SiO2）含量低，粘度小，易流动，呈基性，呈玄武质量，多为溢流相（容易顺着地面流淌，高原常为玄武岩组成）</p>
+<p><strong>柱状节理：</strong></p>
+<p>基性熔岩粘度小，会快速冷凝，形成与流动面垂直的六边形柱体<img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fs9.sinaimg.cn%2Fmw690%2F001MdhvUgy6Rw5eAYZy78%26690&refer=http%3A%2F%2Fs9.sinaimg.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1631071019&t=0a107e7e6c416d2e34f8e5c7a660b635" alt="img"></p>
+<p>岩浆冷凝过程中还会产生<strong>绳状构造、麻花构造</strong>。这些构造常常是由于<strong>粘度小</strong>的基性熔岩不同部位冷凝、流动速度不同产生应力差导致的</p>
+<p><img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fphotocdn.sohu.com%2F20130127%2FImg364738257.jpg&refer=http%3A%2F%2Fphotocdn.sohu.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1631071345&t=159c3b938a49642aadaeedb020930b38" alt="img"></p>
+<p><strong>火山通道</strong>：岩浆流出的地方</p>
+<p>岩浆在通道近地面冷凝产生火山颈，形成<strong>次火山岩</strong>（介于喷出岩和侵入岩之间）</p>
+<p>若高压喷出的是地下的泥砂和水，则形成<strong>泥火山</strong></p>
+<p>多次原位火山喷发则会形成<strong>复式火山锥</strong>（如意大利维苏威火山），多次喷发之间有间歇期，间歇期中会发生沉积岩堆积，产生沉积岩夹层。 </p>
+<h5 id="两种喷发方式："><a href="#两种喷发方式：" class="headerlink" title="两种喷发方式："></a>两种喷发方式：</h5><p><strong>裂隙式喷发：</strong>岩浆沿断裂带的喷溢，固体喷发物少（如大洋洋中脊）</p>
+<p><strong>中心式喷发：</strong>形成平缓的盾形火山堆，近火山口固体喷发物多，形成火山碎屑岩；远火山口能量小，溢流变为熔岩。</p>
+<h4 id="3-1-3火成岩的分类（4）"><a href="#3-1-3火成岩的分类（4）" class="headerlink" title="3-1-3火成岩的分类（4）"></a>3-1-3火成岩的分类（4）</h4><p>*<em>3-1-3-1超基性岩（超镁铁质）</em>***：二氧化硅含量&lt;45%</p>
+<p>科马提岩：具有鬣刺结构，快速冷凝的长条刺状橄榄石/辉石骸晶</p>
+<img src="https://bkimg.cdn.bcebos.com/pic/aa64034f78f0f7366b8752940255b319ebc4132d?x-bce-process=image/watermark,image_d2F0ZXIvYmFpa2UxMTY=,g_7,xp_5,yp_5/format,f_auto" alt="img" style="zoom: 50%;" />
+
+<p><strong>3-1-3-2基性岩（镁铁质）：</strong>二氧化硅含量45%~52%</p>
+<p>玄武岩：黑色，致密，密度大，有气孔构造发育；陆地喷发有柱状节理，海底喷发有枕状节理（顶凸底平）。<img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20180115%2F4887565a673e4498bd077e408da46128.jpeg&refer=http%3A%2F%2F5b0988e595225.cdn.sohucs.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1631084928&t=452999af90727099d27ea1e4be794304" alt="img"></p>
+<p><strong>3-1-3-3中性岩（如安山岩）</strong>：二氧化硅含量52%~65%</p>
+<p>安山岩：黏性大，爆发特点，有多气孔，气孔充填矿物则为杏仁体</p>
+<p><img src="https://ss2.baidu.com/-vo3dSag_xI4khGko9WTAnF6hhy/baike/s%3D220/sign=80a93e5f71f082022992963d7bfafb8a/e824b899a9014c0843e4f2d9087b02087af4f4eb.jpg" alt="img"></p>
+<p><strong>3-1-3-4酸性岩（如花岗岩）：</strong>二氧化硅含量&gt;65%</p>
+<p>流纹岩：黏性很大，浅（红）色，有流纹构造，有很多石英晶体（二氧化硅含量高）伴生鸡血石等矿物</p>
+<img src="https://gss0.baidu.com/70cFfyinKgQFm2e88IuM_a/forum/w=580/sign=8e989f18a61ea8d38a22740ca70b30cf/3e8e5d82b2b7d0a2b1962c3ecbef76094a369a74.jpg" alt="img" style="zoom:50%;" />
+
+<h4 id="3-1-4火山喷发的阶段性："><a href="#3-1-4火山喷发的阶段性：" class="headerlink" title="3-1-4火山喷发的阶段性："></a>3-1-4火山喷发的阶段性：</h4><p>喷发演化规律：基性–中性–酸性</p>
+<p>喷发后期坍塌形成破火山口，积水形成火山口湖（世界最大：贝加尔湖）</p>
+<h4 id="3-1-5世界火山岩分布带："><a href="#3-1-5世界火山岩分布带：" class="headerlink" title="3-1-5世界火山岩分布带："></a>3-1-5世界火山岩分布带：</h4><p>环太平洋火山带：主要是中酸性火山岩，多为安山岩</p>
+<p>洋脊火山带：太平洋、大西洋和印度洋的洋脊</p>
+<p>地中海-印尼火山带、红海沿岸和东非火山带</p>
+<p><strong>安山岩线：</strong></p>
+<p>洋中脊以基性玄武岩为主，靠近大陆的环太平洋岛屿和大陆边缘多喷发中性安山岩，两者交界线称为安山岩线</p>
+<p><img src="https://bkimg.cdn.bcebos.com/pic/a5c27d1ed21b0ef4c721401fd6c451da80cb3ea2?x-bce-process=image/watermark,image_d2F0ZXIvYmFpa2U5Mg==,g_7,xp_5,yp_5/format,f_auto" alt="img"></p>
+<h3 id="3-2侵入作用与侵入岩"><a href="#3-2侵入作用与侵入岩" class="headerlink" title="3-2侵入作用与侵入岩"></a>3-2侵入作用与侵入岩</h3><h4 id="3-2-1侵入岩分类"><a href="#3-2-1侵入岩分类" class="headerlink" title="3-2-1侵入岩分类"></a>3-2-1侵入岩分类</h4><p>深成侵入岩（<strong>深成岩</strong>）：&gt;10km深处形成</p>
+<p>浅成侵入岩（<strong>浅成岩</strong>）：&lt;3km深处形成</p>
+<p>超浅成侵入岩（<strong>次火山岩</strong>）：&lt;1.5km深处形成</p>
+<p>围岩：被岩浆侵入的岩石</p>
+<p><img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210810124423956.png" alt="image-20210810124423956"></p>
+<h4 id="3-2-2火成岩多样性原因："><a href="#3-2-2火成岩多样性原因：" class="headerlink" title="3-2-2火成岩多样性原因："></a>3-2-2火成岩多样性原因：</h4><h5 id="3-2-2-1：同化与混染作用"><a href="#3-2-2-1：同化与混染作用" class="headerlink" title="3-2-2-1：同化与混染作用"></a><strong>3-2-2-1：同化与混染作用</strong></h5><p>同化作用：岩浆&gt;&gt;围岩，围岩被岩浆吞噬同化</p>
+<p>混染作用：岩浆体积不够大，岩浆成分被围岩严重改变</p>
+<p>捕掳体：岩浆上升时通道壁崩落的围岩碎块，多出现在岩体边部</p>
+<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210810131930703.png" alt="image-20210810131930703" style="zoom: 25%;" />
+
+<p>顶垂体：岩浆上升使围岩整体上升，围岩体积大，岩浆无法消化围岩。被整体抬高的围岩就是顶垂体。</p>
+<h5 id="3-2-2-2岩浆混合作用"><a href="#3-2-2-2岩浆混合作用" class="headerlink" title="3-2-2-2岩浆混合作用"></a><strong>3-2-2-2岩浆混合作用</strong></h5><p>来自深部软流圈的玄武岩浆（基性）向上注入到地壳的花岗岩浆（酸性），形成混合岩浆岩</p>
+<h5 id="3-2-2-3拆沉作用"><a href="#3-2-2-3拆沉作用" class="headerlink" title="3-2-2-3拆沉作用"></a><strong>3-2-2-3拆沉作用</strong></h5><p>岩石圈地幔温度低于软流圈，岩石圈底部物质脱水导致密度增大。密度大于软流圈密度时会重力失衡，岩石圈下部断裂掉入软流圈。结果导致软流圈体积变大，岩浆上涌，界面抬升，固态岩石圈发生部分熔融，形成基性岩浆。</p>
+<h5 id="3-2-2-4结晶分异作用"><a href="#3-2-2-4结晶分异作用" class="headerlink" title="3-2-2-4结晶分异作用"></a><strong>3-2-2-4结晶分异作用</strong></h5><p>岩浆在冷凝过程中，按一定规律依次结晶出不同矿物</p>
+<p>鲍温反应系列：熔点高，密度大的矿物先结晶，形成垂直分带。</p>
+<p>1）连续反应系列：硅铝含量高（浅色矿物）</p>
+<p>例如六种长石从钙含量高到钠含量高，互相穿插，连续变化</p>
+<p>2）不连续反应系列：铁镁含量高（暗色矿物）</p>
+<p>化学成分和内部结构变化显著</p>
+<p>橄榄石–辉石–角闪石–黑云母（低温）</p>
+<p><img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210810130945049.png" alt="image-20210810130945049"></p>
+<h4 id="3-2-3伟晶岩"><a href="#3-2-3伟晶岩" class="headerlink" title="3-2-3伟晶岩"></a>3-2-3伟晶岩</h4><p>残余岩浆缓慢结晶形成的粗大晶体</p>
+<p>主要成分为长石、石英、白云母，结晶温度500~800℃，结晶缓慢</p>
+<p>特电气：富含成矿物质，常在此阶段形成</p>
+<h4 id="3-2-4侵入岩的产状"><a href="#3-2-4侵入岩的产状" class="headerlink" title="3-2-4侵入岩的产状"></a>3-2-4侵入岩的产状</h4><p>体积从大到小：</p>
+<p>岩株、岩基、岩脉（岩墙（垂直）、岩床（水平））</p>
+<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210810131813187.png" alt="image-20210810131813187" style="zoom:50%;" />
+
+<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210810132131777.png" alt="image-20210810132131777" style="zoom: 33%;" />
+
+<h3 id="3-3火成岩的结构与构造"><a href="#3-3火成岩的结构与构造" class="headerlink" title="3-3火成岩的结构与构造"></a>3-3火成岩的结构与构造</h3><h4 id="3-3-1火成岩的结构"><a href="#3-3-1火成岩的结构" class="headerlink" title="3-3-1火成岩的结构"></a>3-3-1火成岩的结构</h4><p>结构：指矿物的结晶程度、晶粒大小、晶体形态和晶粒间的相互关系。关键的是可以<strong>反映出岩石形成的条件</strong></p>
+<h5 id="按结晶程度："><a href="#按结晶程度：" class="headerlink" title="按结晶程度："></a><strong>按结晶程度：</strong></h5><p>全晶质：花岗岩、侵入岩、大颗粒喷出岩（斑晶）</p>
+<p>隐晶质-玻璃质：黑曜岩（未发生结晶的快速冷凝喷出岩）</p>
+<p>半晶质：次火山岩，介于两者之间</p>
+<h5 id="按晶粒大小："><a href="#按晶粒大小：" class="headerlink" title="按晶粒大小："></a><strong>按晶粒大小：</strong></h5><p>粗粒、中粒、细粒、微粒</p>
+<h5 id="按晶体完整程度："><a href="#按晶体完整程度：" class="headerlink" title="按晶体完整程度："></a><strong>按晶体完整程度：</strong></h5><p>自形：缓慢结晶，晶形规则</p>
+<p>他形：速冷，晶形不规则</p>
+<p>半自形：介于两者之间</p>
+<h5 id="按晶体的相对大小："><a href="#按晶体的相对大小：" class="headerlink" title="按晶体的相对大小："></a><strong>按晶体的相对大小：</strong></h5><p><strong>斑状结构：</strong>喷出岩的典型结构，含有粗大的晶体（斑晶，早期在深部形成）和斑晶周围细小的隐晶质颗粒（基质，岩浆到地面后快速冷凝形成）</p>
+<p><strong>似斑状结构：</strong>侵入岩的基质也是结晶态，是全晶质，成分与斑晶相同，但是结晶环境温度，颗粒小（图为花岗岩）</p>
+<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210810160136716.png" alt="image-20210810160136716" style="zoom:50%;" />
+
+<h4 id="3-3-2火成岩的构造"><a href="#3-3-2火成岩的构造" class="headerlink" title="3-3-2火成岩的构造"></a>3-3-2火成岩的构造</h4><p>构造：反应矿物集合体的形态、大小、空间分布。关键的是可以<strong>反映出岩石形成的环境</strong></p>
+<h5 id="枕状构造："><a href="#枕状构造：" class="headerlink" title="枕状构造："></a><strong>枕状构造：</strong></h5><p>水下喷发，一边滚动一边快速冷却收缩，说明是<strong>水下喷发环境</strong>。其特点是上凸底平，外壳是玻璃质，而内部是显晶质，有放射状或同心圆状的龟裂缝。</p>
+<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210810155943686.png" alt="image-20210810155943686" style="zoom:50%;" />
+
+<h5 id="气孔构造、杏仁状构造："><a href="#气孔构造、杏仁状构造：" class="headerlink" title="气孔构造、杏仁状构造："></a>气孔构造、杏仁状构造：</h5><p>陆相喷发环境</p>
+<h5 id="流纹构造："><a href="#流纹构造：" class="headerlink" title="流纹构造："></a>流纹构造：</h5><p>流纹岩中有不同的矿物成分、颜色、拉长的气孔成线状排列（长石或石英的碎斑晶+浆屑）</p>
+<img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fwww.china-shj.org.cn%2Fstorage%2Fthumbnails%2F_signatureaa%2F2018%2F05%2F14%2F1526260976KzbtVR.jpg&refer=http%3A%2F%2Fwww.china-shj.org.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1631174601&t=e16e511e5b0b99f6e0565075aa2210cb" alt="img" style="zoom: 33%;" />
+
+<h5 id="晶洞构造："><a href="#晶洞构造：" class="headerlink" title="晶洞构造："></a>晶洞构造：</h5><p>岩浆冷凝收缩形成空洞，常生长有晶簇，反映了<strong>拉张环境</strong></p>
+<h2 id="四-外动力作用与沉积岩"><a href="#四-外动力作用与沉积岩" class="headerlink" title="四.外动力作用与沉积岩"></a>四.外动力作用与沉积岩</h2><h3 id="4-1内动力作用与外动力作用"><a href="#4-1内动力作用与外动力作用" class="headerlink" title="4-1内动力作用与外动力作用"></a>4-1内动力作用与外动力作用</h3><p>内动力源：岩浆、层圈摩擦与化学作用、放射能</p>
+<p>内动力产物：火山岩、侵入岩；地震、褶皱、断裂、节理</p>
+<p><strong>外动力作用：</strong></p>
+<p>外动力源：太阳辐射能、地球转动能、日月引力能、重力势能等引起的力（科里奥利力、水流冲击、风浪、潮汐）</p>
+<p>作用场所：地球表面（大气圈、水圈、生物圈、地壳表面）</p>
+<p><strong>类型与过程：</strong></p>
+<p>风化作用（机械破碎、化学分解作用）–剥蚀作用–搬运作用–沉积作用–固结成岩（压固、胶结、重结晶、新矿物生长）</p>
+<p>注意：重结晶作用不一定在变质作用中，常温也能发生。</p>
+<p>产物：四类沉积岩及矿产（煤、油气、铁、砂矿）</p>
+<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210810164053201.png" alt="image-20210810164053201" style="zoom:50%;" />
+
+<p>图为水循环。</p>
+<p><strong>科里奥利效应：</strong></p>
+<p>由于地球自转，地表运动的流体受到偏离运动方向的力，即为科氏力。纬度和线速度不同，受到的科氏力作用方向也不同：南半球水体会向左偏，而北半球水体会向右偏。</p>
+<p><strong>水圈的作用：</strong>破坏岩石（机械破坏、化学破坏）、搬运岩石、沉积成岩。</p>
+<p>岩石圈：地壳+上地幔顶部的刚体部分，厚度约60-150km，是地学研究的主体。</p>
+<p><strong>六大沉积环境：</strong></p>
+<p>河流、冰川、地下水体、海洋、湖泊、沙漠</p>
+<h3 id="4-2沉积岩的特征"><a href="#4-2沉积岩的特征" class="headerlink" title="4-2沉积岩的特征"></a>4-2沉积岩的特征</h3><p><strong>物质来源：</strong>母岩风化物、生物骨骸、火山物质（火山碎屑岩）、宇宙物质（陨石等）</p>
+<p><strong>重要特征：</strong>有层理结构、含有化石</p>
+<p><strong>搬运作用：</strong></p>
+<p>1）底运：大颗粒砂砾岩跳跃式搬运，沿水流底部搬运。</p>
+<p>当&gt;2mm时成为砾岩；2~0.1mm称为砂岩</p>
+<p>2）悬运：0.01~0.1mm称为粉砂岩（黄土）</p>
+<p>3）溶运（离子态）：&lt;0.01mm，成为粘土岩、灰岩</p>
+<p><strong>固结作用：</strong>压固、胶结、重结晶、新矿物生长</p>
+<p><img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210810170136165.png" alt="image-20210810170136165"></p>
+<h4 id="4-2-1沉积岩特有矿物："><a href="#4-2-1沉积岩特有矿物：" class="headerlink" title="4-2-1沉积岩特有矿物："></a>4-2-1沉积岩特有矿物：</h4><p><strong>石膏、石盐、白云石、高岭石、蒙脱石</strong></p>
+<p>岩浆岩特有矿物：橄榄石、辉石（二氧化硅含量很低，易于化学反应，沉积岩中不存在）</p>
+<p>变质岩特有矿物：红柱石、堇青石、矽线石、十字石、蓝闪石</p>
+<p>三类岩石共有矿物：石英、长石、云母</p>
+<h4 id="4-2-2沉积岩的结构"><a href="#4-2-2沉积岩的结构" class="headerlink" title="4-2-2沉积岩的结构"></a>4-2-2沉积岩的结构</h4><p>大小区别：砾–砂–粉砂–泥</p>
+<p>（观察级别：肉眼–放大镜–显微镜–电子显微镜）</p>
+<p><strong>碎屑结构：</strong>岩石中的颗粒是机械沉积的碎屑物</p>
+<p>碎屑岩：砾岩、砂岩、粉砂岩、泥岩（页岩）</p>
+<h5 id="粗碎屑结构："><a href="#粗碎屑结构：" class="headerlink" title="粗碎屑结构："></a><strong>粗碎屑结构：</strong></h5><p>砾岩：<strong>粗碎屑</strong>+<strong>填隙物</strong>（基质，比碎屑小1-2个粒级的砂、细砂、粉砂等）+<strong>化学胶结物</strong>（泥、硅酸盐等）</p>
+<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210810172636224.png" alt="image-20210810172636224" style="zoom:50%;" />
+
+<h5 id="非碎屑结构："><a href="#非碎屑结构：" class="headerlink" title="非碎屑结构："></a><strong>非碎屑结构：</strong></h5><p>岩石的颗粒均是<strong>化学沉积作用形成</strong>，</p>
+<p><strong>颗粒非常小</strong>，碎屑物、填隙物、胶结物<strong>成分相同</strong>。</p>
+<p>是化学岩、生物化学岩所特有的。</p>
+<p>类型有两种：</p>
+<p>晶质结构：全有近等大的沉积晶体组成（方解石、白云石等）</p>
+<p>生物结构：由丰富的生物碎屑组成（生物屑灰岩）</p>
+<h5 id="分选性："><a href="#分选性：" class="headerlink" title="分选性："></a>分选性：</h5><p>碎屑大小的均匀程度，越均匀，分选性越好，说明搬运距离很远</p>
+<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210810173555336.png" alt="image-20210810173555336" style="zoom:50%;" />
+
+<h5 id="圆度："><a href="#圆度：" class="headerlink" title="圆度："></a>圆度：</h5><p>碎屑的圆化程度，越远者搬运距离越远。（ 棱角状–次棱角–次圆–圆）</p>
+<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210810173716396.png" alt="image-20210810173716396" style="zoom:50%;" />
+
+<h4 id="4-2-3沉积岩的构造"><a href="#4-2-3沉积岩的构造" class="headerlink" title="4-2-3沉积岩的构造"></a>4-2-3沉积岩的构造</h4><h5 id="4-2-3-1层理："><a href="#4-2-3-1层理：" class="headerlink" title="4-2-3-1层理："></a>4-2-3-1层理：</h5><p>层理指的是沉积岩的成层性</p>
+<p>红色层理常为氧化性环境；黑色层理常为还原性环境</p>
+<p><strong>平行层理：</strong>反映安静的水体沉积环境<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210810175225557.png" alt="image-20210810175225557"></p>
+<p><strong>交错层理：</strong>反映动荡的水动力环境，近岸或陆地环境</p>
+<p><img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210810175253112.png" alt="image-20210810175253112"></p>
+<p>顶截底切：底部相切，顶部截掉发散状态</p>
+<p><strong>递变层理：</strong>同一层内，碎屑粒级由下而上逐渐变小。说明形成环境的水体运动从强到弱/从弱到强周期变化，形成“韵律层”</p>
+<p><img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210810180323598.png" alt="image-20210810180323598"></p>
+<p><strong>波痕：</strong>波浪弯曲的层面，反映沉积环境动荡，不对称波痕可以确定流向、对称波痕可以确认地层顶底</p>
+<p><img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210810180403716.png" alt="image-20210810180403716"></p>
+<p><strong>泥裂：</strong>层面上多边形，剖面是上大下小的锥形体，反映了水体沉积物暴露出水面，失水变干收缩形成。</p>
+<p><strong>层间缝合线：</strong>岩层中的锯齿状曲线，与层面平行。分布在石灰岩、砂岩中。</p>
+<p>成因：压溶作用，二氧化碳和碳酸钙发生交代</p>
+<p>意义：确定地层产状，代表层面，区分上下</p>
+<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210812120752352.png" alt="image-20210812120752352" style="zoom:50%;" />
+
+<h5 id="4-3-2-2沉积构造："><a href="#4-3-2-2沉积构造：" class="headerlink" title="4-3-2-2沉积构造："></a>4-3-2-2沉积构造：</h5><p><strong>结核构造</strong></p>
+<p>沉积时，一些<strong>不同物质</strong>绕质点滚动沉积形成核状体。结核易于在含煤地层和石灰岩里产生。</p>
+<p>变化结核：结核脱水收缩，形成网状裂痕，称为<strong>“龟背石”</strong></p>
+<img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fq_70%2Cc_zoom%2Cw_640%2Fimages%2F20180327%2Fcf76fae2cbaa484f9f130d1f330ef534.jpeg&refer=http%3A%2F%2F5b0988e595225.cdn.sohucs.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1631333613&t=6dc814a2f7022fb53840db101ef176a2" alt="img" style="zoom:50%;" />
+
+<p><strong>鲕状构造</strong></p>
+<p>矿物以凝胶方式以某种碎屑物为核心沉积而形成的小颗粒（&lt;2mm）鱼籽状球状体，内部具有同心及发射状构造。</p>
+<p>形成环境：易形成于浅水动荡环境的胶体溶液中。</p>
+<p>常见于灰岩及赤铁矿中</p>
+<p><strong>冲刷痕、槽模：</strong></p>
+<p>沉积岩岩层的底面起伏状突起。</p>
+<p>有浅水动力的强烈作，表用一个沉积阶段的结束、新阶段的开始</p>
+<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210812122544325.png" alt="image-20210812122544325" style="zoom:50%;" />
+
+<p><strong>假晶：</strong></p>
+<p>残留的矿物外型，反映干旱环境，盐类逃逸被泥质充填体取代</p>
+<img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fnimg.ws.126.net%2F%3Furl%3Dhttp%3A%2F%2Fspider.ws.126.net%2F75de8abd9ea56396fad72d01d090535d.jpeg%26thumbnail%3D650x2147483647%26quality%3D80%26type%3Djpg&refer=http%3A%2F%2Fnimg.ws.126.net&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1631334182&t=495cc7e36ecc79dc73f6d95374693f1c" alt="img" style="zoom: 50%;" />
+
+<h3 id="4-3常见的沉积岩"><a href="#4-3常见的沉积岩" class="headerlink" title="4-3常见的沉积岩"></a>4-3常见的沉积岩</h3><h4 id="4-3-1碎屑岩"><a href="#4-3-1碎屑岩" class="headerlink" title="4-3-1碎屑岩"></a>4-3-1碎屑岩</h4><p>砾岩、砂岩、粉砂岩（颗粒大小不同）</p>
+<h4 id="4-3-2化学岩"><a href="#4-3-2化学岩" class="headerlink" title="4-3-2化学岩"></a>4-3-2化学岩</h4><p><strong>硅质岩：</strong>以SiO2为主体的沉积岩</p>
+<p>成因：生物骨体堆积或火山作用凝聚</p>
+<p><img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210812133459228.png" alt="image-20210812133459228"></p>
+<p>不同的水晶结晶：</p>
+<p>紫水晶（Fe多）、蔷薇水晶（Fe少）、烟水晶（含Mn）</p>
+<p><img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fgw3.alicdn.com%2Fbao%2Fuploaded%2Fi4%2FT16peLFydcXXXXXXXX_%21%210-item_pic.jpg_600x600.jpg&refer=http%3A%2F%2Fgw3.alicdn.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1631336820&t=51a57bfb18255c7292c0e3e45e22ba7e" alt="img" style="zoom: 33%;" /><img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fq_70%2Cc_zoom%2Cw_640%2Fimages%2F20181029%2F099390ccda174127947a6a84d10579a7.jpeg&refer=http%3A%2F%2F5b0988e595225.cdn.sohucs.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1631336686&t=13512a628b749ac59e968ab99c8edd3c" alt="img" style="zoom: 33%;" /><img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fcdn.duitang.com%2Fuploads%2Fitem%2F201410%2F31%2F20141031223142_yThcP.thumb.700_0.jpeg&refer=http%3A%2F%2Fcdn.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1631336770&t=c46402928fc3e8cbc181d27d8475e43d" alt="img" style="zoom: 25%;" /></p>
+<p>水晶硅质岩：玉髓、玛瑙、蛋白石、碧玉（隐晶）</p>
+<p>若不同颜色的隐晶呈同心圆构造，则为玛瑙</p>
+<p>产自澳洲的蛋白石成为欧泊</p>
+<p><strong>石灰岩：</strong></p>
+<p>由化学作用形成的方解石颗粒集合，胶结物是碳酸钙。</p>
+<p>亮晶：颗粒直径较大，透明的方解石颗粒</p>
+<p>泥晶：颗粒极小肉眼不可辨</p>
+<p>石灰岩常用于炼制水泥、石灰</p>
+<p>石灰岩和岩浆岩的接触处，会形成<strong>矽卡岩</strong>和铁铜矿床</p>
+<p><strong>白云岩：</strong>碳酸镁钙MgCa[CO3]2</p>
+<p>大部分白云岩是由方解石（碳酸钙）在含镁海水中镁离子交换产生的。</p>
+<p>野外露头的白云岩易于水化风化形成黑色刀砍状溶蚀沟</p>
+<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210812134956956.png" alt="image-20210812134956956" style="zoom:50%;" />
+
+<p>鉴别：白云岩和盐酸反应冒泡很微弱，而石灰岩反应剧烈</p>
+<h4 id="4-3-3生物化学岩"><a href="#4-3-3生物化学岩" class="headerlink" title="4-3-3生物化学岩"></a>4-3-3生物化学岩</h4><p>只有硅藻岩（硅藻土）、放射虫岩。分布很少。</p>
+<h4 id="4-3-4粘土岩"><a href="#4-3-4粘土岩" class="headerlink" title="4-3-4粘土岩"></a>4-3-4粘土岩</h4><p>以<strong>高岭土、蒙脱石</strong>为代表</p>
+<p>成分为小于0.01mm的颗粒，具有很多特性：</p>
+<p>可塑性、吸水性（蒙脱石吸水体积膨胀5~20倍）、吸附性、烧结性、耐火性</p>
+<p>当黏土岩固结形成层理，形成<strong>页岩</strong></p>
+<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210812135810816.png" alt="image-20210812135810816" style="zoom:50%;" />
+
+<h2 id="五-变质作用与变质岩"><a href="#五-变质作用与变质岩" class="headerlink" title="五.变质作用与变质岩"></a>五.变质作用与变质岩</h2><h3 id="5-1变质作用"><a href="#5-1变质作用" class="headerlink" title="5-1变质作用"></a>5-1变质作用</h3><h4 id="5-1-1变质作用定义"><a href="#5-1-1变质作用定义" class="headerlink" title="5-1-1变质作用定义"></a>5-1-1变质作用定义</h4><p><strong>变质作用：</strong>由于温度、压力的改变和化学流体的作用，使岩石的矿物成分、化学成分、结构构造<strong>在固态状态下变化</strong>，形成新矿物新岩石的地质作用。</p>
+<p><strong>变质三要素：T、P、流体</strong></p>
+<p><strong>热源：</strong>来自地球内部的地热增温、岩浆热、构造摩擦热、放射热。</p>
+<p><strong>深度：</strong>发生在中地壳层次或下地壳层次，一般至少<strong>大于地下10km</strong>（温度超过300℃达到变质条件）。</p>
+<p>变质岩约占岩石中的四分之一（火成岩三分之二，沉积岩不到十分之一）</p>
+<p>研究变质岩可以了解地壳深处的温度压力、物理化学条件、恢复原岩。变质作用还可以使矿产变富变大、将普通岩石变为宝玉石。</p>
+<p>变质岩的两个大分类：</p>
+<p><strong>正变质岩：</strong>原岩为火成岩的变质岩</p>
+<p><strong>副变质岩：</strong>原岩为沉积岩的变质岩</p>
+<p>陨石撞击产生的变质作用主要是压力导致的，大部分变质岩是温度导致的。</p>
+<h4 id="5-1-2温度"><a href="#5-1-2温度" class="headerlink" title="5-1-2温度"></a>5-1-2温度</h4><p><strong>温度区间：</strong>低于150℃不变质；高于900℃则会熔化。</p>
+<p>在温度的作用下，</p>
+<p>1）非晶体会变为结晶体；</p>
+<p>2）结晶体颗粒会变大（重结晶）</p>
+<p>3）物质与结构在温度作用下重组，形成新矿物</p>
+<h4 id="5-1-3压力"><a href="#5-1-3压力" class="headerlink" title="5-1-3压力"></a>5-1-3压力</h4><p>静压力：上层岩石重量引起，随深度增加而增加</p>
+<p>流体压力：<strong>流体是物质成分进行交换的自由场所</strong></p>
+<p>定向压力：作用在岩石的六个方向的力</p>
+<p>同轴定向压力/非同轴（不对称）定向压力：</p>
+<p><strong>蓝片岩（高压低温）</strong>：</p>
+<p>温度低，近地表的板块摩擦导致的角闪石压力变质为<strong>蓝闪石</strong>片状矿物，是古俯冲-撞击带的重要标志</p>
+<p><strong>超高压变质岩：</strong>含柯世英、金刚石的榴灰岩</p>
+<p>注意：金伯利岩（次火山岩）中的金刚石是岩浆成因，不是变质成因。</p>
+<h4 id="5-1-4具有化学活动性的流体"><a href="#5-1-4具有化学活动性的流体" class="headerlink" title="5-1-4具有化学活动性的流体"></a><strong>5-1-4具有化学活动性的流体</strong></h4><p>以H2O、CO2为主，并含其他易挥发易流动的物质</p>
+<p>流体分布：岩石粒间或缝隙中、矿物结构中、岩浆分逸而来。</p>
+<p><strong>交代作用：</strong>化学物质的<strong>带进带出</strong>，发生物质交换</p>
+<h3 id="5-2变质作用的变化"><a href="#5-2变质作用的变化" class="headerlink" title="5-2变质作用的变化"></a>5-2变质作用的变化</h3><h4 id="5-2-1化学成分的变化"><a href="#5-2-1化学成分的变化" class="headerlink" title="5-2-1化学成分的变化"></a>5-2-1化学成分的变化</h4><p>1）体积大、密度小的矿物变成体积小、密度大的矿物</p>
+<p>例：橄榄石+钙长石—-石榴子石</p>
+<p>形成新矿物：岩石释放挥发成分达到平衡，形成新矿物</p>
+<p>例：高岭土–红柱石、石英和水</p>
+<p>方解石+石英——硅灰石+二氧化碳</p>
+<p>2）重结晶作用：变质作用一定会发生重结晶</p>
+<p>小晶体变成大晶体</p>
+<p>石灰岩—大理岩（汉白玉）</p>
+<p>石英砂—石英岩</p>
+<p>3）交代作用（如花岗岩侵入石灰岩）</p>
+<p>中酸性岩浆侵入灰岩，形成矽卡岩，并伴生大量的金属矿石矿床（铁矿、铜矿、锡矿、钨矿等）</p>
+<p>4）变质分异作用</p>
+<p>岩石成分重新组合，从原先的均匀构造变为不均匀构造</p>
+<p>例如：粉砂岩—条带状变质岩（如条带状铁矿床，鞍山铁矿）</p>
+<h4 id="5-2-2矿物结构的变化"><a href="#5-2-2矿物结构的变化" class="headerlink" title="5-2-2矿物结构的变化"></a>5-2-2矿物结构的变化</h4><p><strong>片理</strong>和<strong>变质矿物</strong>是变质岩的两大特征！</p>
+<p><strong>特征变质矿物：</strong></p>
+<p>红柱石（低温接触热变质）、蓝晶石（中温中压）、矽线石（高温）</p>
+<p>化学成分不变，但结构发生变化<strong>（等化学系）</strong></p>
+<h4 id="5-2-3变质岩的结构"><a href="#5-2-3变质岩的结构" class="headerlink" title="5-2-3变质岩的结构"></a>5-2-3变质岩的结构</h4><p><strong>变晶结构：</strong></p>
+<p>原有岩石经变质作用在固态下重结晶形成的晶质结构</p>
+<p><strong>变余结构：</strong></p>
+<p>残留有部分原岩特征的结构，如板岩特有的变余泥质结构、砂质结构</p>
+<p><strong>脆裂结构：</strong></p>
+<p>由于动力变质作用使岩石发生机械破碎产生的结构（矿物颗粒扭曲变形）</p>
+<p><strong>交代结构：</strong></p>
+<p>变质作用过程中，通过化学交代作用形成的结构</p>
+<h4 id="5-2-4变质岩的构造"><a href="#5-2-4变质岩的构造" class="headerlink" title="5-2-4变质岩的构造"></a>5-2-4变质岩的构造</h4><h5 id="5-2-4-1变成构造："><a href="#5-2-4-1变成构造：" class="headerlink" title="5-2-4-1变成构造："></a><strong>5-2-4-1变成构造：</strong></h5><p>原岩的结构（如层理）消失，形成新的构造如片理、片麻理等。</p>
+<p>随变质程度而加深：</p>
+<p><strong>斑点构造</strong>—<strong>板理构造</strong>（低温）—<strong>片理构造</strong>（长石&lt;石英）/**片麻构造**（长石&gt;石英）</p>
+<p>片：黑云母等片状晶体      麻：石英、长石的麻点</p>
+<p>高温下形成<strong>片麻构造</strong>属于<strong>高级变质岩</strong></p>
+<p>麻粒岩（<strong>块状构造</strong>）–更高温</p>
+<h5 id="5-2-4-2变余构造"><a href="#5-2-4-2变余构造" class="headerlink" title="5-2-4-2变余构造"></a><strong>5-2-4-2变余构造</strong></h5><h3 id="5-3变质作用类型及变质岩代表岩石"><a href="#5-3变质作用类型及变质岩代表岩石" class="headerlink" title="5-3变质作用类型及变质岩代表岩石"></a>5-3变质作用类型及变质岩代表岩石</h3><h4 id="5-3-1接触变质作用"><a href="#5-3-1接触变质作用" class="headerlink" title="5-3-1接触变质作用"></a>5-3-1接触变质作用</h4><p><strong>产生代表变质岩为：矽卡岩、大理岩、角岩</strong></p>
+<p><strong>5-3-1接触热变质：</strong></p>
+<p>泥岩—斑点板岩/角岩</p>
+<p>石灰岩—大理岩</p>
+<p><strong>5-3-2接触交代变质：</strong></p>
+<p>矽卡岩：中酸性岩浆与冷围岩之间发生物质成分的交换形成</p>
+<p>变质矿物：硅灰石、石榴石、角闪石等</p>
+<p>外带碳酸钙多，主要是大理岩</p>
+<p>内带二氧化硅多，主要是石英</p>
+<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210813122009094.png" alt="image-20210813122009094" style="zoom: 50%;" />
+
+<h4 id="5-3-2区域变质作用"><a href="#5-3-2区域变质作用" class="headerlink" title="5-3-2区域变质作用"></a><strong>5-3-2区域变质作用</strong></h4><p><strong>产生代表变质岩为板岩、千枚岩、片岩、片麻岩、麻粒岩</strong></p>
+<p>在变质作用三要素下，在区域范围内发生的变质作用</p>
+<p>超高压、高温作用：碳—金刚石</p>
+<p>高压、低温条件：角闪石、钠长石—蓝闪石</p>
+<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210813185955215.png" alt="image-20210813185955215" style="zoom:50%;" />
+
+<p>高温低压条件：粘土矿物—红柱石</p>
+<p>高温中压条件：粘土矿物—蓝晶石</p>
+<p><strong>低级变质作用：</strong>生成<strong>板岩</strong>，显微鳞片变晶、变余结构。</p>
+<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210813185518319.png" alt="image-20210813185518319" style="zoom:50%;" />
+
+<p><strong>千枚岩</strong>：具有千枚状构造，完全重结晶，出现绢云母、绿泥石。</p>
+<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210813185546848.png" alt="image-20210813185546848" style="zoom:50%;" />
+
+<p><strong>中级变质作用：</strong>生成<strong>片岩</strong>，具有变晶结构、片状构造，原岩矿物与结构完全重组。新生矿物：石英、云母、长石、石榴石、十字石</p>
+<p>等。</p>
+<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210813185713251.png" alt="image-20210813185713251" style="zoom:50%;" />
+
+<p><strong>高级变质岩：</strong>生成<strong>片麻岩</strong>，长石与石英的总含量超过50%。</p>
+<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210813185825443.png" alt="image-20210813185825443" style="zoom:50%;" />
+
+<p>眼球构造是花岗岩等火成岩变质形成的特征（正变质岩）</p>
+<p><strong>麻粒岩：</strong>变质程度最深，主要有紫苏辉石、铁铝榴石、长石、石英等粒状矿物。变质温度即将到达熔化温度。（片状黑云母不存在）</p>
+<h4 id="5-3-3动力变质作用"><a href="#5-3-3动力变质作用" class="headerlink" title="5-3-3动力变质作用"></a>5-3-3动力变质作用</h4><p><strong>主要代表变质岩为糜棱岩、蓝闪石片岩。</strong></p>
+<p>伴随构造活动产生的韧性剪切变质-变形作用。</p>
+<p><strong>糜棱岩：</strong>韧性剪切变形条件下形成的<strong>晶格位错</strong>变质岩。</p>
+<p>特征：片理发育，偏光显微下波状消光，细粒化，存在核幔构造。</p>
+<p>变质的片理上发育有拉伸<strong>线理</strong>。</p>
+<p><img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210813191124752.png" alt="image-20210813191124752"></p>
+<p>动态（韧性）变质作用的三个特征：“线理、片理、不对称组构”</p>
+<h4 id="5-3-4混合岩化作用："><a href="#5-3-4混合岩化作用：" class="headerlink" title="5-3-4混合岩化作用："></a>5-3-4混合岩化作用：</h4><p>当温度大于900摄氏度时，区域高级变质岩一部分高温熔融，另一部分未熔化的现象。形成特殊的混合变质岩。</p>
+<p><strong>基体</strong>为未熔化的变质岩（暗色）；</p>
+<p>而<strong>脉体</strong>为部分熔融的长石和石英（浅色）</p>
+<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210813191743675.png" alt="image-20210813191743675" style="zoom:50%;" />
+
+<h2 id="三大类岩石的总结："><a href="#三大类岩石的总结：" class="headerlink" title="三大类岩石的总结："></a>三大类岩石的总结：</h2><p><img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210813192958251.png" alt="image-20210813192958251"></p>
+<p><img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210813192921589.png" alt="image-20210813192921589"></p>
+]]></content>
+      <categories>
+        <category>地理学</category>
+      </categories>
+      <tags>
+        <tag>学习笔记</tag>
+        <tag>地质</tag>
+        <tag>矿物</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>计算化学学习笔记</title>
+    <url>/2023/04/27/%E8%AE%A1%E7%AE%97%E5%8C%96%E5%AD%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h2 id="一-序言："><a href="#一-序言：" class="headerlink" title="一.序言："></a>一.序言：</h2><h3 id="1-1软件安装"><a href="#1-1软件安装" class="headerlink" title="1-1软件安装"></a>1-1软件安装</h3><p>GaussView：分子建模软件</p>
+<p>Gaussian：对建好的化学模型进行计算</p>
+<h3 id="1-2研究内容"><a href="#1-2研究内容" class="headerlink" title="1-2研究内容"></a>1-2研究内容</h3><p><strong>1）第一性原理：</strong>理论方法不依赖经验参数，偏重研究固体和表面问题</p>
+<p>2）分子模拟：</p>
+<p>分子反应动力学：使用粗糙的分子力场理论，可以研究超多分子的大体系</p>
+<p>蒙特卡洛：使用随机变量进行模拟，统计学方法可以估算产率</p>
+<p>分子对接：生物分子对接识别等</p>
+<p>3）研究对象：</p>
+<p>分子、团簇等孤立体系，常规处理几个到几百个原子的体系。</p>
+<p>若使用半经验方法可以达到上万个原子。</p>
+<p>计算化学能解决化学热力学、化学动力学、分子性质、结构等。</p>
+<p><strong>单位换算:  1Hartree=2625.5KJ/mol=627.5094kcal/mol</strong></p>
+<h2 id="二-计算化学的计算级别"><a href="#二-计算化学的计算级别" class="headerlink" title="二.计算化学的计算级别"></a>二.计算化学的计算级别</h2><p><strong>理论方法+选用基组===计算级别（Level）</strong></p>
+<p>计算结果与实际值的相符程度：</p>
+<p>取决于理论方法、基组、特殊效应的考虑。</p>
+<p><strong>注意：存在短板效应！</strong>理论方法、基组和特殊效应要搭配得当，否则会浪费时间，甚至导致误差增加。（半经验方法优势就是快，没有必要增加很多特殊效应）</p>
+<h3 id="2-1理论方法"><a href="#2-1理论方法" class="headerlink" title="2-1理论方法"></a>2-1理论方法</h3><h4 id="1）Hartree-Fock近似（HF方法）"><a href="#1）Hartree-Fock近似（HF方法）" class="headerlink" title="1）Hartree-Fock近似（HF方法）"></a><strong>1）Hartree-Fock近似（HF方法）</strong></h4><p><strong>忽略电子相关</strong>，单电子近似，把其他电子近似为一种平均势场，薛定谔方程简化为HF方程。不同的求解方法中总含有一定的HF成分。</p>
+<h4 id="2）自洽场迭代法"><a href="#2）自洽场迭代法" class="headerlink" title="2）自洽场迭代法"></a><strong>2）自洽场迭代法</strong></h4><p><strong>（SCF，self-consistent field）:</strong></p>
+<p>用于求解HF方程，迭代至波函数和能量<strong>收敛（Converged）</strong></p>
+<p>若计算一定次数后未能收敛，则称为<strong>不收敛（Converged Failure）</strong></p>
+<p>柔性结构易于导致振荡不收敛，在收敛点附近起伏，解决方法是减短步长（Step)</p>
+<h4 id="3）有限基组近似"><a href="#3）有限基组近似" class="headerlink" title="3）有限基组近似"></a><strong>3）有限基组近似</strong></h4><p>采用有限个基函数逼近真实波函数的方法 。</p>
+<p>无限个基函数近似可以得到<strong>完备基组（CBS）</strong>，但是无限无法计算，因而使用<strong>外推</strong>基组的方法（增大基组个数结果逐渐收敛）</p>
+<h4 id="4）半经验方法"><a href="#4）半经验方法" class="headerlink" title="4）半经验方法"></a><strong>4）半经验方法</strong></h4><p>存在实验数据，HF方法的进一步近似，速度快，准确度下降</p>
+<p>适用于算光谱误差不大，大尺度体系<strong>迅速模拟</strong>，复杂体系构象可以<strong>预优化</strong>。</p>
+<h4 id="5）后HF方法"><a href="#5）后HF方法" class="headerlink" title="5）后HF方法"></a><strong>5）后HF方法</strong></h4><p><strong>（Post-HF）：</strong></p>
+<p>考虑电子相关，比HF精度更高</p>
+<p>常见的后HF方法：</p>
+<p>  <strong>（1）组态相互作用（CI）</strong>：CIS，CID，CISD，CISDT</p>
+<p>掺杂了一定的激发态成分。</p>
+<p>常用于计算激发态，计算强关联体系（能级差很小）优势较大。</p>
+<p>  <strong>（2）微扰理论</strong>：MP2；MP3，MP4，MP5</p>
+<p>组态相互作用的一种简化，加入高阶微扰相关能。</p>
+<p>  <strong>（3）耦合簇方法（CC）</strong>：CCD，CCSD，CCSD(T)</p>
+<p>CCSD(T)：高斯支持的最高等级，三阶近似，最高20个原子左右封顶，计算量非常大，计算精度非常高。</p>
+<h4 id="6）密度泛函理论（DFT）"><a href="#6）密度泛函理论（DFT）" class="headerlink" title="6）密度泛函理论（DFT）"></a>6）密度泛函理论（DFT）</h4><p><strong>(Density Functional Theory)</strong></p>
+<p>何为泛函？可以简单理解为函数的函数。</p>
+<p>Hohenberg-Kohn第一定理：<strong>体系基态下的电子密度分布决定了体系的一切性质</strong></p>
+<p>这说明了精确的能量泛函是存在的。</p>
+<p>E=动能泛函+经典库伦作用+<strong>交换相关泛函（决定精度的最主要部分，具有经验性）</strong></p>
+<p><strong>传统交换-相关泛函：</strong></p>
+<p>（1）局域密度近似（LDA）：模拟效果较差，没有应用价值</p>
+<p>（2）广义梯度近似（GGA）:比LDA有一定提升</p>
+<p>例如：KT1（非常适合算NMR核磁，但高斯不支持）</p>
+<p>（3）meta-GGA：比GGA提升不大</p>
+<p>例如：TPSS（过渡金属配合物）</p>
+<p><strong>（4）杂化泛函（Hybrid Functional）：</strong>交换能中掺入一定程度的HF交换能，提升明显</p>
+<p>例如：<strong>B3LYP（兼容性超强，适合计算振动分析）</strong></p>
+<p>​            PBE1PBE(适合过渡金属配合物)</p>
+<p>​            CAM-B3LYP（近远程分别考虑，适合计算大范围共轭体系）</p>
+<p>​            wB97XD（计算有机体系，但耗时较高）</p>
+<p>（5）meta-杂化泛函：在meta-GGA中掺入HF成分</p>
+<p>例如：<strong>M062X（有机体系标配，明尼苏达系列泛函）</strong></p>
+<p>（6）双杂化泛函：精度很高，接近后HF方法</p>
+<p>例如：B2PLYP           </p>
+<p>泛函与HF成分：HF成分越高，HOMO-LUMO gap越大。</p>
+<h4 id="7）DFT-D色散矫正"><a href="#7）DFT-D色散矫正" class="headerlink" title="7）DFT-D色散矫正"></a><strong>7）DFT-D色散矫正</strong></h4><p><strong>（Dispersion Correction）用于补充描述色散作用</strong>（如氢键和分子间作用力）</p>
+<p>色散校正对于计算量影响不大，有需要总是加，但是会在构型优化时间接影响计算结果</p>
+<h3 id="2-2基组"><a href="#2-2基组" class="headerlink" title="2-2基组"></a>2-2基组</h3><h4 id="1）基函数："><a href="#1）基函数：" class="headerlink" title="1）基函数："></a>1）<strong>基函数：</strong></h4><p>将分子轨道展开为单电子基函数（展开越多越精确）</p>
+<h4 id="2）基组分类："><a href="#2）基组分类：" class="headerlink" title="2）基组分类："></a>2）<strong>基组分类：</strong></h4><p>​     极小基（每个轨道仅展开为一个基函数，精度差）</p>
+<p>​     扩展基（展开为n个基函数描述）</p>
+<h4 id="3）极化函数（必加）"><a href="#3）极化函数（必加）" class="headerlink" title="3）极化函数（必加）"></a><strong>3）极化函数</strong>（必加）</h4><p>（Polarization function）</p>
+<p>用于描述原子轨道在分子体系中的变形，<strong>必须加</strong>很重要，尤其是在后HF方法和双杂化泛函高精度计算中要加很多极化函数才能保证计算精度。</p>
+<h4 id="4）弥散函数（不随意加）"><a href="#4）弥散函数（不随意加）" class="headerlink" title="4）弥散函数（不随意加）"></a>4）弥散函数（不随意加）</h4><p>（Diffuse Function）</p>
+<p>指数非常小的基函数，<strong>不能随便乱加</strong></p>
+<p>可以延展到非常广的空间区域，易于导致不收敛。</p>
+<p><strong>加弥散函数的情形：</strong></p>
+<p>计算偶极矩、多极矩、电子亲和能、阴离子体系能量、弱相互作用能、Raman强度、优化阴离子体系或弱相互作用体系结构和振动分析等。</p>
+<h4 id="5）常见基组"><a href="#5）常见基组" class="headerlink" title="5）常见基组"></a>5）常见基组</h4><p><strong>（1）pople系列基组：</strong></p>
+<p><strong>适合搭配一般泛函方法，仅对前四周期有定义</strong>（f轨道加不了极化）</p>
+<p>​     3-21G，6-31G，6-311G</p>
+<p>​     加极化和弥散:6-31++G(d,p)；6-31++G**</p>
+<p>一个*等于写了(d)，代表给p轨道加d极化</p>
+<p>两个**等于写了(d,p)，代表再给s轨道加p极化，用于给氢原子加极化。</p>
+<p>一个+代表给重原子加弥散；</p>
+<p>两个++代表给重原子和氢原子同时加弥散</p>
+<p><strong>（2）Dunning’s相关一致性基组：</strong>适合搭配后HF方法使用</p>
+<p>​     cc-pVnZ(n=D/T/Q/5….9)</p>
+<p>（correlation consistent polarized Valence n-Zeta）<strong>已经把极化加满了</strong></p>
+<p>精度极高，计算量很恐怖。</p>
+<p>加弥散的方法：前面补充一个aug-cc-pVnZ</p>
+<p>加两层弥散(d)aug-cc-pVnZ</p>
+<p><strong>（3）Ahlrichs def-/def2-系列基组：</strong>适合DFT或后HF方法</p>
+<p>def-SVP、def-TZVP</p>
+<p><strong>def2-SVP、def2-TZVP</strong>（输入文件不加横杠）</p>
+<h3 id="2-3特殊效应"><a href="#2-3特殊效应" class="headerlink" title="2-3特殊效应"></a>2-3特殊效应</h3><h4 id="1）溶剂效应"><a href="#1）溶剂效应" class="headerlink" title="1）溶剂效应"></a>1）溶剂效应</h4><p>scrf=(SMD,solvent=water)</p>
+<p>SMD为隐式溶剂模型，solvent后关键字为溶剂，不写默认是水</p>
+<h4 id="2）经验色散校正"><a href="#2）经验色散校正" class="headerlink" title="2）经验色散校正"></a>2）经验色散校正</h4><p>RmpiricalDispersion=GD3（简写为<strong>em=GD3</strong>）</p>
+<h4 id="3）相对论效应"><a href="#3）相对论效应" class="headerlink" title="3）相对论效应"></a>3）相对论效应</h4><p><strong>理论方法、基组和特殊效应要使用相近等级搭配！要补的是短板而不是加强长板，例如半经验方法就希望算得快，再加上溶剂效应等毫无意义，不仅延长了计算时间而且还可能导致误差累积！</strong></p>
+<h2 id="三-输入输出"><a href="#三-输入输出" class="headerlink" title="三.输入输出"></a>三.输入输出</h2><p>gjf：GW建立的分子模型文件，也是高斯的常规输入文件</p>
+<p> in：集群使用的输入文件</p>
+<p>Chk：检查点文件，过程性文件。</p>
+<p>out：输出文件</p>
+<h3 id="3-1输入文件编写"><a href="#3-1输入文件编写" class="headerlink" title="3-1输入文件编写"></a>3-1输入文件编写</h3><p>%chk=路径：检查点文件的保存路径，不写就是默认路径</p>
+<p><strong>%nprocshared=12</strong> 打开多核心并行运算</p>
+<p>%mem=4000MB 设置计算使用的内存上限</p>
+<p>#p b3lyp/6-31g*：计算级别，默认开始sp单点计算，后面补充其他关键词。</p>
+<p>溶剂模型smd(适合算能量，高对称可能有微小虚频) pcm iefpcm(默认)</p>
+<p>maxstep=3  调整优化步长上限，步子不要迈太大</p>
+<p>geom=connectivity:读取冗余内坐标，一般删掉，并同时删除末尾的内坐标。</p>
+<p>Title Card Required，下面是分子结构数据</p>
+<p>0                                 1</p>
+<p>电荷量（Charge）  自旋多重度（Multiplicity）</p>
+<p>​        注：自旋多重度的判断方法：自旋多重度=2*总自旋量子数+1</p>
+<p>​        <strong>若要研究电子不配对的情况，则泛函前面写一个U，如写UB3LYP(非限制性)</strong></p>
+<p>表格内是不同原子的Xyz笛卡尔坐标</p>
+<p>图示是对乙烷进行单点计算的最简输入文件。</p>
+<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210815155308244.png" alt="image-20210815155308244" style="zoom:50%;" />
+
+<p>文件拖入gaussian点击开始便开始运算，出现normal termination则计算结束。</p>
+<h3 id="3-2输出文件的读取"><a href="#3-2输出文件的读取" class="headerlink" title="3-2输出文件的读取"></a><strong>3-2输出文件的读取</strong></h3><p>1）result-summary</p>
+<p>SP：单点能计算</p>
+<p>RB3LYP：restrict限制性B3LYP方法，电子成对闭壳层体系使用限制性方法（自旋多重度为1）</p>
+<p>a.u.原子单位制能量，1a.u.=1Hartree=27.2114eV=2625.5kJ/mol</p>
+<p>Dipple Moment：偶极矩</p>
+<p>2）result-Charge Distribution电荷分布</p>
+<p>3）记事本打开out文件</p>
+<p>Cycle：SCF迭代计算方法：收敛结束</p>
+<p>Mulliken charges密立根电荷：均分化学键后两边的电荷量</p>
+<p>重点读取计算总结：</p>
+<p>HF=XXXX（单点能输出）</p>
+<p>名人名言库</p>
+<p>File lengths文件大小  RWF草稿文件   Chk检查点文件</p>
+<h3 id="3-3集群的使用与投任务"><a href="#3-3集群的使用与投任务" class="headerlink" title="3-3集群的使用与投任务"></a>3-3集群的使用与投任务</h3><p>将输入文件改为xxx.in上传至工作路径</p>
+<p>gaussian16的使用指令：</p>
+<p>xg16 -16 xxx</p>
+<p>正常工作，会生成chk及log文件，log文件即为输出文件</p>
+<p>fchk转换指令：</p>
+<p>/usr/local/g16/formchk  xxx.chk</p>
+<h2 id="四-势能面计算与构型优化Opt"><a href="#四-势能面计算与构型优化Opt" class="headerlink" title="四.势能面计算与构型优化Opt"></a>四.势能面计算与构型优化Opt</h2><h3 id="4-1势能面"><a href="#4-1势能面" class="headerlink" title="4-1势能面"></a>4-1势能面</h3><p>势能面是以结构参数为变量，能量为函数值的高维曲面。</p>
+<p>结构参数有原子坐标、键长、键角、二面角等。</p>
+<h4 id="4-1-1限制性势能面"><a href="#4-1-1限制性势能面" class="headerlink" title="4-1-1限制性势能面"></a>4-1-1限制性势能面</h4><p><strong>限制性势能面：</strong>只考虑分子中部分结构参数的变化</p>
+<p><strong>单变量势能曲线：</strong>只改变一个结构参数，计算分子能量或某一性质的变化。</p>
+<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210815151509334.png" alt="image-20210815151509334" style="zoom:50%;" />
+
+<p><strong>内禀反应坐标曲线（IRC）：</strong>常用于有机化学</p>
+<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210815151703396.png" alt="image-20210815151703396" style="zoom:50%;" />
+
+<p><strong>双变量势能曲面：</strong></p>
+<p>能量极小点（山谷）：一阶偏导为0.二阶偏导&gt;0</p>
+<p>过渡态（Transition State）：一阶鞍点，驻点</p>
+<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210815152130045.png" alt="image-20210815152130045" style="zoom:50%;" />
+
+<h4 id="4-1-2不同电子态的势能面"><a href="#4-1-2不同电子态的势能面" class="headerlink" title="4-1-2不同电子态的势能面"></a>4-1-2不同电子态的势能面</h4><p><img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210815152556992.png" alt="image-20210815152556992"></p>
+<p><strong>垂直激发：</strong>构型不变（横坐标不变），能量升高。</p>
+<p><strong>绝热激发：</strong>由基态极小值点到激发态极小值点，构型发生变化。</p>
+<p><strong>内转化：</strong>基态和激发态在某一构型处能量相等，对外无热量交换便发生转化。</p>
+<p><strong>系间窜越：</strong>三重态和激发态在某构型能量相等，发生相互转化</p>
+<p><strong>磷光：</strong>三重态最低点回到单重态，发射磷光（停留时间较长）</p>
+<p><strong>荧光：</strong>激发态回到基态，发荧光（停留时间极短）</p>
+<p><strong>垂直激发能的意义：</strong></p>
+<p>软硬酸碱度：与垂直激发能foundimential gap有关。</p>
+<h3 id="4-2单点计算"><a href="#4-2单点计算" class="headerlink" title="4-2单点计算"></a><strong>4-2单点计算</strong></h3><p>（single point，SP）</p>
+<p>计算单一固定结构的绝对能量，即为势能面某处的函数值（电子能量），计算结果为<strong>单点能（SPE）</strong>。</p>
+<p><strong>单点能：</strong>将所有原子核和所有电子分开到无穷远的距离相应的能量。</p>
+<p><strong>零点能：</strong>基态振动所具有的能量。</p>
+<p>单点能没有绝对意义，但是相对值有化学意义<strong>（必须在完全一致的计算方法下才能比较单点能！！不同方法下势能面有差别）</strong></p>
+<h3 id="4-2构型优化Opt（Optimization）"><a href="#4-2构型优化Opt（Optimization）" class="headerlink" title="4-2构型优化Opt（Optimization）"></a><strong>4-2构型优化Opt（Optimization）</strong></h3><p><strong>构型优化：</strong>从初始结构出发，搜索势能面上特定点对应的结构。</p>
+<p>关键词：Opt，默认优化为能量极小点</p>
+<p>Opt=TS提供过渡态结构初猜（构型优化未必是真实结构！）</p>
+<p>其他附带关键词：</p>
+<p>1）Opt=Z-matrix内坐标优化（高效且默认）</p>
+<p>有时不收敛，可以改为Opt=cartesian笛卡尔坐标优化（计算量略大）</p>
+<p>2）<strong>Opt=calcfc</strong>第一步精确计算（离平衡态很接近有帮助）</p>
+<p>Opt=calcall每一步精确计算，计算量很大</p>
+<p>Opt（recalc=n）每N步精确计算一次，Gaussian16新功能</p>
+<p>3）Opt=loose/tight：柔性很大的结构，放宽收敛标准/严格收敛标准</p>
+<p>4）int=ultrafine：增加泛函积分精度，尤其<strong>适合明尼苏达系列泛函</strong></p>
+<h3 id="4-3过渡态搜索TS"><a href="#4-3过渡态搜索TS" class="headerlink" title="4-3过渡态搜索TS"></a>4-3过渡态搜索TS</h3><p><strong>输入关键字：</strong></p>
+<p>opt=TS:给出过渡态初猜，寻找过渡态</p>
+<p>opt(ts,noeigen,calcfc):其中noeigen代表不进行Hessian矩阵的本征值检测</p>
+<p>当写出calcall时，无需再进行freq频率分析，即可查看结果。</p>
+<p><strong>过渡态的特征：</strong></p>
+<p>只有一个大于100的虚频，振动方向朝着反应物和产物，结构在反应物和产物之间。</p>
+<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210815173831802.png" alt="image-20210815173831802" style="zoom:50%;" />
+
+<p><strong>过渡态的检验：IRC计算</strong></p>
+<p>IRC就是在质权坐标下链接势能面相邻两个极小点能量最低的路径，相当于原子运动无限慢时的路径，而过渡态就是IRC的最高点。</p>
+<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210815182837039.png" alt="image-20210815182837039" style="zoom:50%;" />
+
+<p>IRC的关键词：</p>
+<p>irc(calcall,stepsize=15,maxpoint=15)，计算级别必须和TS严格一致！</p>
+<p>其中：stepsize：步长，默认为10，步长越小曲线越光滑</p>
+<p>maxpoint：设定IRC向两个方向走的点数，如Maxpoint=20则一共有41个点（包含过渡态本身是一个点）</p>
+<p><strong>IRC曲线的两端不是反应物与产物的真实结构！</strong></p>
+<p>正确结构应该把端点结构取出后opt优化。</p>
+<p><strong>过渡态搜索可能出现的错误：</strong></p>
+<h2 id="五-振动分析freq"><a href="#五-振动分析freq" class="headerlink" title="五.振动分析freq"></a>五.振动分析freq</h2><p><strong>分子振动基本概念：</strong></p>
+<p>简正模式：分子质心和取向不变，原子以相同频率在平衡附近振动。</p>
+<p>分子振动形式：对称伸展、平面剪式运动、平面摇摆、非平面扭转等</p>
+<p><strong>振动频率：</strong></p>
+<p>振动的频率为<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210818165527431.png" alt="image-20210818165527431" style="zoom: 33%;" />,若k为负数，则v也是负数，称为<strong>虚频</strong></p>
+<p>势能面极小点没有虚频，而对于绝大多数的过渡态都存在1个虚频。</p>
+<p>虚频意味着振动不平衡，会在势能面上下滑。</p>
+<p><strong>频率计算关键词：</strong></p>
+<p>freq:计算振动频率和红外强度</p>
+<p>freq=raman：计算拉曼强度，只在DFT和MP2方法时需要指定。</p>
+<p>freq=VCD：计算振动圆二色性强度和旋光性</p>
+<p>freq=ROA：计算动态解析拉曼光活性强度</p>
+<h3 id="5-1红外光谱"><a href="#5-1红外光谱" class="headerlink" title="5-1红外光谱"></a>5-1红外光谱</h3><p><strong>红外活性振动：</strong></p>
+<p>引起分子偶极矩变化的振动会吸收红外光（1000~4000nm），称为红外活性振动。(Infrared Vibration)</p>
+<p><strong>计算案例：丙氨酸的红外光谱</strong></p>
+<p>%chk=bingansuan.chk<br>#p b3lyp/6-31g* opt freq scrf(SMD,solvent=toluene)</p>
+<p>结果查看：results—vibrations,可以查看动画</p>
+<p>点击Spectra显示IR光谱，与实验（红外吸收光谱）相反</p>
+<p><img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210819145106591.png" alt="image-20210819145106591"></p>
+<p>右键properties：IR peak Half-Wideth at Half Height（展宽）</p>
+<p>右键save data可以直接导出txt数据文件</p>
+<p>记事本打开输出文件：查找frequencies：振动频率</p>
+<p>​                                      对应IR Inten：红外强度</p>
+<p>稳定的结构：无虚频（负数）；过渡态：有1-2个虚频</p>
+<p><strong>绘制与实验一致的红外光谱：</strong></p>
+<p>将out文件拖入multiwfn软件后回车，选择11绘制光谱，再选择1红外光谱</p>
+<p>2：输出xy轴的数据txt</p>
+<p>3：设置横轴坐标起始</p>
+<p>8：设置展宽全宽（是半宽度的两倍）</p>
+<p><strong>14：加入频率校正因子(必要)</strong></p>
+<p>计算级别B3LYP/6-31G*乘上频率校正因子0.9614后精度极高</p>
+<p><strong>使用Origin绘图：</strong></p>
+<p>光谱曲线的y轴坐标倒置，红外强度的line正置，设置y轴区间使图像充分展开，x轴为4000~0cm-1。</p>
+<p>保存图片为bmp文件时，清晰度很高。</p>
+<img src="D:\g16w\Lab\freq test\Graph1.bmp" alt="Graph1" style="zoom:67%;" />
+
+<h3 id="5-2振动圆二色谱"><a href="#5-2振动圆二色谱" class="headerlink" title="5-2振动圆二色谱"></a><strong>5-2振动圆二色谱</strong></h3><p>两束强度、速度、频率和相位完全一致的圆偏振光复合形成平面偏振光，在光学各向异性介质（手性物质）中传播，其综合光变为椭圆偏振光。L光和R光在介质中传播速度不同，手性物质对某波长的两种光吸光率A不同，分别为AL和AR，则△A=AL-AR，称为圆二色性。</p>
+<p><strong>计算案例：计算丙氨酸的振动圆二色谱</strong></p>
+<p>#p b3lyp/6-31g* opt freq=VCD</p>
+<h3 id="5-3拉曼光谱"><a href="#5-3拉曼光谱" class="headerlink" title="5-3拉曼光谱"></a>5-3拉曼光谱</h3><p>拉曼（Raman）光谱：光通过介质产生散射光</p>
+<p>粒子与波长相近，较大颗粒物产生<strong>Tyndall散射（丁达尔效应）</strong>，对于分子就会产生<strong>Reyleigh散射（瑞利散射）</strong>。散射光频率与入射光相同（即能量不发生变化—–光子与分子产生<strong>弹性碰撞</strong>）但是强度发生变化，与入射光的四次方呈反比。</p>
+<p>而Reyleigh散射线周围却又有频率不同于入射光的散射线，称为<strong>Raman散射</strong>。其中频率较低的是<strong>Stocks线</strong>，较高的是<strong>反Stocks线</strong>。（<strong>Raman散射存在能量交换，来自于分子振动能</strong>）</p>
+<p>第n振动激发态上的分子：具有E0+nhv0的能量，吸收到能量为hv的光子能量，则跃迁至E0+h（nv0+v）的虚态。虚态不稳定迅速回射，便又发出光子。</p>
+<p>但是如果回到n激发态，就与入射光频率相同，表现为Reyleigh散射。如果回到非n激发态，就会产生Raman散射（从振动能处薅羊毛，因此散射光频率发生变化）</p>
+<p>引起<strong>偶极矩变化</strong>的振动模式具有红外活性；而引起<strong>极化率变化</strong>的振动模式具有Raman活性。</p>
+<p>（注：ROA光谱,（动态解析拉曼光谱）需要加充分弥散才能算准，因此应用很少）</p>
+<p>注意：计算得到的Raman活性与Raman强度不同，只能显示峰的位置，但是峰高与实验不一致。</p>
+<p><strong>Multiwfn可以把活性转化为Raman强度</strong></p>
+<p> <strong>使用Origin绘图：</strong></p>
+<p>用Multiwfn打开输出文件</p>
+<p>选择11绘制光谱，选择2绘制拉曼光谱，输入14乘上频率校正因子。</p>
+<p>拉曼强度的转化，需要定义入射光波长，输入19后输入：</p>
+<p>近紫外区<strong>364nm</strong>/ 可见光区<strong>532nm</strong>/ 近红外区<strong>1064nm</strong></p>
+<p>输入温度（或回车默认294.15K）即可将拉曼活性转化为拉曼强度。</p>
+<p>在光谱上可以指认标注峰的归属。</p>
+<h3 id="5-4热力学计算"><a href="#5-4热力学计算" class="headerlink" title="5-4热力学计算"></a>5-4热力学计算</h3><p>ZPE零点能（Zero-point correction）：只包括振动能</p>
+<p>真正的零点能理论上包含了电子能量（单点能）和基态零点振动能</p>
+<p>内能（热力学能）要进行温度热矫正量求解，Ucorr包含了零点能和热矫正量</p>
+<p>计算化学的能量绝对零点是所有粒子分离到无穷远（无相互作用）</p>
+<p>精确计算:热矫正量的误差不是主要矛盾，电子能才需要较高的精度，故使用中等级别计算热矫正量，加于高精度单点能之上</p>
+<p> <strong>计算案例：预测乙酸的pKa</strong></p>
+<h2 id="六-分子轨道作图"><a href="#六-分子轨道作图" class="headerlink" title="六.分子轨道作图"></a>六.分子轨道作图</h2><h3 id="6-1使用软件Multiwfn"><a href="#6-1使用软件Multiwfn" class="headerlink" title="6-1使用软件Multiwfn"></a>6-1使用软件Multiwfn</h3><p>0：显示分子轨道及其序号</p>
+<p>200-3</p>
+<p>输入轨道序号168/169</p>
+<p>3：选择高精度</p>
+<p>1：单独输出为两个文件</p>
+<p>将输出文件拷贝到vmd目录下</p>
+<h3 id="6-2使用软件VMD"><a href="#6-2使用软件VMD" class="headerlink" title="6-2使用软件VMD"></a>6-2使用软件VMD</h3><p>Orb 168</p>
+<p>Orbiso 0.03（0.02-0.05） 改变轨道等势面（视觉上改变大小）</p>
+<p>输入color change rgb tan 0.700000 0.560000 0.360000</p>
+<p>material change mirror Opaque 0.15</p>
+<p>material change outline Opaque 4.000000</p>
+<p>material change outlinewidth Opaque 0.5</p>
+<p>material change ambient Glossy 0.1</p>
+<p>material change diffuse Glossy 0.600000</p>
+<p>material change opacity Glossy 0.75</p>
+<p>material change shininess Glossy 1.0</p>
+<p>mol modcolor 1 top ColorID 12</p>
+<p>mol modcolor 2 top ColorID 22</p>
+<p>display distance -7.0</p>
+<p>display height 10</p>
+<p>light 3 on</p>
+<p>一定要回车！不然会卡死</p>
+<p>Selected atoms</p>
+<p>将all改为serial 1 to 4 13: 选中1-4及13号原子进行修改</p>
+<p>输出：files-Render</p>
+<p>Tachyon </p>
+<h3 id="6-3渲染："><a href="#6-3渲染：" class="headerlink" title="6-3渲染："></a>6-3渲染：</h3><p>VMDrender_full批处理文件</p>
+<p>操作命令记录：log 1.txt</p>
+<p>操作记录停止：log off</p>
+]]></content>
+      <categories>
+        <category>化学</category>
+      </categories>
+      <tags>
+        <tag>学习笔记</tag>
+        <tag>计算化学</tag>
+      </tags>
   </entry>
 </search>

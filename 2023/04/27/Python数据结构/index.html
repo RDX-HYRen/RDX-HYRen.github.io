@@ -1,0 +1,1707 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Python数据结构, RDXのWebsite">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>Python数据结构 | RDXのWebsite</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+
+   <style>
+    body{
+       background-image: url(https://cdn.jsdelivr.net/gh/Tokisaki-Galaxy/res/site/medias/background.jpg);
+       background-repeat:no-repeat;
+       background-size:cover;
+       background-attachment:fixed;
+    }
+</style>
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">RDXのWebsite</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-vial" style="zoom: 0.6;"></i>
+      
+      <span>Chemistry</span>
+      <i class="fas fa-chevron-down" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/crystal">
+          
+          <i class="fas fa-gem" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>crystal</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/study">
+          
+          <i class="fas fa-school" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>study</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/research">
+          
+          <i class="fas fa-book" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>research</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-star" style="zoom: 0.6;"></i>
+      
+      <span>Astronomy</span>
+      <i class="fas fa-chevron-down" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/deepsky">
+          
+          <i class="fas fa-galaxy" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>deepsky</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/planet">
+          
+          <i class="fas fa-planet-ringed" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>planet</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/memory">
+          
+          <span>memory</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/archives">
+          
+          <span>archives</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-lightbulb" style="zoom: 0.6;"></i>
+      
+      <span>Spectrum</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">RDXのWebsite</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-vial"></i>
+			
+			Chemistry
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>
+
+                  <a href="/crystal " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-gem" style="position: absolute;left:50px" ></i>
+			      
+		          <span>crystal</span>
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/study " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-school" style="position: absolute;left:50px" ></i>
+			      
+		          <span>study</span>
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/research " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-book" style="position: absolute;left:50px" ></i>
+			      
+		          <span>research</span>
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-star"></i>
+			
+			Astronomy
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>
+
+                  <a href="/deepsky " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-galaxy" style="position: absolute;left:50px" ></i>
+			      
+		          <span>deepsky</span>
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/planet " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-planet-ringed" style="position: absolute;left:50px" ></i>
+			      
+		          <span>planet</span>
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/memory " style="margin-left:75px">
+				  
+		          <span>memory</span>
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/archives " style="margin-left:75px">
+				  
+		          <span>archives</span>
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-lightbulb"></i>
+			
+			Spectrum
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/RDX-HYRen/RDX-HYRen.github.io" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/RDX-HYRen/RDX-HYRen.github.io" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/21.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Python数据结构</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Python/">
+                                <span class="chip bg-color">Python</span>
+                            </a>
+                        
+                            <a href="/tags/%E7%BC%96%E7%A8%8B/">
+                                <span class="chip bg-color">编程</span>
+                            </a>
+                        
+                            <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+                                <span class="chip bg-color">学习笔记</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/" class="post-category">
+                                计算机科学
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2023-04-27
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="python-序列"><a href="#python-序列" class="headerlink" title="python 序列"></a>python 序列</h1><p>包括字符串，列表，元组，range对象，字典，集合等数据类型</p>
+<p>补充记忆知识点**整数数据类型：</p>
+<p>0b开头代表二进制       如：0b1001</p>
+<p>0o开头代表八进制       如：0o527</p>
+<p>0x开头代表十六进制    如：0xff5a</p>
+<p>浮点数中的科学记数法：3.14e-2（即为0.0314）</p>
+<p>注意科学计数法幂次必须是整数</p>
+<h1 id="0-序列概述"><a href="#0-序列概述" class="headerlink" title="0.序列概述"></a>0.序列概述</h1><h2 id="0-0常用内建函数"><a href="#0-0常用内建函数" class="headerlink" title="0.0常用内建函数"></a>0.0常用内建函数</h2><p>**int()**将一个字符串或数字暴力转换为整型，即浮点数去除小数点变为整数。</p>
+<p><strong>chr</strong>()可将整数转换成其作为ASCII码对应的字符<br>**ord()**可将字符转换成其对应的ASCII码</p>
+<p>len()可以返回序列的长度</p>
+<p>sum()可以返回数字序列中所有数字的和</p>
+<p>max/min()可以返回序列对象的最大/最小值，通过key确定排序方式</p>
+<p>list()可以强制将可迭代对象转换为列表</p>
+<p>tuple()可以强制将可迭代对象转换为元组</p>
+<p>str()操作可迭代对象，则会把<strong>可迭代对象整体表达</strong>转为字符串，输入迭代器会直接把迭代器存储空间转为字符串。</p>
+<p>总之就是可迭代对象打印出来什么样子，str就把它转为什么样的字符串。</p>
+<p>eval()与前者功能恰好相反，它可以把字符串格式的表达式求值返回。<strong>更广义上来说，eval()函数可以把一段字符串转为可执行的代码。</strong>常用于文件读取后执行其中的内容。</p>
+<p>eval()还可以用于输入字符串快速转为int格式赋值给变量</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(<span class="built_in">str</span>((<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>)))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&quot;(1,2,3,4)&quot;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a=<span class="built_in">str</span>(<span class="built_in">zip</span>(<span class="string">&#x27;123&#x27;</span>,<span class="string">&#x27;abc&#x27;</span>))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(a)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;&lt;zip object at 0x000002446CDA2708&gt;&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x=<span class="number">7</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">eval</span>(<span class="string">&#x27;3*x&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">21</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>n1, n2 = <span class="built_in">eval</span>(<span class="built_in">input</span>(<span class="string">&quot;input two numbers a, b: &quot;</span>))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">input</span> two numbers a, b: <span class="number">0</span>,<span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(n1,n2,sep=<span class="string">&#x27; &#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">0</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>range(start,end,step) 生成一个整数数列，start可以取到，end不能取到（Python的特征），step默认为1，-1则为倒序生成数列。</p>
+<p>help函数调用时内部函数无需带括号，如：help(‘list.sort’)</p>
+<h2 id="0-1基本输入输出函数"><a href="#0-1基本输入输出函数" class="headerlink" title="0.1基本输入输出函数"></a>0.1基本输入输出函数</h2><h3 id="输入函数"><a href="#输入函数" class="headerlink" title="输入函数"></a>输入函数</h3><p>input(“提示语句”)，返回输入的字符串。</p>
+<p>如果要将一次性输入的多个数字转为列表进行后续操作，一般使用如下代码:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a=<span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>,<span class="built_in">input</span>(<span class="string">&quot;请输入几个数字，以空格间隔&quot;</span>).split(<span class="string">&quot; &quot;</span>)))</span><br></pre></td></tr></table></figure>
+
+<p>解析：用户字符串先输入input函数，然后对字符串进行split方法，以空格为间隔符拆分，用map函数映射批量转整型数字，然后把迭代器转为list列表存储。</p>
+<h3 id="输出函数"><a href="#输出函数" class="headerlink" title="输出函数"></a>输出函数</h3><p>print()函数可以自由地输出各种序列，并且可以在不同序列之间插入字符串连接。</p>
+<p>默认每次进行print()函数后，都会自动连接一个**换行符”\n”**。如果不想下次输出换行，则可以设置end参数：</p>
+<p>print(“  “，end=””)则强制将结尾符由/n改为空字符。如果下次输出想要间隔，则可以设置end=“ ”</p>
+<h3 id="format格式化模板"><a href="#format格式化模板" class="headerlink" title="format格式化模板"></a>format格式化模板</h3><p>格式化输出模板：print(“dviding {} by {}”.format(对象0, 对象1….对象n))</p>
+<p>若在{}中输入数字，则为对象的索引，可以按索引填充字符串。</p>
+<p>除此之外，格式化模板提供格式符，可以在{}中输入统一格式：</p>
+<p>{序号：【对齐说明符】【符号说明符】【最小宽度说明符】【.】【精度说明符】【类型说明符】}</p>
+<p>例如：{0：#&gt;6.2f}  代表序号为0，右对齐并以#填充空格，输入最小长度为6位，2位小数，浮点数类型</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; print(&quot;输出结果为 &#123;0:#&gt;6.2f&#125;&quot;.format(3.1415926))</span><br><span class="line">&gt;&gt;&gt; ##3.14</span><br></pre></td></tr></table></figure>
+
+<p>【对齐说明符】：^居中对齐；&lt;左对齐；&gt;右对齐</p>
+<p>【类型说明符】：f浮点小数；e科学记数法；%百分数；d十进制；x十六进制；o八进制；b二进制</p>
+<h2 id="0-2可迭代对象的映射批处理"><a href="#0-2可迭代对象的映射批处理" class="headerlink" title="0.2可迭代对象的映射批处理"></a>0.2可迭代对象的映射批处理</h2><p>map(f, iterable)：接受一个函数f和一个可迭代对象并通过将f依次作用在可迭代对象的每一个元素上得到一个新的<strong>迭代器对象</strong>（需要通过list等方法转化为列表等形式，但是不能用str()直接转字符串，需要用str=’’.join(迭代器)）。<br>应用举例：将输入的字符串列表转化为整数列表</p>
+<h2 id="0-3赋值、浅拷贝与深拷贝"><a href="#0-3赋值、浅拷贝与深拷贝" class="headerlink" title="0.3赋值、浅拷贝与深拷贝"></a>0.3赋值、浅拷贝与深拷贝</h2><p>赋值：b=a</p>
+<p>是直接把b的内存空间指向a，<strong>两者完全公用一个内存空间</strong>，一荣俱荣，一损俱损。他们之间存在着不可磨灭的纽带，修改其中任何一个，另外一个也会跟着变化。</p>
+<p>浅拷贝时，<strong>内部复杂元素</strong>仍使用同一内存空间，一个发生更改，其他也会跟着一起变化。因此容易出现易忽视的未知bug。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a=[<span class="number">1</span>,<span class="number">2</span>,[<span class="number">3</span>,<span class="number">4</span>]]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b=a.copy()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b[<span class="number">0</span>],b[<span class="number">2</span>][<span class="number">0</span>]=<span class="number">5</span>,<span class="number">5</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(a)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>[<span class="number">1</span>,<span class="number">2</span>,[<span class="number">5</span>,<span class="number">4</span>]]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(b)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>[<span class="number">5</span>,<span class="number">2</span>,[<span class="number">5</span>,<span class="number">4</span>]]</span><br></pre></td></tr></table></figure>
+
+<p>在此案例中，列表内部嵌套的列表在拷贝后仍然使用同一内存空间，因而b的[3,4]变更为[5,4]时，a对应位置的[3,4]也变更为[5,4]。</p>
+<p>如果不想因为浅拷贝同内存空间导致变量牵连，应使用深拷贝，开辟完全独立的新内存空间，互不干扰：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> copy</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a=[<span class="number">1</span>,<span class="number">2</span>,[<span class="number">3</span>,<span class="number">4</span>]]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b=copy.deepcopy(a)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(b)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>[<span class="number">1</span>,<span class="number">2</span>,[<span class="number">3</span>,<span class="number">4</span>]]</span><br></pre></td></tr></table></figure>
+
+<h2 id="0-4-序列的通用操作"><a href="#0-4-序列的通用操作" class="headerlink" title="0.4 序列的通用操作"></a>0.4 序列的通用操作</h2><h3 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h3><p>从左往右数，序列的索引为0,1,2,3,4,……..（与实际日常排序比，均少1，因为第一个元素的索引是0）</p>
+<p>另外还支持负数索引：……-4,-3,-2,-1，最后一个数的索引为-1.从右往左数</p>
+<p>索引的使用为[]方括号，例如：序列[index]</p>
+<h3 id="切片"><a href="#切片" class="headerlink" title="切片"></a>切片</h3><p>序列索引的升级版，可以设置初始位置索引和终止位置索引，再设置一个步长。</p>
+<p>格式也是方括号：序列[strat : end : step]</p>
+<h3 id="重复"><a href="#重复" class="headerlink" title="重复"></a>重复</h3><p>对序列使用乘法符号，则重复序列并连接为更长的序列。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>‘Python’*<span class="number">2</span></span><br><span class="line">&gt;&gt;&gt;<span class="string">&#x27;PythonPython&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="连接"><a href="#连接" class="headerlink" title="连接"></a>连接</h3><p>同类型序列用加法符号可以直接连接。此处不再赘述，详情见str节的连接字符串部分。</p>
+<h3 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h3><p>sorted(iter,key,reverse)</p>
+<p>内置函数，可以把任意序列iter中的元素强制排序，并转化为列表返回。注意这种方法的返回对象是列表，而非迭代器或者别的。</p>
+<p>可选参数key可以指定排序方式，而reverse控制排序的正反向。</p>
+<p>key=str/lambda表达式</p>
+<p>​        按长度排序：key=lambda x:len(x)</p>
+<p>​        按列表内置元组第三个元素排序：key=lambda s: s[2]</p>
+<p>倒序：reverse=True</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; students = [(<span class="string">&#x27;john&#x27;</span>, <span class="string">&#x27;A&#x27;</span>, <span class="number">15</span>), (<span class="string">&#x27;jane&#x27;</span>, <span class="string">&#x27;B&#x27;</span>, <span class="number">12</span>), (<span class="string">&#x27;dave&#x27;</span>, <span class="string">&#x27;B&#x27;</span>, <span class="number">10</span>)]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">sorted</span>(students, key=<span class="keyword">lambda</span> s: s[<span class="number">2</span>])        <span class="comment"># 按年龄排序</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>[(<span class="string">&#x27;dave&#x27;</span>, <span class="string">&#x27;B&#x27;</span>, <span class="number">10</span>), (<span class="string">&#x27;jane&#x27;</span>, <span class="string">&#x27;B&#x27;</span>, <span class="number">12</span>), (<span class="string">&#x27;john&#x27;</span>, <span class="string">&#x27;A&#x27;</span>, <span class="number">15</span>)]</span><br></pre></td></tr></table></figure>
+
+<p>也常用于字典的排序。可以先用dict.keys()或dict.values()提取出键或者值进行排序，也可以用dict.items同时提取键值对，再用key加lambda匿名函数指定按键还是值排序：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">dict</span>=&#123;<span class="string">&#x27;a&#x27;</span>:<span class="number">2</span>,<span class="string">&#x27;b&#x27;</span>:<span class="number">3</span>,<span class="string">&#x27;c&#x27;</span>:<span class="number">1</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">sorted</span>(<span class="built_in">dict</span>.keys())</span><br><span class="line">[<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">sorted</span>(<span class="built_in">dict</span>.values())</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">sorted</span>(<span class="built_in">dict</span>.items(),key=<span class="keyword">lambda</span> x:x[<span class="number">1</span>],reverse=<span class="literal">True</span>)</span><br><span class="line">[(<span class="string">&#x27;b&#x27;</span>, <span class="number">3</span>), (<span class="string">&#x27;a&#x27;</span>, <span class="number">2</span>), (<span class="string">&#x27;c&#x27;</span>, <span class="number">1</span>)]  <span class="comment">#按值倒序排列</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="0-5-可修改与不可修改类型"><a href="#0-5-可修改与不可修改类型" class="headerlink" title="0.5 可修改与不可修改类型"></a>0.5 可修改与不可修改类型</h2><h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p>可修改：list, dict, set, 大部分自定义类型，前三种可以用解析方法创建</p>
+<p>不可修改： int，bool，float，tuple，str，frozenset</p>
+<p>本质：不可变的是每一个元组元素到实际对象（值）的引用/绑定关系</p>
+<h3 id="对运行效率的影响"><a href="#对运行效率的影响" class="headerlink" title="对运行效率的影响"></a>对运行效率的影响</h3><p>对于不可变类型反复修改时会反复创建新对象，降低运行效率。</p>
+<h2 id="0-6-迭代器对象与可迭代对象"><a href="#0-6-迭代器对象与可迭代对象" class="headerlink" title="0.6 迭代器对象与可迭代对象"></a>0.6 迭代器对象与可迭代对象</h2><h3 id="迭代器对象"><a href="#迭代器对象" class="headerlink" title="迭代器对象"></a>迭代器对象</h3><p>指向可迭代对象中某个位置，通过next()函数访问下一个位置的元素，直到没有元素抛出StopIteration</p>
+<p>相当于使用时指针向后移动，移动到末尾则迭代器任务完成，无法继续使用。</p>
+<h3 id="可迭代对象"><a href="#可迭代对象" class="headerlink" title="可迭代对象"></a>可迭代对象</h3><p>通过iter()函数或self.__iter__()返回一个迭代器对象</p>
+<h3 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h3><p>迭代器只能用一次：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>x = <span class="built_in">iter</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(<span class="built_in">list</span>(x))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(<span class="built_in">list</span>(x))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>[]</span><br></pre></td></tr></table></figure>
+
+<h3 id="生成迭代器对象的函数"><a href="#生成迭代器对象的函数" class="headerlink" title="生成迭代器对象的函数"></a>生成迭代器对象的函数</h3><h4 id="倒序"><a href="#倒序" class="headerlink" title="倒序"></a>倒序</h4><p>reversed()函数返回倒向排序的<strong>迭代器对象</strong>，需用list()等转化为相应所需形式</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;x=[a,b,c,d]</span><br><span class="line">&gt;&gt;&gt;<span class="built_in">reversed</span>(x)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>&lt;list_reverseiterator <span class="built_in">object</span> at <span class="number">0x0000000002FA0448</span>&gt;</span><br><span class="line">&gt;&gt;&gt;<span class="built_in">list</span>(<span class="built_in">reversed</span>(x))</span><br><span class="line">&gt;&gt;&gt;[d,c,b,a]</span><br></pre></td></tr></table></figure>
+
+<h4 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h4><p>enumerate()函数用于枚举可迭代对象中的元素，返回<strong>迭代器对象</strong>，每个元素都是一个包含索引和值的元组</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>x=<span class="built_in">enumerate</span>(<span class="string">&#x27;abcd&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>&lt;enumberate <span class="built_in">object</span> at <span class="number">0x0000000002FA0448</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">list</span>(x)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>[(<span class="number">1</span>,<span class="string">&#x27;a&#x27;</span>),(<span class="number">2</span>,<span class="string">&#x27;b&#x27;</span>),(<span class="number">3</span>,<span class="string">&#x27;c&#x27;</span>),(<span class="number">4</span>,<span class="string">&#x27;d&#x27;</span>)]</span><br></pre></td></tr></table></figure>
+
+<h4 id="压缩"><a href="#压缩" class="headerlink" title="压缩"></a>压缩</h4><p>zip(a,b)函数像一个拉链，将多个可迭代对象的对应位置元素组合为一个元组，返回一个<strong>迭代器对象</strong>。</p>
+<p>当多个输入的可迭代对象长度不同时，以最短的进行匹配。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>x=<span class="built_in">zip</span>(<span class="string">&#x27;abcd&#x27;</span>,<span class="string">&#x27;123&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>&lt;enumberate <span class="built_in">object</span> at <span class="number">0x0000000002FA0448</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">list</span>(x)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>[(<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;1&#x27;</span>),(<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;2&#x27;</span>),(<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;3&#x27;</span>)]</span><br></pre></td></tr></table></figure>
+
+<h4 id="映射"><a href="#映射" class="headerlink" title="映射"></a>映射</h4><p>map(f, iterable)函数用于将某个函数一一映射到序列上进行操作，返回一个<strong>迭代器对象</strong>。</p>
+<p>常用于字符串拆分后批量转int数字，来获取一次输入多个值形成列表。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a=<span class="built_in">list</span>((<span class="built_in">map</span>(<span class="built_in">int</span>,<span class="built_in">input</span>().split(<span class="string">&#x27;,&#x27;</span>)))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span> </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="1-列表List"><a href="#1-列表List" class="headerlink" title="1.列表List [ ]"></a>1.列表List [ ]</h1><h2 id="1-1列表的方法"><a href="#1-1列表的方法" class="headerlink" title="1.1列表的方法"></a>1.1列表的方法</h2><h3 id="1）类似数组利用下标赋值"><a href="#1）类似数组利用下标赋值" class="headerlink" title="1）类似数组利用下标赋值"></a>1）类似数组利用下标赋值</h3><h3 id="2）添加元素："><a href="#2）添加元素：" class="headerlink" title="2）添加元素："></a>2）添加元素：</h3><p><strong>list.append(obj)：</strong></p>
+<p>​      在列表结尾添加新元素<br><strong>list.insert(index, obj)：</strong></p>
+<p>​      在列表中某一位置插入元素，插入后下标为index，若index过大则插在最后</p>
+<h3 id="3）删除元素："><a href="#3）删除元素：" class="headerlink" title="3）删除元素："></a>3）删除元素：</h3><p><strong>list.pop(index)：</strong></p>
+<p>​      删除列表中下标为index的元素，<strong>不写index默认删除最后一项</strong>，<strong>并返回删除元素的值</strong>（pop:弹出）</p>
+<p><strong>list.remove(obj)：</strong></p>
+<p>​      删除列表中等于obj的元素</p>
+<h3 id="4）列表反序："><a href="#4）列表反序：" class="headerlink" title="4）列表反序："></a>4）列表反序：</h3><p><strong>list.reserve()：</strong></p>
+<p>与内建函数reserved(list)不同：使用list.reserve()方法，则会直接反序原列表，因为列表是可变对象。</p>
+<h3 id="5）列表排序"><a href="#5）列表排序" class="headerlink" title="5）列表排序"></a>5）列表排序</h3><p><strong>list.sort(key=None/len/str , reverse=True/False)：</strong></p>
+<p>与内建函数sorted(list)不同：使用list.sort()方法，则会直接排序原列表，但这样做会覆盖原列表。</p>
+<h2 id="1-2列表使用"><a href="#1-2列表使用" class="headerlink" title="1.2列表使用"></a>1.2列表使用</h2><p>1.成员判断(in)，序列连接(+)，序列重复(*)<br>2.整体操作：<br>list.sort()，list.reverse()，list.extend(iterable)（将可迭代对象分割为列表并合并入原列表），其返回值均为none，只修改原列表；<br>sorted(list)返回新列表，reversed(list)返回反转列表的迭代器，len(list)返回列表元素个数。</p>
+<p>3.list.count()可用于计数</p>
+<p>4.list.index()可用于查找<strong>（列表没有find方法)，</strong>list.clear()可用于清空列表。</p>
+<p>5.统计操作：max(list), sum(list)</p>
+<h2 id="1-25-列表比较"><a href="#1-25-列表比较" class="headerlink" title="1.25 列表比较"></a>1.25 列表比较</h2><p>列表的值比较结果为其逐元素比较的结果：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line">b = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a == b</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="literal">True</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a <span class="keyword">is</span> b</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="literal">False</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="1-3创建列表"><a href="#1-3创建列表" class="headerlink" title="1.3创建列表"></a>1.3创建列表</h2><h3 id="列表解析"><a href="#列表解析" class="headerlink" title="列表解析"></a>列表解析</h3><p>列表解析：利用循环生成列表的一种简洁方式<br>公式：newlist = [expression1 for item1 in iterable1 for item2 in iter2 … if condition == True else exp2]<br>可以有多个for语句，从左到右依次执行（相当于嵌套循环）<br>可以有复杂的条件判断表达式（if-else)</p>
+<h3 id="其他方法"><a href="#其他方法" class="headerlink" title="其他方法"></a>其他方法</h3><p>关于高维列表：list(zip(*matrix))可以直接返回转置后的矩阵<br>列表切片：newlist = listA[start : end : step]，其中start到end为左闭右开区间<br>若start、end为负数则为倒数第x个，但此时step仍默认为1不是-1<br>列表复制：copy浅拷贝，deepcopy深拷贝<br>可通过list()将range对象、字符串、可迭代对象转化为列表。</p>
+<p>创建多维列表：alist = [[]]*n可以创建一个n行矩阵</p>
+<h1 id="2-字符串String-“-“"><a href="#2-字符串String-“-“" class="headerlink" title="2.字符串String  “ “"></a>2.字符串String  “ “</h1><p>list等<strong>可迭代对象</strong>和str的转化：x.join(iterable)，将list等<strong>可迭代对象</strong>中的元素用字符串x拼接起来<br>例：’’ ‘’.join(reversed(astr))</p>
+<p>字符串是<strong>不可变对象</strong>，因而字符串使用字符串对象的方法进行操作，格式为str.方法名()，涉及“修改”字符串则是通过对应方法返回修改后的新字符串。若确实想修改原字符串，则可用赋值语句：</p>
+<p>str=str.方法名()</p>
+<p>str =”” .join(函数名(Str))—函数返回的可迭代对象通过join组合为字符串，不能直接str(可迭代对象)。并且迭代器输出的值也必须是字符串类型，不能是其他类型的数据（如列表拆分出的int）。</p>
+<p>不可使用索引直接修改字符串中的某一部分。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>Str=<span class="string">&quot;abcde&quot;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Str[<span class="number">1</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;b&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Str[<span class="number">1</span>]=c</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Traceback (most recent call last):</span><br><span class="line">  File <span class="string">&quot;&lt;pyshell#2&gt;&quot;</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    Str[<span class="number">1</span>]=c</span><br><span class="line">NameError: name <span class="string">&#x27;c&#x27;</span> <span class="keyword">is</span> <span class="keyword">not</span> defined</span><br><span class="line">----------------------------------------------------------------------------</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Str=<span class="string">&quot;abcde&quot;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Str=Str.upper()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Str</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;ABCDE&#x27;</span></span><br><span class="line">----------------------------------------------------------------------------</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Str=<span class="string">&quot;abcde&quot;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Str=<span class="string">&#x27;&#x27;</span>.join(<span class="built_in">reversed</span>(Str))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Str</span><br><span class="line">&gt;&gt;&gt;<span class="string">&#x27;edcba&#x27;</span> </span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-0-字符串的表示"><a href="#2-0-字符串的表示" class="headerlink" title="2.0 字符串的表示"></a>2.0 字符串的表示</h2><ol>
+<li><p>str’1’ng1: “str’1’ng1”<br>也可以用’str”i”ng’表示内部有引号的字符串</p>
+</li>
+<li><p>三引号可以在字符串中换行，输出时也换行，换行即为一个换行符\n</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a=<span class="string">&#x27;&#x27;&#x27;abc</span></span><br><span class="line"><span class="string">12\t3&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(<span class="built_in">len</span>(a))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">8</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="2-1查找-计数"><a href="#2-1查找-计数" class="headerlink" title="2.1查找/计数"></a>2.1查找/计数</h2><p><strong>str.find()<strong>和</strong>rfind()</strong></p>
+<p>​      查找指定字符串在指定范围内首次出现的位置，返回被查找对象的索引数字。如用rfind()则倒序查找返回最后一次出现的位置</p>
+<p><strong>str.index()<strong>和</strong>rindex()</strong></p>
+<p>​       与find()基本一致，但index方法找不到直接报错，<strong>find方法找不到返回-1</strong><br><strong>str.count()：</strong></p>
+<p>​       统计特定字串出现个数<br><strong>str.startswith/endswith()：</strong></p>
+<p>​       判断字符串是否由特定字串开始/结束，返回布尔值</p>
+<h2 id="2-2切分"><a href="#2-2切分" class="headerlink" title="2.2切分"></a>2.2切分</h2><p><strong>str.split()：</strong></p>
+<p>​      将字符串按照特定字串分割为新的字符串列表，不包含给定字串<br><strong>str.partition/rpartition()：</strong></p>
+<p>​      将字符串按照特定字串分割为新的<strong>三元字符串元组</strong>返回（左切片，字串，右切片），左切片和右切片全部合并为一整个字符串，如使用rpartition()则从右向左搜索分割字串。</p>
+<h2 id="2-3替换"><a href="#2-3替换" class="headerlink" title="2.3替换"></a>2.3替换</h2><p><strong>str.replace(old, new, maxnum)：</strong></p>
+<p>​       将字符串中的old字串替换为new字串，可设置最大替换次数，返回新字符串<br><strong>注意：若要替换单词，如果不将目标字串两端加空格的话包含该字串的单词中的字串也会被替换</strong></p>
+<h2 id="2-4调整-判断大小写"><a href="#2-4调整-判断大小写" class="headerlink" title="2.4调整/判断大小写"></a>2.4调整/判断大小写</h2><p><strong>str.upper/lower()：</strong></p>
+<p>​      将字符串中所有字母全部转化为大/小写；</p>
+<p><strong>str.swapcase()：</strong></p>
+<p>​      将字符串中大写变小写，小写变大写；<br><strong>str.title()：</strong></p>
+<p>​      将字符串中所有单词（通过空格和 ‘ 分割）的首字母大写；</p>
+<p><strong>str.capitalize()：</strong></p>
+<p>​      仅将字符串的首字母大写；<br><strong>str.istitle/isupper/islower()：</strong></p>
+<p>​       判断字符串是否为对应类型，返回布尔值</p>
+<h2 id="2-5调整长度和空白符"><a href="#2-5调整长度和空白符" class="headerlink" title="2.5调整长度和空白符"></a>2.5调整长度和空白符</h2><p><strong>str.strip/rstrip/lstrip()：</strong></p>
+<p>​      去掉字符串两侧或右侧或左侧的空白字符（空格、制表符、换行符）<br><strong>str.zfill(int)：</strong></p>
+<p>​      在左边填充 0 使其长度变为 width，正负值前缀的处理方式是在正负符号之后填充而非在之前，若指定长度过短则返回原字符串<br>​      整数左边去0，直接int()即可</p>
+<h2 id="2-6-字符串的表达式求值输出"><a href="#2-6-字符串的表达式求值输出" class="headerlink" title="2.6 字符串的表达式求值输出"></a>2.6 字符串的表达式求值输出</h2><p>f”str1{exp}str2”在字符串求值时对exp表达式求值</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>name = <span class="string">&quot;python&quot;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">f&quot;dear <span class="subst">&#123;name&#125;</span>&quot;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&quot;dear python&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-7-字符串的连接"><a href="#2-7-字符串的连接" class="headerlink" title="2.7 字符串的连接"></a>2.7 字符串的连接</h2><p>简单的字符串合并可以使用“+”连接，但是字符串为不可变对象因此应该把合并结果赋值给新的字符串。</p>
+<p><strong>str.join()：</strong></p>
+<p>join()方法用于<strong>将可迭代对象的元素</strong>按照指定的<strong>连接符</strong>（字符串）连接为新字符串。</p>
+<p>本质上相当于被操作字符串填充到可迭代对象的间隙中作为分隔符了。</p>
+<p>更重要的应用是把迭代器转为字符串的代码str=””.join(迭代器)）【这是将可迭代对象转为不可迭代对象】</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>x=<span class="string">&quot;abc&quot;</span>+<span class="string">&quot;123&quot;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(x)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&quot;abc123&quot;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x=<span class="string">&#x27;sep&#x27;</span>.join([<span class="string">&quot;1&quot;</span>,<span class="string">&quot;2&quot;</span>,<span class="string">&quot;3&quot;</span>,<span class="string">&quot;4&quot;</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(x)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&quot;1sep2sep3sep4&quot;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-8-字符串中的转义字符"><a href="#2-8-字符串中的转义字符" class="headerlink" title="2.8 字符串中的转义字符"></a>2.8 字符串中的转义字符</h2><h3 id="转义字符的应用"><a href="#转义字符的应用" class="headerlink" title="转义字符的应用"></a>转义字符的应用</h3><p>\t：水平制表符，可以上下对齐（用于制表）<br>\n：换行符</p>
+<p>注：只需要一个换行符的时候，直接输入print()即默认含一个换行符</p>
+<p>\x64：字母d的十六进制ascii码，输出时直接变成d，换成\xn则输出以n为ascii码的符号。<br>在””中如果要表示”，则要写作\”</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="number">10</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,i+<span class="number">1</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;&#123;&#125;x&#123;&#125;=&#123;&#125;\t&#x27;</span>.<span class="built_in">format</span>(j,i,i*j),end=<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>()</span><br></pre></td></tr></table></figure>
+
+<p>案例为打印九九乘法表的代码，使用制表符\t便可输出对齐的乘法表，无需计算空格数量。</p>
+<h3 id="阻止解释转义字符：在字符串前面加r"><a href="#阻止解释转义字符：在字符串前面加r" class="headerlink" title="阻止解释转义字符：在字符串前面加r"></a>阻止解释转义字符：在字符串前面加r</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(<span class="string">r&quot;Hello, \t my friend, \n \t\t Greetings!&quot;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&quot;Hello, \t my friend, \n \t\t Greetings!&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="3-元组Tuple"><a href="#3-元组Tuple" class="headerlink" title="3.元组Tuple  ( )"></a>3.元组Tuple  ( )</h1><h2 id="3-1组合与拆分"><a href="#3-1组合与拆分" class="headerlink" title="3.1组合与拆分"></a>3.1组合与拆分</h2><p>packing：利用元组将一组数据组合成一个对象 例：atuple = (obj1, obj2)<br>unpacking：将元组赋值给多个独立变量 例：x, y = atuple，则x = obj1, y = obj2<br>另例：x, y = input().split()，输入1 2，则x = ‘1’, y = ‘2’</p>
+<h2 id="3-2元组性质"><a href="#3-2元组性质" class="headerlink" title="3.2元组性质"></a>3.2元组性质</h2><p>可通过下标访问，可切片，可通过tuple()将list，str类型转化为元组<br>len(atuple)可获取元组元素个数，sorted()由小到大排序, reversed()反转元组（利用tuple()转换为元组）</p>
+<p>以上均为元组作为序列的基本性质，不是元组的特殊性质。</p>
+<p>元组是不可修改对象，故没有append()，pop()，insert()等方法，只能使用内建函数将结果转移至其他序列。</p>
+<p><strong>元组的一个特点是，虽然它本身是不可变对象，但其内部的可变对象仍然可修改。</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>tup=([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],<span class="string">&#x27;123&#x27;</span>,(<span class="string">&#x27;1&#x27;</span>,<span class="string">&#x27;2&#x27;</span>,<span class="string">&#x27;3&#x27;</span>))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>tup[<span class="number">0</span>][<span class="number">1</span>]=<span class="number">0</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(tup)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>([<span class="number">1</span>, <span class="number">0</span>, <span class="number">3</span>], <span class="string">&#x27;123&#x27;</span>, (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;3&#x27;</span>))</span><br></pre></td></tr></table></figure>
+
+<p>元组最常用的是作为多维数组，形成矩阵：</p>
+<p>（ (1 , 0) , ( 0 , 1 ) ）：一个二维数组，同时可以表示一个二阶矩阵。</p>
+<h1 id="4-字典Dict"><a href="#4-字典Dict" class="headerlink" title="4.字典Dict { }"></a>4.字典Dict { }</h1><h2 id="4-1键值对访问"><a href="#4-1键值对访问" class="headerlink" title="4.1键值对访问"></a>4.1键值对访问</h2><p>键的内容一般为字符串、整型数字、元组等<strong>不可变对象。</strong></p>
+<p>值可以重复，但是键不可重复。</p>
+<p>adict = {1 : 1, 2 : 4, 3 : 9}，则adict[3] = 9，代码直接由键访问值。</p>
+<h2 id="4-2创建字典"><a href="#4-2创建字典" class="headerlink" title="4.2创建字典"></a>4.2创建字典</h2><p>直接创建： adict = {1 : 1, 2 : 4, 3 : 9}<br>从<strong>一个列表</strong>（key）创建：令d={}，对于key列表中的元素item，直接用赋值法更新其值：d[item]=…<br>从<strong>两个列表</strong>（key-value）列表创建：bdict = <strong>dict</strong>(<strong>zip</strong>(keylist, valuelist)) ，其中两个列表一般等长<br>从<strong>一个元素全为二元元组的列表创建</strong>：cdict = <strong>dict</strong>(tuplelist)，key为所有元组0号，value为所有元组1号，对应关系不变<br><strong>字典解析</strong>：公式：newdict = {expr : expr for item in iterable if condition == True}<br>                  例：adict = {x : x ** 2 for x in range(1, 4) if True}，则 adict = {1 : 1, 2 : 4, 3 : 9}<br><strong>多重对应关系，可以考虑字典套字典</strong></p>
+<h2 id="4-3元素修改"><a href="#4-3元素修改" class="headerlink" title="4.3元素修改"></a>4.3元素修改</h2><p>直接赋值：adict[3] = 6，则adict = {1:1, 2:4, 3:6}<br>删除键值对：adict.pop(key)，则先返回key对应的值，再删除对应键值对（弹出）</p>
+<h2 id="4-4获取元素信息"><a href="#4-4获取元素信息" class="headerlink" title="4.4获取元素信息"></a>4.4获取元素信息</h2><p><strong>dict.get(key,default=None)</strong></p>
+<p>​      以直接返回key对应的值。若未查找到则返回default的值。</p>
+<p><strong>dict.keys/values()</strong>—-注意单词复数形式</p>
+<p>​      返回一个含有所有key/value值的<strong>view对象</strong>，需用list()等转化为键/值组成的列表。<br><strong>dict.items()</strong>—-注意单词复数形式</p>
+<p>​      返回一个含有所有键值对元组的<strong>view对象</strong>，需用list()等转化为<strong>键值对元组</strong>作为元素组成的列表。</p>
+<h2 id="4-5-字典的合并更新"><a href="#4-5-字典的合并更新" class="headerlink" title="4.5 字典的合并更新"></a>4.5 字典的合并更新</h2><p><strong>dict.update(dict2):</strong></p>
+<p>​      将dict2的键值对更新进dict，如果已经存在对应的键，就更新值。</p>
+<h1 id="5-集合Set-Frozenset"><a href="#5-集合Set-Frozenset" class="headerlink" title="5.集合Set/Frozenset { }"></a>5.集合Set/Frozenset { }</h1><p>分为可变集合（set）和不可变集合（frozenset），可迭代。、</p>
+<p>集合与数学上的定义一致，有两个显著特征：<strong>元素去重，无序</strong></p>
+<p>所以和其他序列不同的是，它作为一个无序序列<strong>不存在索引、切片</strong>。</p>
+<h2 id="5-1创建集合（自动去重）"><a href="#5-1创建集合（自动去重）" class="headerlink" title="5.1创建集合（自动去重）"></a>5.1创建集合（自动去重）</h2><p>例：aset = {1, 1, 2}，则aset = {1, 2}、</p>
+<p><strong>常用集合作为自动去重工具</strong>，例如有一个列表x需要把重复元素删去，则先set(x)再list(x)即可。</p>
+<h2 id="5-2集合基本操作"><a href="#5-2集合基本操作" class="headerlink" title="5.2集合基本操作"></a>5.2集合基本操作</h2><p>len(set)返回集合元素个数<br>修改元素：set.add/remove(obj)：添加/删除指定元素<br>                  set.pop()<strong>随机</strong>删除一个元素并返回删掉的元素：毕竟是无序序列，没法指定删掉哪个。<br>                  set.clear()清空集合<br>元素判断：in/ not in，返回布尔值<br>子集判断：aset.issubset(bset)判断aset是否为bset子集；aset.superset(bset)判断aset是否包含bset<br><strong>集合排序：sorted(aset)返回一个排好序的列表</strong></p>
+<p>​                  虽然集合是无序的，但是对它使用sorted()内建函数则会强制排序并变更为有序的列表。</p>
+<h2 id="5-3集合运算"><a href="#5-3集合运算" class="headerlink" title="5.3集合运算"></a>5.3集合运算</h2><p>适用于可变与不可变集合的常见通用方法为：</p>
+<p><strong>交集：aset.intersection(bset, cset, …)：</strong></p>
+<p>​          返回一个新的集合对象，即求交集aset&amp;bset&amp;cset…的结果<br><strong>并集：aset.union(bset, cset, …)：</strong></p>
+<p>​          返回一个新的集合对象，即求并集aset|bset|cset….的结果<br><strong>差集：aset.difference(bset, cset, …)：</strong></p>
+<p>​          返回一个新的集合对象，即求差集aset - bset - cset - …的结果<br>​           aset.symmetric_difference(bset)，返回一个新的集合对象，即aset和bset对称差的结果</p>
+<p>对于可变集合，则可特殊地写出修改方法：</p>
+<p><strong>交集：aset.intersection_update(bset, cset, …)</strong></p>
+<p><strong>并集：aset.update(bset, cset, …)</strong></p>
+<p><strong>差集：aset.difference_update(bset, cset, …)</strong></p>
+<h1 id="6-文件操作"><a href="#6-文件操作" class="headerlink" title="6.文件操作"></a>6.文件操作</h1><h2 id="打开文件"><a href="#打开文件" class="headerlink" title="打开文件"></a>打开文件</h2><p>有open(”file.txt”)和with open(“file.txt”) as f两种用法，推荐后一种,因为with open() as的打开方式会在结束后自动关闭文件。<br>打开文件常用模式：（必须作为字符串写入括号参数）</p>
+<table>
+<thead>
+<tr>
+<th>模式</th>
+<th>r</th>
+<th>r+</th>
+<th>w</th>
+<th>w+</th>
+<th>a</th>
+<th>a+</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>读</td>
+<td>+</td>
+<td>+</td>
+<td></td>
+<td>+</td>
+<td></td>
+<td>+</td>
+</tr>
+<tr>
+<td>写</td>
+<td></td>
+<td>+</td>
+<td>+</td>
+<td>+</td>
+<td>+</td>
+<td>+</td>
+</tr>
+<tr>
+<td>创建</td>
+<td></td>
+<td></td>
+<td>+</td>
+<td>+</td>
+<td>+</td>
+<td>+</td>
+</tr>
+<tr>
+<td>覆盖</td>
+<td></td>
+<td></td>
+<td>+</td>
+<td>+</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>指针在开始</td>
+<td>+</td>
+<td>+</td>
+<td>+</td>
+<td>+</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>指针在结尾</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;test.txt&#x27;</span>,<span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="built_in">print</span>(f.read())</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="读取文件内容"><a href="#读取文件内容" class="headerlink" title="读取文件内容"></a>读取文件内容</h2><h4 id="f-read"><a href="#f-read" class="headerlink" title="f.read()"></a>f.read()</h4><p>直接将文本中的全部内容读取进来变成一个换行的字符串，但输出时没有一般字符串类型自带的引号</p>
+<h4 id="f-readline"><a href="#f-readline" class="headerlink" title="f.readline()"></a>f.readline()</h4><p>readline方法从文件中读取整行，包括换行符’\n’<br>多次使用时，readline记住上一次读取的位置，继续读取下一行</p>
+<h4 id="f-readlines"><a href="#f-readlines" class="headerlink" title="f.readlines()"></a>f.readlines()</h4><p>readlines方法读取所有行，返回的是所有行的字符串组成的列表。</p>
+<h2 id="文件改写"><a href="#文件改写" class="headerlink" title="文件改写"></a>文件改写</h2><h4 id="f-write"><a href="#f-write" class="headerlink" title="f.write()"></a>f.write()</h4><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">f.write(str) # f为文件对象，str为要写入的字符串</span><br></pre></td></tr></table></figure>
+
+<h2 id="文件关闭"><a href="#文件关闭" class="headerlink" title="文件关闭"></a>文件关闭</h2><h4 id="f-close"><a href="#f-close" class="headerlink" title="f.close()"></a>f.close()</h4><p>常常搭配try：f = open() +finally:f.close()使用，但如果使用with语句可以自动关闭文件无需close()</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    f = <span class="built_in">open</span>(<span class="string">&#x27;xxx&#x27;</span>)</span><br><span class="line">    data = f.read()</span><br><span class="line"><span class="keyword">except</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;fail to open&#x27;</span>)</span><br><span class="line"><span class="keyword">finally</span>:</span><br><span class="line">    f.close()</span><br><span class="line">-------------------------------------------------------------------------</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;1.txt&quot;</span>) <span class="keyword">as</span> file:</span><br><span class="line">    data = file.read()</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><p>1.matrix = [ [1,2,3,4], [5,6,7,8], [9,10,11,12] ]用列表解析一行实现矩阵转置<br>用zip实现矩阵转置</p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">HuanyuRen</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://RDX-HYRen.github.io/2023/04/27/Python%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">http://RDX-HYRen.github.io/2023/04/27/Python%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">HuanyuRen</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/Python/">
+                                    <span class="chip bg-color">Python</span>
+                                </a>
+                            
+                                <a href="/tags/%E7%BC%96%E7%A8%8B/">
+                                    <span class="chip bg-color">编程</span>
+                                </a>
+                            
+                                <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+                                    <span class="chip bg-color">学习笔记</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2023/04/27/Python%E7%AE%97%E6%B3%95%E6%A8%A1%E5%9D%97%E4%B8%8E%E5%B8%B8%E7%94%A8%E5%BA%93/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="Python算法结构与常用库">
+                        
+                        <span class="card-title">Python算法结构与常用库</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-04-27
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/" class="post-category">
+                                    计算机科学
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Python/">
+                        <span class="chip bg-color">Python</span>
+                    </a>
+                    
+                    <a href="/tags/%E7%BC%96%E7%A8%8B/">
+                        <span class="chip bg-color">编程</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+                        <span class="chip bg-color">学习笔记</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/04/27/%E8%AE%A1%E7%AE%97%E5%8C%96%E5%AD%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="计算化学学习笔记">
+                        
+                        <span class="card-title">计算化学学习笔记</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-04-27
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%8C%96%E5%AD%A6/" class="post-category">
+                                    化学
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+                        <span class="chip bg-color">学习笔记</span>
+                    </a>
+                    
+                    <a href="/tags/%E8%AE%A1%E7%AE%97%E5%8C%96%E5%AD%A6/">
+                        <span class="chip bg-color">计算化学</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2023</span>
+            
+            <span id="year">2023</span>
+            <a href="/about" target="_blank">HuanyuRen</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/RDX-HYRen" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:huanyu_ren@nnu.edu.cn" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1395988100" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1395988100" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+	
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
