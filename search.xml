@@ -1,123 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Python算法结构与常用库</title>
-    <url>/2023/04/27/Python%E7%AE%97%E6%B3%95%E6%A8%A1%E5%9D%97%E4%B8%8E%E5%B8%B8%E7%94%A8%E5%BA%93/</url>
-    <content><![CDATA[<h1 id="python-算法模块与常用库"><a href="#python-算法模块与常用库" class="headerlink" title="python 算法模块与常用库"></a>python 算法模块与常用库</h1><p>包括各种常用算法案例，以及常用库的使用说明</p>
-<h1 id="1-常用算法实例"><a href="#1-常用算法实例" class="headerlink" title="1.常用算法实例"></a>1.常用算法实例</h1><h2 id="1-1质数判断算法"><a href="#1-1质数判断算法" class="headerlink" title="1.1质数判断算法"></a>1.1质数判断算法</h2><p>基本思路：首先用if判断最特殊的0和1，它们都不是质数。</p>
-<p>其次，再使用循环对每个数的可能因数全部进行判断，从2到x-1，如果循环途中发现有可以整除（即为x的因数），则返回False并跳出循环。</p>
-<p>如果循环结束也没有跳出，那么说明没有因数，x是质数，返回True。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">isprime</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">if</span> x==<span class="number">0</span> <span class="keyword">or</span> x==<span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>,x):</span><br><span class="line">            <span class="keyword">if</span> x%i==<span class="number">0</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="1-2进制算法"><a href="#1-2进制算法" class="headerlink" title="1.2进制算法"></a>1.2进制算法</h2><h3 id="十进制转N进制"><a href="#十进制转N进制" class="headerlink" title="十进制转N进制"></a>十进制转N进制</h3><p>总思路为逆向取余法，对十进制数字反复除以进制数n，直至整除为0，将余数逆向排列，即可得到n进制转换结果。需要注意的是超过十进制转换时，需要把超过10的余数转换为字母表达。这一部分使用循环进行余数序列的对应替换。<strong>另一种算法是直接用列表解析生成对照序列，再利用序列的索引进行一一对应替换。</strong></p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a=<span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;请输入要转换的十进制数&quot;</span>))</span><br><span class="line">n=<span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;要转换为几进制数？&quot;</span>))</span><br><span class="line">b=[]</span><br><span class="line">Str=<span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    b.append(a%n)</span><br><span class="line">    a=a//n</span><br><span class="line">    <span class="keyword">if</span> a&lt;n:</span><br><span class="line">        b.append(a)</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(b)):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>,<span class="number">36</span>):</span><br><span class="line">        letter=<span class="built_in">chr</span>(<span class="built_in">ord</span>(<span class="string">&#x27;a&#x27;</span>)+(j-<span class="number">10</span>))</span><br><span class="line">        <span class="keyword">if</span> b[-<span class="number">1</span>-i]==j:</span><br><span class="line">            b[-<span class="number">1</span>-i]=letter</span><br><span class="line">    <span class="built_in">print</span>(b[-<span class="number">1</span>-i],end=<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">--------------------------------------------------------------------------</span><br><span class="line">a=<span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;请输入要转换的十进制数&quot;</span>))</span><br><span class="line">n=<span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;要转换为几进制数？&quot;</span>))</span><br><span class="line">b=[]</span><br><span class="line">base=[<span class="built_in">str</span>(x) <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>)]+[<span class="built_in">chr</span>(x) <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">ord</span>(<span class="string">&#x27;a&#x27;</span>),<span class="built_in">ord</span>(<span class="string">&#x27;a&#x27;</span>)+<span class="number">26</span>)]</span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    b.append(base[a%n-<span class="number">1</span>])</span><br><span class="line">    a=a//n </span><br><span class="line">    <span class="keyword">if</span> a&lt;n:</span><br><span class="line">        b.append(base[a-<span class="number">1</span>])</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"><span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(b)):</span><br><span class="line">    <span class="built_in">print</span>(b[-<span class="number">1</span>-k],end=<span class="string">&#x27;&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-<h3 id="N进制转十进制"><a href="#N进制转十进制" class="headerlink" title="N进制转十进制"></a>N进制转十进制</h3><p>主要思路为：位权展开法，每一位乘上对应的权。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">n=<span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;您将要输入N进制数N=？&quot;</span>))</span><br><span class="line">a=<span class="built_in">input</span>(<span class="string">&quot;请输入要转换为十进制的N进制数&quot;</span>)</span><br><span class="line">base=[<span class="built_in">str</span>(x) <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>)]+[<span class="built_in">chr</span>(x) <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">ord</span>(<span class="string">&#x27;a&#x27;</span>),<span class="built_in">ord</span>(<span class="string">&#x27;a&#x27;</span>)+<span class="number">26</span>)]</span><br><span class="line">a=<span class="built_in">list</span>(a)</span><br><span class="line">b=[]</span><br><span class="line">s=<span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(a)-<span class="number">1</span>,-<span class="number">1</span>,-<span class="number">1</span>):</span><br><span class="line">    a[i]=<span class="built_in">int</span>(base.index(a[i]))</span><br><span class="line">    s=s+<span class="built_in">int</span>(a[i])*(n**(<span class="built_in">len</span>(a)-<span class="number">1</span>-i))</span><br><span class="line"><span class="built_in">print</span>(s)</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="1-3因子算法"><a href="#1-3因子算法" class="headerlink" title="1.3因子算法"></a>1.3因子算法</h2><h3 id="最小公倍数算法："><a href="#最小公倍数算法：" class="headerlink" title="最小公倍数算法："></a>最小公倍数算法：</h3><p>设置循环从较大数开始找，直到找到最小公倍数跳出循环。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">gbs</span>(<span class="params">a,b</span>):</span><br><span class="line">    <span class="keyword">if</span> a&lt;b:</span><br><span class="line">        a,b=b,a</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(a+<span class="number">1</span>,a*b+<span class="number">1</span>):</span><br><span class="line">        <span class="keyword">if</span> i%a==<span class="number">0</span> <span class="keyword">and</span> i%b==<span class="number">0</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;最小公倍数为&quot;</span>,i)</span><br><span class="line">            <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="最大公约数算法："><a href="#最大公约数算法：" class="headerlink" title="最大公约数算法："></a>最大公约数算法：</h3><p>设置循环从较小数开始倒序找，直到找到最大公约数跳出循环</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">gys</span>(<span class="params">a,b</span>):</span><br><span class="line">    <span class="keyword">if</span> a&lt;b:</span><br><span class="line">        a,b=b,a</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(b,<span class="number">0</span>,-<span class="number">1</span>):</span><br><span class="line">        <span class="keyword">if</span> a%i==<span class="number">0</span> <span class="keyword">and</span> b%i==<span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> i</span><br><span class="line">            <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="辗转相除法："><a href="#辗转相除法：" class="headerlink" title="辗转相除法："></a>辗转相除法：</h3><p>更简洁高效的最大公约数算法。原理是以较大数除以较小数开始循环，每次将除数移交给被除数，再把余数移交给除数，辗转相除，直到余数为0，则最后一次的除数就是最大公约数。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">gys</span>(<span class="params">a,b</span>):</span><br><span class="line">    <span class="keyword">if</span> a&lt;b:</span><br><span class="line">        a,b=b,a</span><br><span class="line">    <span class="keyword">while</span> b: </span><br><span class="line">        a,b=b,a%b</span><br><span class="line"><span class="keyword">return</span> a</span><br></pre></td></tr></table></figure>
-
-<h3 id="用最大公约数求最小公倍数："><a href="#用最大公约数求最小公倍数：" class="headerlink" title="用最大公约数求最小公倍数："></a>用最大公约数求最小公倍数：</h3><p>两个数的最大公约数与最小公倍数的乘积，即为两个数的乘积：</p>
-<p>axb=(最大公约数)x(最小公倍数)</p>
-<h2 id="1-4-回文算法"><a href="#1-4-回文算法" class="headerlink" title="1.4 回文算法"></a>1.4 回文算法</h2><p>pythond的回文算法非常简单，转换为列表利用内置的颠倒函数便可轻松实现。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">hws</span>(<span class="params">x</span>):</span><br><span class="line">    x=<span class="built_in">list</span>(<span class="built_in">str</span>(x))</span><br><span class="line">    y=<span class="built_in">list</span>(<span class="built_in">reversed</span>(x))</span><br><span class="line">    <span class="keyword">if</span> x==y:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure>
-
-<p>或者，也可以使用索引进行一一对比，采用递归思路：</p>
-<p>从两端向中间递归，如果发现不同就触发return回False；如果一直递归到最中间也没找到不同，就返回Ture。每次递归把输入字符串去除首尾，进行下一轮迭代；返回结果时，反向从内向外报告。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">hws</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(x)&lt;<span class="number">2</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="keyword">if</span> x[<span class="number">0</span>]!=x[-<span class="number">1</span>]:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">return</span> hws(x[<span class="number">1</span>:-<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="1-5-排序算法"><a href="#1-5-排序算法" class="headerlink" title="1.5 排序算法"></a>1.5 排序算法</h2><p>Python自带有各种序列的排序方法函数，但是出于对算法的理解角度，也应该掌握各类排序算法。</p>
-<h3 id="冒泡排序法"><a href="#冒泡排序法" class="headerlink" title="冒泡排序法"></a>冒泡排序法</h3><p>双重循环结构，每次都将序列最左边的数向右进行冒泡（相邻比较，如果左边小于右边，就交换，等效于较大数向右移动）。此过程中较大数会慢慢“浮”到序列右端，很像冒泡。</p>
-<p>外层循环：循环n=len(arr)次，确保每个值都会进行排序。</p>
-<p>内层循环：跟外层循环进行的次数有关。外层循环每冒泡一次，则最右端就会确定一个较大值的位置，无需继续冒泡。</p>
-<p>注意：列表在函数中相当于全局变量，被修改则会牵连原列表，因而无需返回值。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">bubbleSort</span>(<span class="params">arr</span>):</span><br><span class="line">    n=<span class="built_in">len</span>(arr)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,n-i-<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">if</span> arr[j]&gt;arr[j+<span class="number">1</span>]:</span><br><span class="line">                arr[j],arr[j+<span class="number">1</span>]=arr[j+<span class="number">1</span>],arr[j]</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="插入排序法"><a href="#插入排序法" class="headerlink" title="插入排序法"></a>插入排序法</h3><p>类似于我们平时打牌时对扑克牌进行排序，每次插入一个新值，需要找到其适当的中间位置并插入。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">insertSort</span>(<span class="params">arr</span>):</span><br><span class="line">    length=<span class="built_in">len</span>(arr)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,length):</span><br><span class="line">        x=arr[i]</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(i,-<span class="number">1</span>,-<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">if</span> x&lt;arr[j-<span class="number">1</span>]:</span><br><span class="line">                arr[j]=arr[j-<span class="number">1</span>]</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        arr[j]=x</span><br></pre></td></tr></table></figure>
-
-<p>这串代码的逻辑是，序列分为两个区域：左边为已排序区，右边为待排序区。第一层循环的参数i控制正在插空的被排序对象是第几个，第二层循环的参数j倒序变化，控制插空位移。首先，i从1开始取，0号元素已经默认为排序区；然后，指针i不断向右移动，先把待排序对象arr[i]单独取出来，和已排序区进行从右向左的插空判断： </p>
-<p><strong>如果待排序对象arr[i]过小，</strong>arr[j-1]向右移动来为将来的arr[i]插入提供空位。不必担心arr[i]本身会因为移动而被替换，因为已经用x来存储arr[i]。</p>
-<p><strong>如果待排序对象arr[i]过大</strong>，直接跳出循环，找到插入位置了，就把arr[i]=x放在arr[j]这个位置插入。内层循环结束，进入下一轮arr[i+1]的插入。</p>
-<h2 id="1-6-查找算法"><a href="#1-6-查找算法" class="headerlink" title="1.6 查找算法"></a>1.6 查找算法</h2><h3 id="二分查找法"><a href="#二分查找法" class="headerlink" title="二分查找法"></a>二分查找法</h3><p>对有序数组进行快速查找时，使用二分法可以大大提高效率，每次比较都可以使搜索范围缩小一半。</p>
-<p>案例代码使用递归函数，输入：查找序列arr, 序列待查找对象x。l与r是函数内部的形参</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">binarySearch</span>(<span class="params">arr,l,r,x</span>):</span><br><span class="line">    <span class="keyword">if</span> r&gt;=l:</span><br><span class="line">        mid=<span class="built_in">int</span>(l+(r-l)/<span class="number">2</span>)</span><br><span class="line">        <span class="keyword">if</span> arr[mid]==x:</span><br><span class="line">            <span class="keyword">return</span> mid</span><br><span class="line">        <span class="keyword">elif</span> arr[mid]&gt;x:</span><br><span class="line">            <span class="keyword">return</span> binarySearch(arr,<span class="number">1</span>,mid-<span class="number">1</span>,x)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> binarySearch(arr,mid+<span class="number">1</span>,r,x)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="1-7-累加算法"><a href="#1-7-累加算法" class="headerlink" title="1.7 累加算法"></a>1.7 累加算法</h2><p>这个就不写了，简单的循环即可。主要任务是找数列递推公式，比如下面这个斐波那契数列:</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">nterms=<span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;你需要几项斐波那契数列？&quot;</span>))</span><br><span class="line">n1，n2=<span class="number">0</span>，<span class="number">1</span></span><br><span class="line">count=<span class="number">2</span></span><br><span class="line"><span class="keyword">if</span> nterms&lt;=<span class="number">0</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;输入不合法，请输入一个正数&quot;</span>)</span><br><span class="line"><span class="keyword">elif</span> nterms==<span class="number">1</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;斐波那契数列：&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(n1)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;斐波那契数列：&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(n1,<span class="string">&quot;,&quot;</span>,n2,end=<span class="string">&#x27; &#x27;</span>)</span><br><span class="line">    <span class="keyword">while</span> count&lt;nterms:</span><br><span class="line">        nth=n1+n2</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;,&quot;</span>,nth,end=<span class="string">&#x27; &#x27;</span>)</span><br><span class="line">        n1，n2=n2，nth</span><br><span class="line">        count+=<span class="number">1</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="2-常用库函数"><a href="#2-常用库函数" class="headerlink" title="2.常用库函数"></a>2.常用库函数</h1><p>库的使用：import 库名称;  使用库函数时为:  库名称.函数名()</p>
-<h2 id="2-1-math库"><a href="#2-1-math库" class="headerlink" title="2.1 math库"></a>2.1 math库</h2><p>math库的函数主要用于数学计算，包含常用的数学常数以及常用数学函数：指对数、三角函数等</p>
-<h3 id="指对数"><a href="#指对数" class="headerlink" title="指对数"></a>指对数</h3><p>math.exp(x):  返回自然对数的x次幂</p>
-<p>math.pow(x,y):  返回x的y次幂</p>
-<p>math.sqrt(x):  返回x的平方根</p>
-<h3 id="三角函数"><a href="#三角函数" class="headerlink" title="三角函数"></a>三角函数</h3><p>sin(x),cos(x),tan(x)：三角函数</p>
-<p>asin(x),acos(x),atan(x)：反三角函数</p>
-<h3 id="数值表示函数"><a href="#数值表示函数" class="headerlink" title="数值表示函数"></a>数值表示函数</h3><p>math.fabs(x):  返回x的绝对值</p>
-<p>math.gcd(a,b):  返回a和b的最大公约数</p>
-<p>math.floor(): 向下取整</p>
-<p>math.ceil():  向上取整</p>
-<h2 id="2-2-random库"><a href="#2-2-random库" class="headerlink" title="2.2 random库"></a>2.2 random库</h2><p>randint(a,b):  返回一个a到b之间的随机整数</p>
-<p>uniform(a,b):  返回一个a到b之间的随机小数</p>
-<p>random():  随机生成一个[0,1.0]之间的小数</p>
-<h2 id="2-3-os库"><a href="#2-3-os库" class="headerlink" title="2.3 os库"></a>2.3 os库</h2><p>os.getcwd()： 获取当前工作目录，默认为程序所在目录</p>
-<p>os.chdir(’新目录‘):  更改当前工作目录至新目录</p>
-<p>os.listdir():  列出当前工作目录下的文件或文件夹</p>
-<p>os.rmdir(‘某目录’)：删除目录</p>
-<p>os.remove(‘某文件’):  删除文件</p>
-<h2 id="2-4-datetime库"><a href="#2-4-datetime库" class="headerlink" title="2.4 datetime库"></a>2.4 datetime库</h2><p>该库分为三个类：date , time , datetime</p>
-<p>使用案例：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line">newdt=datetime.datetime.now()</span><br><span class="line"><span class="comment">#代表datetime库中datetime类下的now方法，获取日期和时间</span></span><br><span class="line"><span class="built_in">print</span>(datetime.datetime.time(newdt))</span><br><span class="line"><span class="comment">#代表datetime库中datetime类下的time方法，拆出字符串中的时间</span></span><br><span class="line">datetime.timedelta(weeks,days,hours,minutes,seconds)</span><br><span class="line"><span class="comment">#用于计算时间差的函数，该函数会自动计算某段时间前的时间。</span></span><br></pre></td></tr></table></figure>
-
-<p>此外，time库也有一些常用的函数，比如time.sleep()，可以使程序暂停休眠一段时间再继续运行</p>
-<h2 id="2-5-NumPy库"><a href="#2-5-NumPy库" class="headerlink" title="2.5 NumPy库"></a>2.5 NumPy库</h2><h2 id=""><a href="#" class="headerlink" title=""></a><img src="/pic/image-20210626200200930.png"></h2><p>用于科学计算的基础包，可以处理矩阵和数组</p>
-<p><strong>NumPy 的主要对象：</strong></p>
-<p>同构多维数组（元素表）。所有类型都相同，由非负整数元组索引。在NumPy维度中称为<strong>轴</strong>。</p>
-<p>​    例如，3D空间中的点的坐标[1, 2, 1]具有一个轴。该轴有3个元素，所以我们说它的长度为3。在下面所示的例子中，数组有2个轴。第一轴的长度为2，第二轴的长度为3。</p>
-<p>[[ 1, 0, 0],</p>
-<p> [ 0, 1, 2]]</p>
-<p>拥有数组创建、数组打印、数组操作等功能，可用于线性代数计算、矩阵操作等。</p>
-<h2 id="2-6-SciPy-library库"><a href="#2-6-SciPy-library库" class="headerlink" title="2.6 SciPy library库"></a>2.6 SciPy library库</h2><h2 id="-1"><a href="#-1" class="headerlink" title=""></a><img src="/pic/image-20210626200614717.png"></h2><p>基于NumPy的拓展模块，增加了数学和工程上的运算，比如拟合、<strong>积分</strong>、常微分方程求解、插值等。</p>
-<p>简单的定积分：SciPy的子模块integrate中的quad()函数</p>
-<p>quad(f,a,b)：对函数f从a积分到b</p>
-<p>dblquad(f,a,b,g,h): 计算二重积分，二元函数f，x从a积分到b，y从g(x)积分到h(x)</p>
-<h2 id="2-7-Matplotlib-库"><a href="#2-7-Matplotlib-库" class="headerlink" title="2.7 Matplotlib 库"></a>2.7 Matplotlib 库</h2><h2 id="-2"><a href="#-2" class="headerlink" title=""></a><img src="/pic/image-20210626201253294.png"></h2><p>主要用于绘图，可以简单高效地将数据图形化，可视化。</p>
-<p>最常用plot()命令</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#pyplot生成可视化效果：</span></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">plt.plot([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>])</span><br><span class="line">plt.ylabel(<span class="string">&#x27;some numbers&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-
-<p><img src="/pic/image-20210626201558056.png"></p>
-<p>可以设置绘图的各种参数，如线形、颜色、坐标轴等。</p>
-<p>除此之外，还可以绘制各种统计图、三维曲线、曲面等。</p>
-<h2 id="2-8-Pandas库"><a href="#2-8-Pandas库" class="headerlink" title="2.8 Pandas库"></a>2.8 Pandas库</h2><h2 id="-3"><a href="#-3" class="headerlink" title=""></a><img src="/pic/image-20210626202023168.png"></h2><p>主要用于数据挖掘和数据分析，大数据处理统计。</p>
-<p>其主要的两大模块为：Series和DataFrame</p>
-<p>Series是类似于<strong>一维数组</strong>的对象，是由一组数据以及一组一直相关的数据标签（索引）组成的。索引是默认从0开始的整数序列，Series是一种<strong>有序的变长字典</strong>。</p>
-<p>DataFrame是一个<strong>表格型的数据结构</strong>，包含一组有序序列，并且同时拥有行索引和列索引。</p>
-]]></content>
-      <categories>
-        <category>计算机科学</category>
-      </categories>
-      <tags>
-        <tag>Python</tag>
-        <tag>编程</tag>
-        <tag>学习笔记</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Python数据结构</title>
     <url>/2023/04/27/Python%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</url>
     <content><![CDATA[<h1 id="python-序列"><a href="#python-序列" class="headerlink" title="python 序列"></a>python 序列</h1><p>包括字符串，列表，元组，range对象，字典，集合等数据类型</p>
@@ -714,6 +597,123 @@
       </tags>
   </entry>
   <entry>
+    <title>Python算法结构与常用库</title>
+    <url>/2023/04/27/Python%E7%AE%97%E6%B3%95%E6%A8%A1%E5%9D%97%E4%B8%8E%E5%B8%B8%E7%94%A8%E5%BA%93/</url>
+    <content><![CDATA[<h1 id="python-算法模块与常用库"><a href="#python-算法模块与常用库" class="headerlink" title="python 算法模块与常用库"></a>python 算法模块与常用库</h1><p>包括各种常用算法案例，以及常用库的使用说明</p>
+<h1 id="1-常用算法实例"><a href="#1-常用算法实例" class="headerlink" title="1.常用算法实例"></a>1.常用算法实例</h1><h2 id="1-1质数判断算法"><a href="#1-1质数判断算法" class="headerlink" title="1.1质数判断算法"></a>1.1质数判断算法</h2><p>基本思路：首先用if判断最特殊的0和1，它们都不是质数。</p>
+<p>其次，再使用循环对每个数的可能因数全部进行判断，从2到x-1，如果循环途中发现有可以整除（即为x的因数），则返回False并跳出循环。</p>
+<p>如果循环结束也没有跳出，那么说明没有因数，x是质数，返回True。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">isprime</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">if</span> x==<span class="number">0</span> <span class="keyword">or</span> x==<span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>,x):</span><br><span class="line">            <span class="keyword">if</span> x%i==<span class="number">0</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="1-2进制算法"><a href="#1-2进制算法" class="headerlink" title="1.2进制算法"></a>1.2进制算法</h2><h3 id="十进制转N进制"><a href="#十进制转N进制" class="headerlink" title="十进制转N进制"></a>十进制转N进制</h3><p>总思路为逆向取余法，对十进制数字反复除以进制数n，直至整除为0，将余数逆向排列，即可得到n进制转换结果。需要注意的是超过十进制转换时，需要把超过10的余数转换为字母表达。这一部分使用循环进行余数序列的对应替换。<strong>另一种算法是直接用列表解析生成对照序列，再利用序列的索引进行一一对应替换。</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a=<span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;请输入要转换的十进制数&quot;</span>))</span><br><span class="line">n=<span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;要转换为几进制数？&quot;</span>))</span><br><span class="line">b=[]</span><br><span class="line">Str=<span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    b.append(a%n)</span><br><span class="line">    a=a//n</span><br><span class="line">    <span class="keyword">if</span> a&lt;n:</span><br><span class="line">        b.append(a)</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(b)):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>,<span class="number">36</span>):</span><br><span class="line">        letter=<span class="built_in">chr</span>(<span class="built_in">ord</span>(<span class="string">&#x27;a&#x27;</span>)+(j-<span class="number">10</span>))</span><br><span class="line">        <span class="keyword">if</span> b[-<span class="number">1</span>-i]==j:</span><br><span class="line">            b[-<span class="number">1</span>-i]=letter</span><br><span class="line">    <span class="built_in">print</span>(b[-<span class="number">1</span>-i],end=<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">--------------------------------------------------------------------------</span><br><span class="line">a=<span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;请输入要转换的十进制数&quot;</span>))</span><br><span class="line">n=<span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;要转换为几进制数？&quot;</span>))</span><br><span class="line">b=[]</span><br><span class="line">base=[<span class="built_in">str</span>(x) <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>)]+[<span class="built_in">chr</span>(x) <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">ord</span>(<span class="string">&#x27;a&#x27;</span>),<span class="built_in">ord</span>(<span class="string">&#x27;a&#x27;</span>)+<span class="number">26</span>)]</span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    b.append(base[a%n-<span class="number">1</span>])</span><br><span class="line">    a=a//n </span><br><span class="line">    <span class="keyword">if</span> a&lt;n:</span><br><span class="line">        b.append(base[a-<span class="number">1</span>])</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"><span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(b)):</span><br><span class="line">    <span class="built_in">print</span>(b[-<span class="number">1</span>-k],end=<span class="string">&#x27;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="N进制转十进制"><a href="#N进制转十进制" class="headerlink" title="N进制转十进制"></a>N进制转十进制</h3><p>主要思路为：位权展开法，每一位乘上对应的权。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">n=<span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;您将要输入N进制数N=？&quot;</span>))</span><br><span class="line">a=<span class="built_in">input</span>(<span class="string">&quot;请输入要转换为十进制的N进制数&quot;</span>)</span><br><span class="line">base=[<span class="built_in">str</span>(x) <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>)]+[<span class="built_in">chr</span>(x) <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">ord</span>(<span class="string">&#x27;a&#x27;</span>),<span class="built_in">ord</span>(<span class="string">&#x27;a&#x27;</span>)+<span class="number">26</span>)]</span><br><span class="line">a=<span class="built_in">list</span>(a)</span><br><span class="line">b=[]</span><br><span class="line">s=<span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(a)-<span class="number">1</span>,-<span class="number">1</span>,-<span class="number">1</span>):</span><br><span class="line">    a[i]=<span class="built_in">int</span>(base.index(a[i]))</span><br><span class="line">    s=s+<span class="built_in">int</span>(a[i])*(n**(<span class="built_in">len</span>(a)-<span class="number">1</span>-i))</span><br><span class="line"><span class="built_in">print</span>(s)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="1-3因子算法"><a href="#1-3因子算法" class="headerlink" title="1.3因子算法"></a>1.3因子算法</h2><h3 id="最小公倍数算法："><a href="#最小公倍数算法：" class="headerlink" title="最小公倍数算法："></a>最小公倍数算法：</h3><p>设置循环从较大数开始找，直到找到最小公倍数跳出循环。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">gbs</span>(<span class="params">a,b</span>):</span><br><span class="line">    <span class="keyword">if</span> a&lt;b:</span><br><span class="line">        a,b=b,a</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(a+<span class="number">1</span>,a*b+<span class="number">1</span>):</span><br><span class="line">        <span class="keyword">if</span> i%a==<span class="number">0</span> <span class="keyword">and</span> i%b==<span class="number">0</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;最小公倍数为&quot;</span>,i)</span><br><span class="line">            <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="最大公约数算法："><a href="#最大公约数算法：" class="headerlink" title="最大公约数算法："></a>最大公约数算法：</h3><p>设置循环从较小数开始倒序找，直到找到最大公约数跳出循环</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">gys</span>(<span class="params">a,b</span>):</span><br><span class="line">    <span class="keyword">if</span> a&lt;b:</span><br><span class="line">        a,b=b,a</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(b,<span class="number">0</span>,-<span class="number">1</span>):</span><br><span class="line">        <span class="keyword">if</span> a%i==<span class="number">0</span> <span class="keyword">and</span> b%i==<span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> i</span><br><span class="line">            <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="辗转相除法："><a href="#辗转相除法：" class="headerlink" title="辗转相除法："></a>辗转相除法：</h3><p>更简洁高效的最大公约数算法。原理是以较大数除以较小数开始循环，每次将除数移交给被除数，再把余数移交给除数，辗转相除，直到余数为0，则最后一次的除数就是最大公约数。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">gys</span>(<span class="params">a,b</span>):</span><br><span class="line">    <span class="keyword">if</span> a&lt;b:</span><br><span class="line">        a,b=b,a</span><br><span class="line">    <span class="keyword">while</span> b: </span><br><span class="line">        a,b=b,a%b</span><br><span class="line"><span class="keyword">return</span> a</span><br></pre></td></tr></table></figure>
+
+<h3 id="用最大公约数求最小公倍数："><a href="#用最大公约数求最小公倍数：" class="headerlink" title="用最大公约数求最小公倍数："></a>用最大公约数求最小公倍数：</h3><p>两个数的最大公约数与最小公倍数的乘积，即为两个数的乘积：</p>
+<p>axb=(最大公约数)x(最小公倍数)</p>
+<h2 id="1-4-回文算法"><a href="#1-4-回文算法" class="headerlink" title="1.4 回文算法"></a>1.4 回文算法</h2><p>pythond的回文算法非常简单，转换为列表利用内置的颠倒函数便可轻松实现。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">hws</span>(<span class="params">x</span>):</span><br><span class="line">    x=<span class="built_in">list</span>(<span class="built_in">str</span>(x))</span><br><span class="line">    y=<span class="built_in">list</span>(<span class="built_in">reversed</span>(x))</span><br><span class="line">    <span class="keyword">if</span> x==y:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure>
+
+<p>或者，也可以使用索引进行一一对比，采用递归思路：</p>
+<p>从两端向中间递归，如果发现不同就触发return回False；如果一直递归到最中间也没找到不同，就返回Ture。每次递归把输入字符串去除首尾，进行下一轮迭代；返回结果时，反向从内向外报告。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">hws</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(x)&lt;<span class="number">2</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="keyword">if</span> x[<span class="number">0</span>]!=x[-<span class="number">1</span>]:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">return</span> hws(x[<span class="number">1</span>:-<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="1-5-排序算法"><a href="#1-5-排序算法" class="headerlink" title="1.5 排序算法"></a>1.5 排序算法</h2><p>Python自带有各种序列的排序方法函数，但是出于对算法的理解角度，也应该掌握各类排序算法。</p>
+<h3 id="冒泡排序法"><a href="#冒泡排序法" class="headerlink" title="冒泡排序法"></a>冒泡排序法</h3><p>双重循环结构，每次都将序列最左边的数向右进行冒泡（相邻比较，如果左边小于右边，就交换，等效于较大数向右移动）。此过程中较大数会慢慢“浮”到序列右端，很像冒泡。</p>
+<p>外层循环：循环n=len(arr)次，确保每个值都会进行排序。</p>
+<p>内层循环：跟外层循环进行的次数有关。外层循环每冒泡一次，则最右端就会确定一个较大值的位置，无需继续冒泡。</p>
+<p>注意：列表在函数中相当于全局变量，被修改则会牵连原列表，因而无需返回值。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">bubbleSort</span>(<span class="params">arr</span>):</span><br><span class="line">    n=<span class="built_in">len</span>(arr)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,n-i-<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">if</span> arr[j]&gt;arr[j+<span class="number">1</span>]:</span><br><span class="line">                arr[j],arr[j+<span class="number">1</span>]=arr[j+<span class="number">1</span>],arr[j]</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="插入排序法"><a href="#插入排序法" class="headerlink" title="插入排序法"></a>插入排序法</h3><p>类似于我们平时打牌时对扑克牌进行排序，每次插入一个新值，需要找到其适当的中间位置并插入。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">insertSort</span>(<span class="params">arr</span>):</span><br><span class="line">    length=<span class="built_in">len</span>(arr)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,length):</span><br><span class="line">        x=arr[i]</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(i,-<span class="number">1</span>,-<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">if</span> x&lt;arr[j-<span class="number">1</span>]:</span><br><span class="line">                arr[j]=arr[j-<span class="number">1</span>]</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        arr[j]=x</span><br></pre></td></tr></table></figure>
+
+<p>这串代码的逻辑是，序列分为两个区域：左边为已排序区，右边为待排序区。第一层循环的参数i控制正在插空的被排序对象是第几个，第二层循环的参数j倒序变化，控制插空位移。首先，i从1开始取，0号元素已经默认为排序区；然后，指针i不断向右移动，先把待排序对象arr[i]单独取出来，和已排序区进行从右向左的插空判断： </p>
+<p><strong>如果待排序对象arr[i]过小，</strong>arr[j-1]向右移动来为将来的arr[i]插入提供空位。不必担心arr[i]本身会因为移动而被替换，因为已经用x来存储arr[i]。</p>
+<p><strong>如果待排序对象arr[i]过大</strong>，直接跳出循环，找到插入位置了，就把arr[i]=x放在arr[j]这个位置插入。内层循环结束，进入下一轮arr[i+1]的插入。</p>
+<h2 id="1-6-查找算法"><a href="#1-6-查找算法" class="headerlink" title="1.6 查找算法"></a>1.6 查找算法</h2><h3 id="二分查找法"><a href="#二分查找法" class="headerlink" title="二分查找法"></a>二分查找法</h3><p>对有序数组进行快速查找时，使用二分法可以大大提高效率，每次比较都可以使搜索范围缩小一半。</p>
+<p>案例代码使用递归函数，输入：查找序列arr, 序列待查找对象x。l与r是函数内部的形参</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">binarySearch</span>(<span class="params">arr,l,r,x</span>):</span><br><span class="line">    <span class="keyword">if</span> r&gt;=l:</span><br><span class="line">        mid=<span class="built_in">int</span>(l+(r-l)/<span class="number">2</span>)</span><br><span class="line">        <span class="keyword">if</span> arr[mid]==x:</span><br><span class="line">            <span class="keyword">return</span> mid</span><br><span class="line">        <span class="keyword">elif</span> arr[mid]&gt;x:</span><br><span class="line">            <span class="keyword">return</span> binarySearch(arr,<span class="number">1</span>,mid-<span class="number">1</span>,x)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> binarySearch(arr,mid+<span class="number">1</span>,r,x)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="1-7-累加算法"><a href="#1-7-累加算法" class="headerlink" title="1.7 累加算法"></a>1.7 累加算法</h2><p>这个就不写了，简单的循环即可。主要任务是找数列递推公式，比如下面这个斐波那契数列:</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">nterms=<span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;你需要几项斐波那契数列？&quot;</span>))</span><br><span class="line">n1，n2=<span class="number">0</span>，<span class="number">1</span></span><br><span class="line">count=<span class="number">2</span></span><br><span class="line"><span class="keyword">if</span> nterms&lt;=<span class="number">0</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;输入不合法，请输入一个正数&quot;</span>)</span><br><span class="line"><span class="keyword">elif</span> nterms==<span class="number">1</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;斐波那契数列：&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(n1)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;斐波那契数列：&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(n1,<span class="string">&quot;,&quot;</span>,n2,end=<span class="string">&#x27; &#x27;</span>)</span><br><span class="line">    <span class="keyword">while</span> count&lt;nterms:</span><br><span class="line">        nth=n1+n2</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;,&quot;</span>,nth,end=<span class="string">&#x27; &#x27;</span>)</span><br><span class="line">        n1，n2=n2，nth</span><br><span class="line">        count+=<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="2-常用库函数"><a href="#2-常用库函数" class="headerlink" title="2.常用库函数"></a>2.常用库函数</h1><p>库的使用：import 库名称;  使用库函数时为:  库名称.函数名()</p>
+<h2 id="2-1-math库"><a href="#2-1-math库" class="headerlink" title="2.1 math库"></a>2.1 math库</h2><p>math库的函数主要用于数学计算，包含常用的数学常数以及常用数学函数：指对数、三角函数等</p>
+<h3 id="指对数"><a href="#指对数" class="headerlink" title="指对数"></a>指对数</h3><p>math.exp(x):  返回自然对数的x次幂</p>
+<p>math.pow(x,y):  返回x的y次幂</p>
+<p>math.sqrt(x):  返回x的平方根</p>
+<h3 id="三角函数"><a href="#三角函数" class="headerlink" title="三角函数"></a>三角函数</h3><p>sin(x),cos(x),tan(x)：三角函数</p>
+<p>asin(x),acos(x),atan(x)：反三角函数</p>
+<h3 id="数值表示函数"><a href="#数值表示函数" class="headerlink" title="数值表示函数"></a>数值表示函数</h3><p>math.fabs(x):  返回x的绝对值</p>
+<p>math.gcd(a,b):  返回a和b的最大公约数</p>
+<p>math.floor(): 向下取整</p>
+<p>math.ceil():  向上取整</p>
+<h2 id="2-2-random库"><a href="#2-2-random库" class="headerlink" title="2.2 random库"></a>2.2 random库</h2><p>randint(a,b):  返回一个a到b之间的随机整数</p>
+<p>uniform(a,b):  返回一个a到b之间的随机小数</p>
+<p>random():  随机生成一个[0,1.0]之间的小数</p>
+<h2 id="2-3-os库"><a href="#2-3-os库" class="headerlink" title="2.3 os库"></a>2.3 os库</h2><p>os.getcwd()： 获取当前工作目录，默认为程序所在目录</p>
+<p>os.chdir(’新目录‘):  更改当前工作目录至新目录</p>
+<p>os.listdir():  列出当前工作目录下的文件或文件夹</p>
+<p>os.rmdir(‘某目录’)：删除目录</p>
+<p>os.remove(‘某文件’):  删除文件</p>
+<h2 id="2-4-datetime库"><a href="#2-4-datetime库" class="headerlink" title="2.4 datetime库"></a>2.4 datetime库</h2><p>该库分为三个类：date , time , datetime</p>
+<p>使用案例：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line">newdt=datetime.datetime.now()</span><br><span class="line"><span class="comment">#代表datetime库中datetime类下的now方法，获取日期和时间</span></span><br><span class="line"><span class="built_in">print</span>(datetime.datetime.time(newdt))</span><br><span class="line"><span class="comment">#代表datetime库中datetime类下的time方法，拆出字符串中的时间</span></span><br><span class="line">datetime.timedelta(weeks,days,hours,minutes,seconds)</span><br><span class="line"><span class="comment">#用于计算时间差的函数，该函数会自动计算某段时间前的时间。</span></span><br></pre></td></tr></table></figure>
+
+<p>此外，time库也有一些常用的函数，比如time.sleep()，可以使程序暂停休眠一段时间再继续运行</p>
+<h2 id="2-5-NumPy库"><a href="#2-5-NumPy库" class="headerlink" title="2.5 NumPy库"></a>2.5 NumPy库</h2><h2 id=""><a href="#" class="headerlink" title=""></a><img src="/pic/image-20210626200200930.png"></h2><p>用于科学计算的基础包，可以处理矩阵和数组</p>
+<p><strong>NumPy 的主要对象：</strong></p>
+<p>同构多维数组（元素表）。所有类型都相同，由非负整数元组索引。在NumPy维度中称为<strong>轴</strong>。</p>
+<p>​    例如，3D空间中的点的坐标[1, 2, 1]具有一个轴。该轴有3个元素，所以我们说它的长度为3。在下面所示的例子中，数组有2个轴。第一轴的长度为2，第二轴的长度为3。</p>
+<p>[[ 1, 0, 0],</p>
+<p> [ 0, 1, 2]]</p>
+<p>拥有数组创建、数组打印、数组操作等功能，可用于线性代数计算、矩阵操作等。</p>
+<h2 id="2-6-SciPy-library库"><a href="#2-6-SciPy-library库" class="headerlink" title="2.6 SciPy library库"></a>2.6 SciPy library库</h2><h2 id="-1"><a href="#-1" class="headerlink" title=""></a><img src="/pic/image-20210626200614717.png"></h2><p>基于NumPy的拓展模块，增加了数学和工程上的运算，比如拟合、<strong>积分</strong>、常微分方程求解、插值等。</p>
+<p>简单的定积分：SciPy的子模块integrate中的quad()函数</p>
+<p>quad(f,a,b)：对函数f从a积分到b</p>
+<p>dblquad(f,a,b,g,h): 计算二重积分，二元函数f，x从a积分到b，y从g(x)积分到h(x)</p>
+<h2 id="2-7-Matplotlib-库"><a href="#2-7-Matplotlib-库" class="headerlink" title="2.7 Matplotlib 库"></a>2.7 Matplotlib 库</h2><h2 id="-2"><a href="#-2" class="headerlink" title=""></a><img src="/pic/image-20210626201253294.png"></h2><p>主要用于绘图，可以简单高效地将数据图形化，可视化。</p>
+<p>最常用plot()命令</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#pyplot生成可视化效果：</span></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">plt.plot([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>])</span><br><span class="line">plt.ylabel(<span class="string">&#x27;some numbers&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p><img src="/pic/image-20210626201558056.png"></p>
+<p>可以设置绘图的各种参数，如线形、颜色、坐标轴等。</p>
+<p>除此之外，还可以绘制各种统计图、三维曲线、曲面等。</p>
+<h2 id="2-8-Pandas库"><a href="#2-8-Pandas库" class="headerlink" title="2.8 Pandas库"></a>2.8 Pandas库</h2><h2 id="-3"><a href="#-3" class="headerlink" title=""></a><img src="/pic/image-20210626202023168.png"></h2><p>主要用于数据挖掘和数据分析，大数据处理统计。</p>
+<p>其主要的两大模块为：Series和DataFrame</p>
+<p>Series是类似于<strong>一维数组</strong>的对象，是由一组数据以及一组一直相关的数据标签（索引）组成的。索引是默认从0开始的整数序列，Series是一种<strong>有序的变长字典</strong>。</p>
+<p>DataFrame是一个<strong>表格型的数据结构</strong>，包含一组有序序列，并且同时拥有行索引和列索引。</p>
+]]></content>
+      <categories>
+        <category>计算机科学</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+        <tag>编程</tag>
+        <tag>学习笔记</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>普通地质学学习笔记</title>
     <url>/2023/04/27/%E6%99%AE%E9%80%9A%E5%9C%B0%E8%B4%A8%E5%AD%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<h1 id="普通地质学学习笔记"><a href="#普通地质学学习笔记" class="headerlink" title="普通地质学学习笔记"></a>普通地质学学习笔记</h1><h2 id="一-绪论"><a href="#一-绪论" class="headerlink" title="一.绪论"></a>一.绪论</h2><h3 id="1-1研究内容与方法"><a href="#1-1研究内容与方法" class="headerlink" title="1-1研究内容与方法"></a>1-1研究内容与方法</h3><h4 id="地球的物质："><a href="#地球的物质：" class="headerlink" title="地球的物质："></a>地球的物质：</h4><p>元素-矿物-岩石-地壳</p>
@@ -876,7 +876,7 @@
 <p><img src="/pic/image-20210810155943686.png" alt="枕状玄武岩"></p>
 <h5 id="气孔构造、杏仁状构造："><a href="#气孔构造、杏仁状构造：" class="headerlink" title="气孔构造、杏仁状构造："></a>气孔构造、杏仁状构造：</h5><p>陆相喷发环境</p>
 <h5 id="流纹构造："><a href="#流纹构造：" class="headerlink" title="流纹构造："></a>流纹构造：</h5><p>流纹岩中有不同的矿物成分、颜色、拉长的气孔成线状排列（长石或石英的碎斑晶+浆屑）</p>
-<p><img src="/pic/dizhi10" alt="流纹构造"></p>
+<p><img src="/pic/dizhi10.JPG" alt="流纹构造"></p>
 <h5 id="晶洞构造："><a href="#晶洞构造：" class="headerlink" title="晶洞构造："></a>晶洞构造：</h5><p>岩浆冷凝收缩形成空洞，常生长有晶簇，反映了<strong>拉张环境</strong></p>
 <h2 id="四-外动力作用与沉积岩"><a href="#四-外动力作用与沉积岩" class="headerlink" title="四.外动力作用与沉积岩"></a>四.外动力作用与沉积岩</h2><h3 id="4-1内动力作用与外动力作用"><a href="#4-1内动力作用与外动力作用" class="headerlink" title="4-1内动力作用与外动力作用"></a>4-1内动力作用与外动力作用</h3><p>内动力源：岩浆、层圈摩擦与化学作用、放射能</p>
 <p>内动力产物：火山岩、侵入岩；地震、褶皱、断裂、节理</p>
