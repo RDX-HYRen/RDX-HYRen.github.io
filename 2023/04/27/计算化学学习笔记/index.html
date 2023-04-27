@@ -618,12 +618,32 @@
                 
 
                 
-
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2023-04-27
+                </div>
                 
 
                 
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    4.9k
+                </div>
+                
 
                 
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    17 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
             </div>
         </div>
         <hr class="clearfix">
@@ -741,8 +761,7 @@
 <p>​        <strong>若要研究电子不配对的情况，则泛函前面写一个U，如写UB3LYP(非限制性)</strong></p>
 <p>表格内是不同原子的Xyz笛卡尔坐标</p>
 <p>图示是对乙烷进行单点计算的最简输入文件。</p>
-<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210815155308244.png" alt="image-20210815155308244" style="zoom:50%;" />
-
+<p><img src="/pic/image-20210815155308244.png" alt="最简输入文件"></p>
 <p>文件拖入gaussian点击开始便开始运算，出现normal termination则计算结束。</p>
 <h3 id="3-2输出文件的读取"><a href="#3-2输出文件的读取" class="headerlink" title="3-2输出文件的读取"></a><strong>3-2输出文件的读取</strong></h3><p>1）result-summary</p>
 <p>SP：单点能计算</p>
@@ -767,17 +786,14 @@
 <p>结构参数有原子坐标、键长、键角、二面角等。</p>
 <h4 id="4-1-1限制性势能面"><a href="#4-1-1限制性势能面" class="headerlink" title="4-1-1限制性势能面"></a>4-1-1限制性势能面</h4><p><strong>限制性势能面：</strong>只考虑分子中部分结构参数的变化</p>
 <p><strong>单变量势能曲线：</strong>只改变一个结构参数，计算分子能量或某一性质的变化。</p>
-<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210815151509334.png" alt="image-20210815151509334" style="zoom:50%;" />
-
+<p><img src="/pic/image-20210815151509334.png" alt="单变量势能曲线"></p>
 <p><strong>内禀反应坐标曲线（IRC）：</strong>常用于有机化学</p>
-<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210815151703396.png" alt="image-20210815151703396" style="zoom:50%;" />
-
+<p><img src="/pic/image-20210815151703396.png" alt="内禀反应坐标曲线"></p>
 <p><strong>双变量势能曲面：</strong></p>
 <p>能量极小点（山谷）：一阶偏导为0.二阶偏导&gt;0</p>
 <p>过渡态（Transition State）：一阶鞍点，驻点</p>
-<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210815152130045.png" alt="image-20210815152130045" style="zoom:50%;" />
-
-<h4 id="4-1-2不同电子态的势能面"><a href="#4-1-2不同电子态的势能面" class="headerlink" title="4-1-2不同电子态的势能面"></a>4-1-2不同电子态的势能面</h4><p><img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210815152556992.png" alt="image-20210815152556992"></p>
+<p><img src="/pic/image-20210815152130045.png" alt="双变量势能曲面"></p>
+<h4 id="4-1-2不同电子态的势能面"><a href="#4-1-2不同电子态的势能面" class="headerlink" title="4-1-2不同电子态的势能面"></a>4-1-2不同电子态的势能面</h4><p><img src="/pic/image-20210815152556992.png" alt="势能面与光化学过程"></p>
 <p><strong>垂直激发：</strong>构型不变（横坐标不变），能量升高。</p>
 <p><strong>绝热激发：</strong>由基态极小值点到激发态极小值点，构型发生变化。</p>
 <p><strong>内转化：</strong>基态和激发态在某一构型处能量相等，对外无热量交换便发生转化。</p>
@@ -808,12 +824,10 @@
 <p>当写出calcall时，无需再进行freq频率分析，即可查看结果。</p>
 <p><strong>过渡态的特征：</strong></p>
 <p>只有一个大于100的虚频，振动方向朝着反应物和产物，结构在反应物和产物之间。</p>
-<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210815173831802.png" alt="image-20210815173831802" style="zoom:50%;" />
-
+<p><img src="/pic/image-20210815173831802.png" alt="SN2反应过渡态"></p>
 <p><strong>过渡态的检验：IRC计算</strong></p>
 <p>IRC就是在质权坐标下链接势能面相邻两个极小点能量最低的路径，相当于原子运动无限慢时的路径，而过渡态就是IRC的最高点。</p>
-<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210815182837039.png" alt="image-20210815182837039" style="zoom:50%;" />
-
+<p><img src="/pic/image-20210815182837039.png" alt="IRC计算"></p>
 <p>IRC的关键词：</p>
 <p>irc(calcall,stepsize=15,maxpoint=15)，计算级别必须和TS严格一致！</p>
 <p>其中：stepsize：步长，默认为10，步长越小曲线越光滑</p>
@@ -825,7 +839,7 @@
 <p>简正模式：分子质心和取向不变，原子以相同频率在平衡附近振动。</p>
 <p>分子振动形式：对称伸展、平面剪式运动、平面摇摆、非平面扭转等</p>
 <p><strong>振动频率：</strong></p>
-<p>振动的频率为<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210818165527431.png" alt="image-20210818165527431" style="zoom: 33%;" />,若k为负数，则v也是负数，称为<strong>虚频</strong></p>
+<p>振动的频率为<img src="/pic/image-20210818165527431.png">,若k为负数，则v也是负数，称为<strong>虚频</strong></p>
 <p>势能面极小点没有虚频，而对于绝大多数的过渡态都存在1个虚频。</p>
 <p>虚频意味着振动不平衡，会在势能面上下滑。</p>
 <p><strong>频率计算关键词：</strong></p>
@@ -839,7 +853,7 @@
 <p>%chk=bingansuan.chk<br>#p b3lyp/6-31g* opt freq scrf(SMD,solvent=toluene)</p>
 <p>结果查看：results—vibrations,可以查看动画</p>
 <p>点击Spectra显示IR光谱，与实验（红外吸收光谱）相反</p>
-<p><img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210819145106591.png" alt="image-20210819145106591"></p>
+<p><img src="/pic/image-20210819145106591.png" alt="计算拟合红外光谱"></p>
 <p>右键properties：IR peak Half-Wideth at Half Height（展宽）</p>
 <p>右键save data可以直接导出txt数据文件</p>
 <p>记事本打开输出文件：查找frequencies：振动频率</p>
@@ -855,8 +869,7 @@
 <p><strong>使用Origin绘图：</strong></p>
 <p>光谱曲线的y轴坐标倒置，红外强度的line正置，设置y轴区间使图像充分展开，x轴为4000~0cm-1。</p>
 <p>保存图片为bmp文件时，清晰度很高。</p>
-<img src="D:\g16w\Lab\freq test\Graph1.bmp" alt="Graph1" style="zoom:67%;" />
-
+<p><img src="/pic/IR.jpg" alt="绘制IR计算结果"></p>
 <h3 id="5-2振动圆二色谱"><a href="#5-2振动圆二色谱" class="headerlink" title="5-2振动圆二色谱"></a><strong>5-2振动圆二色谱</strong></h3><p>两束强度、速度、频率和相位完全一致的圆偏振光复合形成平面偏振光，在光学各向异性介质（手性物质）中传播，其综合光变为椭圆偏振光。L光和R光在介质中传播速度不同，手性物质对某波长的两种光吸光率A不同，分别为AL和AR，则△A=AL-AR，称为圆二色性。</p>
 <p><strong>计算案例：计算丙氨酸的振动圆二色谱</strong></p>
 <p>#p b3lyp/6-31g* opt freq=VCD</p>
@@ -1453,6 +1466,9 @@
             |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
             <br>
             
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">20.7k</span>&nbsp;字
+            
             
             
             
@@ -1491,19 +1507,11 @@
 
 
 
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1395988100" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1395988100" data-position="top" data-delay="50">
-        <i class="fab fa-qq"></i>
-    </a>
 
 
 
 
 
-
-
-    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
-        <i class="fas fa-rss"></i>
-    </a>
 
 </div>
     </div>
@@ -1661,6 +1669,11 @@ $(function () {
     
 
 	
+    
+    <script type="text/javascript" color="0,0,255"
+        pointColor="0,0,255" opacity='0.7'
+        zIndex="-1" count="99"
+        src="/libs/background/canvas-nest.js"></script>
     
 
     

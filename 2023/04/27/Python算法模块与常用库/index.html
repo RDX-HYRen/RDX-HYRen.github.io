@@ -622,12 +622,32 @@
                 
 
                 
-
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2023-04-28
+                </div>
                 
 
                 
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    2.8k
+                </div>
+                
 
                 
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    11 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
             </div>
         </div>
         <hr class="clearfix">
@@ -720,25 +740,25 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line">newdt=datetime.datetime.now()</span><br><span class="line"><span class="comment">#代表datetime库中datetime类下的now方法，获取日期和时间</span></span><br><span class="line"><span class="built_in">print</span>(datetime.datetime.time(newdt))</span><br><span class="line"><span class="comment">#代表datetime库中datetime类下的time方法，拆出字符串中的时间</span></span><br><span class="line">datetime.timedelta(weeks,days,hours,minutes,seconds)</span><br><span class="line"><span class="comment">#用于计算时间差的函数，该函数会自动计算某段时间前的时间。</span></span><br></pre></td></tr></table></figure>
 
 <p>此外，time库也有一些常用的函数，比如time.sleep()，可以使程序暂停休眠一段时间再继续运行</p>
-<h2 id="2-5-NumPy库"><a href="#2-5-NumPy库" class="headerlink" title="2.5 NumPy库"></a>2.5 NumPy库<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210626200200930.png" alt="image-20210626200200930" style="zoom:25%;" /></h2><p>用于科学计算的基础包，可以处理矩阵和数组</p>
+<h2 id="2-5-NumPy库"><a href="#2-5-NumPy库" class="headerlink" title="2.5 NumPy库"></a>2.5 NumPy库</h2><h2 id=""><a href="#" class="headerlink" title=""></a><img src="/pic/image-20210626200200930.png"></h2><p>用于科学计算的基础包，可以处理矩阵和数组</p>
 <p><strong>NumPy 的主要对象：</strong></p>
 <p>同构多维数组（元素表）。所有类型都相同，由非负整数元组索引。在NumPy维度中称为<strong>轴</strong>。</p>
 <p>​    例如，3D空间中的点的坐标[1, 2, 1]具有一个轴。该轴有3个元素，所以我们说它的长度为3。在下面所示的例子中，数组有2个轴。第一轴的长度为2，第二轴的长度为3。</p>
 <p>[[ 1, 0, 0],</p>
 <p> [ 0, 1, 2]]</p>
 <p>拥有数组创建、数组打印、数组操作等功能，可用于线性代数计算、矩阵操作等。</p>
-<h2 id="2-6-SciPy-library库"><a href="#2-6-SciPy-library库" class="headerlink" title="2.6 SciPy library库"></a>2.6 SciPy library库<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210626200614717.png" alt="image-20210626200614717" style="zoom:25%;" /></h2><p>基于NumPy的拓展模块，增加了数学和工程上的运算，比如拟合、<strong>积分</strong>、常微分方程求解、插值等。</p>
+<h2 id="2-6-SciPy-library库"><a href="#2-6-SciPy-library库" class="headerlink" title="2.6 SciPy library库"></a>2.6 SciPy library库</h2><h2 id="-1"><a href="#-1" class="headerlink" title=""></a><img src="/pic/image-20210626200614717.png"></h2><p>基于NumPy的拓展模块，增加了数学和工程上的运算，比如拟合、<strong>积分</strong>、常微分方程求解、插值等。</p>
 <p>简单的定积分：SciPy的子模块integrate中的quad()函数</p>
 <p>quad(f,a,b)：对函数f从a积分到b</p>
 <p>dblquad(f,a,b,g,h): 计算二重积分，二元函数f，x从a积分到b，y从g(x)积分到h(x)</p>
-<h2 id="2-7-Matplotlib-库"><a href="#2-7-Matplotlib-库" class="headerlink" title="2.7 Matplotlib 库"></a>2.7 Matplotlib 库<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210626201253294.png" alt="image-20210626201253294" style="zoom:25%;" /></h2><p>主要用于绘图，可以简单高效地将数据图形化，可视化。</p>
+<h2 id="2-7-Matplotlib-库"><a href="#2-7-Matplotlib-库" class="headerlink" title="2.7 Matplotlib 库"></a>2.7 Matplotlib 库</h2><h2 id="-2"><a href="#-2" class="headerlink" title=""></a><img src="/pic/image-20210626201253294.png"></h2><p>主要用于绘图，可以简单高效地将数据图形化，可视化。</p>
 <p>最常用plot()命令</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#pyplot生成可视化效果：</span></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">plt.plot([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>])</span><br><span class="line">plt.ylabel(<span class="string">&#x27;some numbers&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
 
-<p><img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210626201558056.png" alt="image-20210626201558056"></p>
+<p><img src="/pic/image-20210626201558056.png"></p>
 <p>可以设置绘图的各种参数，如线形、颜色、坐标轴等。</p>
 <p>除此之外，还可以绘制各种统计图、三维曲线、曲面等。</p>
-<h2 id="2-8-Pandas库"><a href="#2-8-Pandas库" class="headerlink" title="2.8 Pandas库"></a>2.8 Pandas库<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210626202023168.png" alt="image-20210626202023168" style="zoom:25%;" /></h2><p>主要用于数据挖掘和数据分析，大数据处理统计。</p>
+<h2 id="2-8-Pandas库"><a href="#2-8-Pandas库" class="headerlink" title="2.8 Pandas库"></a>2.8 Pandas库</h2><h2 id="-3"><a href="#-3" class="headerlink" title=""></a><img src="/pic/image-20210626202023168.png"></h2><p>主要用于数据挖掘和数据分析，大数据处理统计。</p>
 <p>其主要的两大模块为：Series和DataFrame</p>
 <p>Series是类似于<strong>一维数组</strong>的对象，是由一组数据以及一组一直相关的数据标签（索引）组成的。索引是默认从0开始的整数序列，Series是一种<strong>有序的变长字典</strong>。</p>
 <p>DataFrame是一个<strong>表格型的数据结构</strong>，包含一组有序序列，并且同时拥有行索引和列索引。</p>
@@ -1291,6 +1311,9 @@
             |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
             <br>
             
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">20.7k</span>&nbsp;字
+            
             
             
             
@@ -1329,19 +1352,11 @@
 
 
 
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1395988100" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1395988100" data-position="top" data-delay="50">
-        <i class="fab fa-qq"></i>
-    </a>
 
 
 
 
 
-
-
-    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
-        <i class="fas fa-rss"></i>
-    </a>
 
 </div>
     </div>
@@ -1499,6 +1514,11 @@ $(function () {
     
 
 	
+    
+    <script type="text/javascript" color="0,0,255"
+        pointColor="0,0,255" opacity='0.7'
+        zIndex="-1" count="99"
+        src="/libs/background/canvas-nest.js"></script>
     
 
     

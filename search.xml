@@ -1,6 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Python算法结构与常用库</title>
+    <url>/2023/04/27/Python%E7%AE%97%E6%B3%95%E6%A8%A1%E5%9D%97%E4%B8%8E%E5%B8%B8%E7%94%A8%E5%BA%93/</url>
+    <content><![CDATA[<h1 id="python-算法模块与常用库"><a href="#python-算法模块与常用库" class="headerlink" title="python 算法模块与常用库"></a>python 算法模块与常用库</h1><p>包括各种常用算法案例，以及常用库的使用说明</p>
+<h1 id="1-常用算法实例"><a href="#1-常用算法实例" class="headerlink" title="1.常用算法实例"></a>1.常用算法实例</h1><h2 id="1-1质数判断算法"><a href="#1-1质数判断算法" class="headerlink" title="1.1质数判断算法"></a>1.1质数判断算法</h2><p>基本思路：首先用if判断最特殊的0和1，它们都不是质数。</p>
+<p>其次，再使用循环对每个数的可能因数全部进行判断，从2到x-1，如果循环途中发现有可以整除（即为x的因数），则返回False并跳出循环。</p>
+<p>如果循环结束也没有跳出，那么说明没有因数，x是质数，返回True。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">isprime</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">if</span> x==<span class="number">0</span> <span class="keyword">or</span> x==<span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>,x):</span><br><span class="line">            <span class="keyword">if</span> x%i==<span class="number">0</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="1-2进制算法"><a href="#1-2进制算法" class="headerlink" title="1.2进制算法"></a>1.2进制算法</h2><h3 id="十进制转N进制"><a href="#十进制转N进制" class="headerlink" title="十进制转N进制"></a>十进制转N进制</h3><p>总思路为逆向取余法，对十进制数字反复除以进制数n，直至整除为0，将余数逆向排列，即可得到n进制转换结果。需要注意的是超过十进制转换时，需要把超过10的余数转换为字母表达。这一部分使用循环进行余数序列的对应替换。<strong>另一种算法是直接用列表解析生成对照序列，再利用序列的索引进行一一对应替换。</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a=<span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;请输入要转换的十进制数&quot;</span>))</span><br><span class="line">n=<span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;要转换为几进制数？&quot;</span>))</span><br><span class="line">b=[]</span><br><span class="line">Str=<span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    b.append(a%n)</span><br><span class="line">    a=a//n</span><br><span class="line">    <span class="keyword">if</span> a&lt;n:</span><br><span class="line">        b.append(a)</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(b)):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>,<span class="number">36</span>):</span><br><span class="line">        letter=<span class="built_in">chr</span>(<span class="built_in">ord</span>(<span class="string">&#x27;a&#x27;</span>)+(j-<span class="number">10</span>))</span><br><span class="line">        <span class="keyword">if</span> b[-<span class="number">1</span>-i]==j:</span><br><span class="line">            b[-<span class="number">1</span>-i]=letter</span><br><span class="line">    <span class="built_in">print</span>(b[-<span class="number">1</span>-i],end=<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">--------------------------------------------------------------------------</span><br><span class="line">a=<span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;请输入要转换的十进制数&quot;</span>))</span><br><span class="line">n=<span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;要转换为几进制数？&quot;</span>))</span><br><span class="line">b=[]</span><br><span class="line">base=[<span class="built_in">str</span>(x) <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>)]+[<span class="built_in">chr</span>(x) <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">ord</span>(<span class="string">&#x27;a&#x27;</span>),<span class="built_in">ord</span>(<span class="string">&#x27;a&#x27;</span>)+<span class="number">26</span>)]</span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    b.append(base[a%n-<span class="number">1</span>])</span><br><span class="line">    a=a//n </span><br><span class="line">    <span class="keyword">if</span> a&lt;n:</span><br><span class="line">        b.append(base[a-<span class="number">1</span>])</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"><span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(b)):</span><br><span class="line">    <span class="built_in">print</span>(b[-<span class="number">1</span>-k],end=<span class="string">&#x27;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="N进制转十进制"><a href="#N进制转十进制" class="headerlink" title="N进制转十进制"></a>N进制转十进制</h3><p>主要思路为：位权展开法，每一位乘上对应的权。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">n=<span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;您将要输入N进制数N=？&quot;</span>))</span><br><span class="line">a=<span class="built_in">input</span>(<span class="string">&quot;请输入要转换为十进制的N进制数&quot;</span>)</span><br><span class="line">base=[<span class="built_in">str</span>(x) <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>)]+[<span class="built_in">chr</span>(x) <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">ord</span>(<span class="string">&#x27;a&#x27;</span>),<span class="built_in">ord</span>(<span class="string">&#x27;a&#x27;</span>)+<span class="number">26</span>)]</span><br><span class="line">a=<span class="built_in">list</span>(a)</span><br><span class="line">b=[]</span><br><span class="line">s=<span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(a)-<span class="number">1</span>,-<span class="number">1</span>,-<span class="number">1</span>):</span><br><span class="line">    a[i]=<span class="built_in">int</span>(base.index(a[i]))</span><br><span class="line">    s=s+<span class="built_in">int</span>(a[i])*(n**(<span class="built_in">len</span>(a)-<span class="number">1</span>-i))</span><br><span class="line"><span class="built_in">print</span>(s)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="1-3因子算法"><a href="#1-3因子算法" class="headerlink" title="1.3因子算法"></a>1.3因子算法</h2><h3 id="最小公倍数算法："><a href="#最小公倍数算法：" class="headerlink" title="最小公倍数算法："></a>最小公倍数算法：</h3><p>设置循环从较大数开始找，直到找到最小公倍数跳出循环。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">gbs</span>(<span class="params">a,b</span>):</span><br><span class="line">    <span class="keyword">if</span> a&lt;b:</span><br><span class="line">        a,b=b,a</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(a+<span class="number">1</span>,a*b+<span class="number">1</span>):</span><br><span class="line">        <span class="keyword">if</span> i%a==<span class="number">0</span> <span class="keyword">and</span> i%b==<span class="number">0</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;最小公倍数为&quot;</span>,i)</span><br><span class="line">            <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="最大公约数算法："><a href="#最大公约数算法：" class="headerlink" title="最大公约数算法："></a>最大公约数算法：</h3><p>设置循环从较小数开始倒序找，直到找到最大公约数跳出循环</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">gys</span>(<span class="params">a,b</span>):</span><br><span class="line">    <span class="keyword">if</span> a&lt;b:</span><br><span class="line">        a,b=b,a</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(b,<span class="number">0</span>,-<span class="number">1</span>):</span><br><span class="line">        <span class="keyword">if</span> a%i==<span class="number">0</span> <span class="keyword">and</span> b%i==<span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> i</span><br><span class="line">            <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="辗转相除法："><a href="#辗转相除法：" class="headerlink" title="辗转相除法："></a>辗转相除法：</h3><p>更简洁高效的最大公约数算法。原理是以较大数除以较小数开始循环，每次将除数移交给被除数，再把余数移交给除数，辗转相除，直到余数为0，则最后一次的除数就是最大公约数。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">gys</span>(<span class="params">a,b</span>):</span><br><span class="line">    <span class="keyword">if</span> a&lt;b:</span><br><span class="line">        a,b=b,a</span><br><span class="line">    <span class="keyword">while</span> b: </span><br><span class="line">        a,b=b,a%b</span><br><span class="line"><span class="keyword">return</span> a</span><br></pre></td></tr></table></figure>
+
+<h3 id="用最大公约数求最小公倍数："><a href="#用最大公约数求最小公倍数：" class="headerlink" title="用最大公约数求最小公倍数："></a>用最大公约数求最小公倍数：</h3><p>两个数的最大公约数与最小公倍数的乘积，即为两个数的乘积：</p>
+<p>axb=(最大公约数)x(最小公倍数)</p>
+<h2 id="1-4-回文算法"><a href="#1-4-回文算法" class="headerlink" title="1.4 回文算法"></a>1.4 回文算法</h2><p>pythond的回文算法非常简单，转换为列表利用内置的颠倒函数便可轻松实现。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">hws</span>(<span class="params">x</span>):</span><br><span class="line">    x=<span class="built_in">list</span>(<span class="built_in">str</span>(x))</span><br><span class="line">    y=<span class="built_in">list</span>(<span class="built_in">reversed</span>(x))</span><br><span class="line">    <span class="keyword">if</span> x==y:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure>
+
+<p>或者，也可以使用索引进行一一对比，采用递归思路：</p>
+<p>从两端向中间递归，如果发现不同就触发return回False；如果一直递归到最中间也没找到不同，就返回Ture。每次递归把输入字符串去除首尾，进行下一轮迭代；返回结果时，反向从内向外报告。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">hws</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(x)&lt;<span class="number">2</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="keyword">if</span> x[<span class="number">0</span>]!=x[-<span class="number">1</span>]:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">return</span> hws(x[<span class="number">1</span>:-<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="1-5-排序算法"><a href="#1-5-排序算法" class="headerlink" title="1.5 排序算法"></a>1.5 排序算法</h2><p>Python自带有各种序列的排序方法函数，但是出于对算法的理解角度，也应该掌握各类排序算法。</p>
+<h3 id="冒泡排序法"><a href="#冒泡排序法" class="headerlink" title="冒泡排序法"></a>冒泡排序法</h3><p>双重循环结构，每次都将序列最左边的数向右进行冒泡（相邻比较，如果左边小于右边，就交换，等效于较大数向右移动）。此过程中较大数会慢慢“浮”到序列右端，很像冒泡。</p>
+<p>外层循环：循环n=len(arr)次，确保每个值都会进行排序。</p>
+<p>内层循环：跟外层循环进行的次数有关。外层循环每冒泡一次，则最右端就会确定一个较大值的位置，无需继续冒泡。</p>
+<p>注意：列表在函数中相当于全局变量，被修改则会牵连原列表，因而无需返回值。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">bubbleSort</span>(<span class="params">arr</span>):</span><br><span class="line">    n=<span class="built_in">len</span>(arr)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,n-i-<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">if</span> arr[j]&gt;arr[j+<span class="number">1</span>]:</span><br><span class="line">                arr[j],arr[j+<span class="number">1</span>]=arr[j+<span class="number">1</span>],arr[j]</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="插入排序法"><a href="#插入排序法" class="headerlink" title="插入排序法"></a>插入排序法</h3><p>类似于我们平时打牌时对扑克牌进行排序，每次插入一个新值，需要找到其适当的中间位置并插入。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">insertSort</span>(<span class="params">arr</span>):</span><br><span class="line">    length=<span class="built_in">len</span>(arr)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,length):</span><br><span class="line">        x=arr[i]</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(i,-<span class="number">1</span>,-<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">if</span> x&lt;arr[j-<span class="number">1</span>]:</span><br><span class="line">                arr[j]=arr[j-<span class="number">1</span>]</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        arr[j]=x</span><br></pre></td></tr></table></figure>
+
+<p>这串代码的逻辑是，序列分为两个区域：左边为已排序区，右边为待排序区。第一层循环的参数i控制正在插空的被排序对象是第几个，第二层循环的参数j倒序变化，控制插空位移。首先，i从1开始取，0号元素已经默认为排序区；然后，指针i不断向右移动，先把待排序对象arr[i]单独取出来，和已排序区进行从右向左的插空判断： </p>
+<p><strong>如果待排序对象arr[i]过小，</strong>arr[j-1]向右移动来为将来的arr[i]插入提供空位。不必担心arr[i]本身会因为移动而被替换，因为已经用x来存储arr[i]。</p>
+<p><strong>如果待排序对象arr[i]过大</strong>，直接跳出循环，找到插入位置了，就把arr[i]=x放在arr[j]这个位置插入。内层循环结束，进入下一轮arr[i+1]的插入。</p>
+<h2 id="1-6-查找算法"><a href="#1-6-查找算法" class="headerlink" title="1.6 查找算法"></a>1.6 查找算法</h2><h3 id="二分查找法"><a href="#二分查找法" class="headerlink" title="二分查找法"></a>二分查找法</h3><p>对有序数组进行快速查找时，使用二分法可以大大提高效率，每次比较都可以使搜索范围缩小一半。</p>
+<p>案例代码使用递归函数，输入：查找序列arr, 序列待查找对象x。l与r是函数内部的形参</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">binarySearch</span>(<span class="params">arr,l,r,x</span>):</span><br><span class="line">    <span class="keyword">if</span> r&gt;=l:</span><br><span class="line">        mid=<span class="built_in">int</span>(l+(r-l)/<span class="number">2</span>)</span><br><span class="line">        <span class="keyword">if</span> arr[mid]==x:</span><br><span class="line">            <span class="keyword">return</span> mid</span><br><span class="line">        <span class="keyword">elif</span> arr[mid]&gt;x:</span><br><span class="line">            <span class="keyword">return</span> binarySearch(arr,<span class="number">1</span>,mid-<span class="number">1</span>,x)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> binarySearch(arr,mid+<span class="number">1</span>,r,x)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="1-7-累加算法"><a href="#1-7-累加算法" class="headerlink" title="1.7 累加算法"></a>1.7 累加算法</h2><p>这个就不写了，简单的循环即可。主要任务是找数列递推公式，比如下面这个斐波那契数列:</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">nterms=<span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;你需要几项斐波那契数列？&quot;</span>))</span><br><span class="line">n1，n2=<span class="number">0</span>，<span class="number">1</span></span><br><span class="line">count=<span class="number">2</span></span><br><span class="line"><span class="keyword">if</span> nterms&lt;=<span class="number">0</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;输入不合法，请输入一个正数&quot;</span>)</span><br><span class="line"><span class="keyword">elif</span> nterms==<span class="number">1</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;斐波那契数列：&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(n1)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;斐波那契数列：&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(n1,<span class="string">&quot;,&quot;</span>,n2,end=<span class="string">&#x27; &#x27;</span>)</span><br><span class="line">    <span class="keyword">while</span> count&lt;nterms:</span><br><span class="line">        nth=n1+n2</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;,&quot;</span>,nth,end=<span class="string">&#x27; &#x27;</span>)</span><br><span class="line">        n1，n2=n2，nth</span><br><span class="line">        count+=<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="2-常用库函数"><a href="#2-常用库函数" class="headerlink" title="2.常用库函数"></a>2.常用库函数</h1><p>库的使用：import 库名称;  使用库函数时为:  库名称.函数名()</p>
+<h2 id="2-1-math库"><a href="#2-1-math库" class="headerlink" title="2.1 math库"></a>2.1 math库</h2><p>math库的函数主要用于数学计算，包含常用的数学常数以及常用数学函数：指对数、三角函数等</p>
+<h3 id="指对数"><a href="#指对数" class="headerlink" title="指对数"></a>指对数</h3><p>math.exp(x):  返回自然对数的x次幂</p>
+<p>math.pow(x,y):  返回x的y次幂</p>
+<p>math.sqrt(x):  返回x的平方根</p>
+<h3 id="三角函数"><a href="#三角函数" class="headerlink" title="三角函数"></a>三角函数</h3><p>sin(x),cos(x),tan(x)：三角函数</p>
+<p>asin(x),acos(x),atan(x)：反三角函数</p>
+<h3 id="数值表示函数"><a href="#数值表示函数" class="headerlink" title="数值表示函数"></a>数值表示函数</h3><p>math.fabs(x):  返回x的绝对值</p>
+<p>math.gcd(a,b):  返回a和b的最大公约数</p>
+<p>math.floor(): 向下取整</p>
+<p>math.ceil():  向上取整</p>
+<h2 id="2-2-random库"><a href="#2-2-random库" class="headerlink" title="2.2 random库"></a>2.2 random库</h2><p>randint(a,b):  返回一个a到b之间的随机整数</p>
+<p>uniform(a,b):  返回一个a到b之间的随机小数</p>
+<p>random():  随机生成一个[0,1.0]之间的小数</p>
+<h2 id="2-3-os库"><a href="#2-3-os库" class="headerlink" title="2.3 os库"></a>2.3 os库</h2><p>os.getcwd()： 获取当前工作目录，默认为程序所在目录</p>
+<p>os.chdir(’新目录‘):  更改当前工作目录至新目录</p>
+<p>os.listdir():  列出当前工作目录下的文件或文件夹</p>
+<p>os.rmdir(‘某目录’)：删除目录</p>
+<p>os.remove(‘某文件’):  删除文件</p>
+<h2 id="2-4-datetime库"><a href="#2-4-datetime库" class="headerlink" title="2.4 datetime库"></a>2.4 datetime库</h2><p>该库分为三个类：date , time , datetime</p>
+<p>使用案例：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line">newdt=datetime.datetime.now()</span><br><span class="line"><span class="comment">#代表datetime库中datetime类下的now方法，获取日期和时间</span></span><br><span class="line"><span class="built_in">print</span>(datetime.datetime.time(newdt))</span><br><span class="line"><span class="comment">#代表datetime库中datetime类下的time方法，拆出字符串中的时间</span></span><br><span class="line">datetime.timedelta(weeks,days,hours,minutes,seconds)</span><br><span class="line"><span class="comment">#用于计算时间差的函数，该函数会自动计算某段时间前的时间。</span></span><br></pre></td></tr></table></figure>
+
+<p>此外，time库也有一些常用的函数，比如time.sleep()，可以使程序暂停休眠一段时间再继续运行</p>
+<h2 id="2-5-NumPy库"><a href="#2-5-NumPy库" class="headerlink" title="2.5 NumPy库"></a>2.5 NumPy库</h2><h2 id=""><a href="#" class="headerlink" title=""></a><img src="/pic/image-20210626200200930.png"></h2><p>用于科学计算的基础包，可以处理矩阵和数组</p>
+<p><strong>NumPy 的主要对象：</strong></p>
+<p>同构多维数组（元素表）。所有类型都相同，由非负整数元组索引。在NumPy维度中称为<strong>轴</strong>。</p>
+<p>​    例如，3D空间中的点的坐标[1, 2, 1]具有一个轴。该轴有3个元素，所以我们说它的长度为3。在下面所示的例子中，数组有2个轴。第一轴的长度为2，第二轴的长度为3。</p>
+<p>[[ 1, 0, 0],</p>
+<p> [ 0, 1, 2]]</p>
+<p>拥有数组创建、数组打印、数组操作等功能，可用于线性代数计算、矩阵操作等。</p>
+<h2 id="2-6-SciPy-library库"><a href="#2-6-SciPy-library库" class="headerlink" title="2.6 SciPy library库"></a>2.6 SciPy library库</h2><h2 id="-1"><a href="#-1" class="headerlink" title=""></a><img src="/pic/image-20210626200614717.png"></h2><p>基于NumPy的拓展模块，增加了数学和工程上的运算，比如拟合、<strong>积分</strong>、常微分方程求解、插值等。</p>
+<p>简单的定积分：SciPy的子模块integrate中的quad()函数</p>
+<p>quad(f,a,b)：对函数f从a积分到b</p>
+<p>dblquad(f,a,b,g,h): 计算二重积分，二元函数f，x从a积分到b，y从g(x)积分到h(x)</p>
+<h2 id="2-7-Matplotlib-库"><a href="#2-7-Matplotlib-库" class="headerlink" title="2.7 Matplotlib 库"></a>2.7 Matplotlib 库</h2><h2 id="-2"><a href="#-2" class="headerlink" title=""></a><img src="/pic/image-20210626201253294.png"></h2><p>主要用于绘图，可以简单高效地将数据图形化，可视化。</p>
+<p>最常用plot()命令</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#pyplot生成可视化效果：</span></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">plt.plot([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>])</span><br><span class="line">plt.ylabel(<span class="string">&#x27;some numbers&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p><img src="/pic/image-20210626201558056.png"></p>
+<p>可以设置绘图的各种参数，如线形、颜色、坐标轴等。</p>
+<p>除此之外，还可以绘制各种统计图、三维曲线、曲面等。</p>
+<h2 id="2-8-Pandas库"><a href="#2-8-Pandas库" class="headerlink" title="2.8 Pandas库"></a>2.8 Pandas库</h2><h2 id="-3"><a href="#-3" class="headerlink" title=""></a><img src="/pic/image-20210626202023168.png"></h2><p>主要用于数据挖掘和数据分析，大数据处理统计。</p>
+<p>其主要的两大模块为：Series和DataFrame</p>
+<p>Series是类似于<strong>一维数组</strong>的对象，是由一组数据以及一组一直相关的数据标签（索引）组成的。索引是默认从0开始的整数序列，Series是一种<strong>有序的变长字典</strong>。</p>
+<p>DataFrame是一个<strong>表格型的数据结构</strong>，包含一组有序序列，并且同时拥有行索引和列索引。</p>
+]]></content>
+      <categories>
+        <category>计算机科学</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+        <tag>编程</tag>
+        <tag>学习笔记</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Python数据结构</title>
     <url>/2023/04/27/Python%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</url>
     <content><![CDATA[<h1 id="python-序列"><a href="#python-序列" class="headerlink" title="python 序列"></a>python 序列</h1><p>包括字符串，列表，元组，range对象，字典，集合等数据类型</p>
@@ -315,527 +432,6 @@
       </tags>
   </entry>
   <entry>
-    <title>普通地质学学习笔记</title>
-    <url>/2023/04/27/%E6%99%AE%E9%80%9A%E5%9C%B0%E8%B4%A8%E5%AD%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<h1 id="普通地质学学习笔记"><a href="#普通地质学学习笔记" class="headerlink" title="普通地质学学习笔记"></a>普通地质学学习笔记</h1><h2 id="一-绪论"><a href="#一-绪论" class="headerlink" title="一.绪论"></a>一.绪论</h2><h3 id="1-1研究内容与方法"><a href="#1-1研究内容与方法" class="headerlink" title="1-1研究内容与方法"></a>1-1研究内容与方法</h3><h4 id="地球的物质："><a href="#地球的物质：" class="headerlink" title="地球的物质："></a>地球的物质：</h4><p>元素-矿物-岩石-地壳</p>
-<p>五大类岩石</p>
-<p>三大类岩石</p>
-<h4 id="地球的结构："><a href="#地球的结构：" class="headerlink" title="地球的结构："></a>地球的结构：</h4><p>固体地球（地壳、地幔、地核）、大气圈、水圈、生物圈</p>
-<h4 id="地球的构造："><a href="#地球的构造：" class="headerlink" title="地球的构造："></a>地球的构造：</h4><p>层圈分布、运动变化、动力</p>
-<h4 id="地质事件："><a href="#地质事件：" class="headerlink" title="地质事件："></a>地质事件：</h4><p>构造–岩浆事件</p>
-<h3 id="1-2我国地学研究的地域优势"><a href="#1-2我国地学研究的地域优势" class="headerlink" title="1-2我国地学研究的地域优势"></a>1-2我国地学研究的地域优势</h3><p><strong>青藏高原、黄土高原、秦岭大别山高压-超高压变质带、云南澄江及辽西热河动物群、陆相生油盆地、滇黔桂喀斯特地貌、华南花岗岩</strong></p>
-<h2 id="二-矿物"><a href="#二-矿物" class="headerlink" title="二.矿物"></a>二.矿物</h2><h3 id="2-1绪论"><a href="#2-1绪论" class="headerlink" title="2-1绪论"></a>2-1绪论</h3><p>克拉克值（ppm）：地壳元素丰度（单位：g/t或百万分之一）</p>
-<h3 id="2-2矿物的概念"><a href="#2-2矿物的概念" class="headerlink" title="2-2矿物的概念"></a>2-2矿物的概念</h3><p><strong>晶体：</strong></p>
-<p>其内部的原子或离子在三维空间呈周期性平移重复排列的固体</p>
-<p><strong>矿物：</strong></p>
-<p>****<strong>由地质作用形成的</strong>、在正常情况下呈结晶质的元素或无机化合物</p>
-<p><strong>煤是有机化合物，不是矿物；冰是固体结晶，是矿物</strong></p>
-<p><strong>准矿物:</strong></p>
-<p>在产出状态、成分和化学组成等方面均与矿物有相同的特征，但不具有标准结晶的均匀固体。<strong>如蛋白石、玛瑙等</strong></p>
-<h3 id="2-3矿物的基本特征（6）"><a href="#2-3矿物的基本特征（6）" class="headerlink" title="2-3矿物的基本特征（6）"></a>2-3矿物的基本特征（6）</h3><p><strong>1.最基本特征：地质作用、有序结构、无机、固体</strong></p>
-<p><strong>2.自然界的绝大多数矿物都是晶体（准晶体很少）</strong></p>
-<p>肉眼常见矿物：</p>
-<p>石英、长石、云母（花岗岩）</p>
-<p>方解石（石灰岩）</p>
-<p>橄榄石、辉石、角闪石（岩浆岩）</p>
-<p>黄铁矿、赤铁矿、磁铁矿</p>
-<p>注意：纯黄铁矿中含有46.67%的铁和53.33%的硫。一般将黄铁矿作为生产硫磺和硫酸的原料，<strong>而不是用作提炼铁的原料</strong>，因为提炼铁有更好的铁矿石。</p>
-<p><strong>3.矿物的化学成分基本稳定，但多含有杂质</strong></p>
-<p><strong>4.矿物具有同质多象的特征</strong></p>
-<p><strong>5.常见矿物可以分为三大类</strong></p>
-<p>自然元素矿物</p>
-<p>简单分子化合物（氧化物、氢氧化物、硫化物、卤化物）</p>
-<p>含氧盐矿物（硅酸盐矿物、碳酸盐矿物、硫酸盐矿物）</p>
-<p><strong>6.符合特定条件</strong>（色彩鲜艳、折光率高、透明度高、硬度高、化学性质稳定）的矿物，可成为宝玉石</p>
-<h3 id="2-4-矿物的鉴定特征"><a href="#2-4-矿物的鉴定特征" class="headerlink" title="2-4 矿物的鉴定特征"></a>2-4 矿物的鉴定特征</h3><p><strong>看、掂、刻</strong></p>
-<h4 id="2-4-0外形："><a href="#2-4-0外形：" class="headerlink" title="2-4-0外形："></a>2-4-0外形：</h4><p>单晶体（一维方向伸展：针状；二维方向伸展：片状、板状；三维方向伸展：粒状）</p>
-<p>集合体（一维：纤维状；二维：鳞片状；三维的：粒状）</p>
-<p>特殊形态集合体：放射状；晶簇状；鲕（er）状（如下图）豆状；钟乳状；葡萄状；结核状</p>
-<img src="https://bkimg.cdn.bcebos.com/pic/caef76094b36acafdc2f276c7cd98d1000e99c57?x-bce-process=image/watermark,image_d2F0ZXIvYmFpa2UxMTY=,g_7,xp_5,yp_5/format,f_auto" alt="img" style="zoom:50%;" />
-
-<h4 id="2-4-1光学特征："><a href="#2-4-1光学特征：" class="headerlink" title="2-4-1光学特征："></a><strong>2-4-1光学特征：</strong></h4><p><strong>透明度：</strong>光线是否能透过矿物0.03mm的薄片</p>
-<p><strong>光泽：</strong>矿物的反光能力（金属光泽/非金属光泽）</p>
-<p>非金属光泽：玻璃光泽（长石）、油脂光泽（石英断口）、丝绢光泽（云母）、土状光泽（高岭土）</p>
-<p><strong>颜色：</strong></p>
-<p>自色：化学成分及结构决定的矿物本色</p>
-<p>他色：混入微量元素、杂质后的矿物颜色</p>
-<p>假色：表面氧化或吸附他物的颜色</p>
-<p>条痕色：矿物粉末的颜色。用瓷板划之得到条痕色（硬度要低于瓷板5~6，透明矿物多硬度高于瓷板）</p>
-<p><strong>双折射：</strong>不同方向折射率不一样产生光程差，呈现双影（如冰洲石，无色透明的方解石变种）</p>
-<img src="https://bkimg.cdn.bcebos.com/pic/2f738bd4b31c8701255209ab267f9e2f0608ff93?x-bce-process=image/watermark,image_d2F0ZXIvYmFpa2UxMTY=,g_7,xp_5,yp_5/format,f_auto" alt="img" style="zoom: 50%;" />
-
-<p><strong>荧光：</strong>切断光源后发光消失（如白钨矿和萤石紫外线下发荧光，金刚石在X射线下发蓝色荧光）</p>
-<p><strong>磷光：</strong>切断光源后仍然发光片刻</p>
-<h4 id="2-4-2力学性质："><a href="#2-4-2力学性质：" class="headerlink" title="2-4-2力学性质："></a><strong>2-4-2力学性质：</strong></h4><p><strong>硬度：</strong>莫氏硬度十级</p>
-<p>1级：滑石                                           6级：长石</p>
-<p>2级：石膏                                           7级：石英</p>
-<p>3级：方解石                                       8级：黄晶</p>
-<p>4级：萤石                                           9级：刚玉</p>
-<p>5级：磷灰石                                       10级：金刚石</p>
-<p>鉴定工具：指甲（2.5），小刀（5~5.5），玻璃（6）</p>
-<p><strong>解理：</strong>外力打击下矿物沿质点结合力最弱网面的定向开裂构造。</p>
-<p>极完全解理、完全解理、无解理<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210806172912573.png" alt="image-20210806172912573"></p>
-<p>辉石解理夹角：87°（约直角）、角闪石解理夹角：56°（约60°）</p>
-<p><strong>断口：</strong>外力下矿物不规则裂开，解理不发育</p>
-<p>石英有断口，长石会定向开裂</p>
-<p><strong>弹性：</strong>受力后恢复原状（如云母）</p>
-<p><strong>挠性（范性）：</strong>受力不能恢复原状（如蛭石）</p>
-<p><strong>延展性：</strong>可用外力任意改变性质形状（如黄金）</p>
-<h3 id="2-5矿物的用途"><a href="#2-5矿物的用途" class="headerlink" title="2-5矿物的用途"></a>2-5矿物的用途</h3><h4 id="2-5-1环境气候示踪矿物"><a href="#2-5-1环境气候示踪矿物" class="headerlink" title="2-5-1环境气候示踪矿物"></a>2-5-1环境气候示踪矿物</h4><p>干旱炎热：石膏、石盐</p>
-<p>海洋环境：方解石</p>
-<p>板块边界俯冲带：蓝闪石、硬玉（高压低温）</p>
-<p>大陆地壳深俯冲：柯石英、金刚石（超高压）</p>
-<h4 id="2-5-2常见宝玉石："><a href="#2-5-2常见宝玉石：" class="headerlink" title="2-5-2常见宝玉石："></a>2-5-2常见宝玉石：</h4><p>硬玉（翡翠）：一种呈隐晶致密的纤维状辉石微晶集合体（成分：单斜辉石中的碱性辉石）（硬度6.5~7）</p>
-<p>软玉（缅玉、和田玉、昆仑玉）：一种呈纤维状的阳起石或透闪石微晶集合体。（硬度5.5~6）</p>
-<h2 id="三-岩浆作用和火成岩"><a href="#三-岩浆作用和火成岩" class="headerlink" title="三.岩浆作用和火成岩"></a>三.岩浆作用和火成岩</h2><h3 id="3-1喷出作用与喷出岩"><a href="#3-1喷出作用与喷出岩" class="headerlink" title="3-1喷出作用与喷出岩"></a>3-1喷出作用与喷出岩</h3><h4 id="3-1-1岩浆的定义："><a href="#3-1-1岩浆的定义：" class="headerlink" title="3-1-1岩浆的定义："></a>3-1-1岩浆的定义：</h4><p>形成于地表下50km~200km，具有较大粘性的高温熔融硅酸盐物质</p>
-<p>形成条件：650~1400℃，压力1.0GPa</p>
-<h5 id="岩浆作用："><a href="#岩浆作用：" class="headerlink" title="岩浆作用："></a>岩浆作用：</h5><p>岩浆发育、运动、固结成火成岩的作用</p>
-<p>火山作用：岩浆喷出地表的过程</p>
-<p>侵入作用：岩浆在地下深处冷凝结晶固结的过程</p>
-<h4 id="3-1-2火成岩的定义："><a href="#3-1-2火成岩的定义：" class="headerlink" title="3-1-2火成岩的定义："></a>3-1-2火成岩的定义：</h4><p>火山岩：岩浆喷出地表、冷凝固结形成的岩石</p>
-<p>1）火山碎屑岩：喷至空中炸碎的岩浆与围岩碎块堆积而成</p>
-<p>2）熔岩：岩浆在地表溢流冷凝成岩</p>
-<p>侵入岩：地下深处冷凝结晶形成的岩浆岩</p>
-<h5 id="火山喷发物的构成："><a href="#火山喷发物的构成：" class="headerlink" title="火山喷发物的构成："></a>火山喷发物的构成：</h5><p>岩浆：</p>
-<p>固体：火山通道周围的岩石落入岩浆后，喷发至空中</p>
-<p>凝灰岩（火山灰）：颗粒&lt;2mm</p>
-<p>火山角砾岩:2~50mm</p>
-<p>火山集块岩：&gt;50mm</p>
-<p>火山弹：呈纺锤状</p>
-<p>浮岩：气体快速逃逸，有大量孔洞冷凝呈火山渣</p>
-<h5 id="喷发条件："><a href="#喷发条件：" class="headerlink" title="喷发条件："></a>喷发条件：</h5><p>地壳运动</p>
-<p>岩浆粘度：</p>
-<p>硅氧四面体（SiO2）含量高，粘度大，难流动，呈酸性，呈花岗质，多喷发相（高粘度到达地面后会猛烈喷发）。</p>
-<p>硅氧四面体（SiO2）含量低，粘度小，易流动，呈基性，呈玄武质量，多为溢流相（容易顺着地面流淌，高原常为玄武岩组成）</p>
-<p><strong>柱状节理：</strong></p>
-<p>基性熔岩粘度小，会快速冷凝，形成与流动面垂直的六边形柱体<img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fs9.sinaimg.cn%2Fmw690%2F001MdhvUgy6Rw5eAYZy78%26690&refer=http%3A%2F%2Fs9.sinaimg.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1631071019&t=0a107e7e6c416d2e34f8e5c7a660b635" alt="img"></p>
-<p>岩浆冷凝过程中还会产生<strong>绳状构造、麻花构造</strong>。这些构造常常是由于<strong>粘度小</strong>的基性熔岩不同部位冷凝、流动速度不同产生应力差导致的</p>
-<p><img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fphotocdn.sohu.com%2F20130127%2FImg364738257.jpg&refer=http%3A%2F%2Fphotocdn.sohu.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1631071345&t=159c3b938a49642aadaeedb020930b38" alt="img"></p>
-<p><strong>火山通道</strong>：岩浆流出的地方</p>
-<p>岩浆在通道近地面冷凝产生火山颈，形成<strong>次火山岩</strong>（介于喷出岩和侵入岩之间）</p>
-<p>若高压喷出的是地下的泥砂和水，则形成<strong>泥火山</strong></p>
-<p>多次原位火山喷发则会形成<strong>复式火山锥</strong>（如意大利维苏威火山），多次喷发之间有间歇期，间歇期中会发生沉积岩堆积，产生沉积岩夹层。 </p>
-<h5 id="两种喷发方式："><a href="#两种喷发方式：" class="headerlink" title="两种喷发方式："></a>两种喷发方式：</h5><p><strong>裂隙式喷发：</strong>岩浆沿断裂带的喷溢，固体喷发物少（如大洋洋中脊）</p>
-<p><strong>中心式喷发：</strong>形成平缓的盾形火山堆，近火山口固体喷发物多，形成火山碎屑岩；远火山口能量小，溢流变为熔岩。</p>
-<h4 id="3-1-3火成岩的分类（4）"><a href="#3-1-3火成岩的分类（4）" class="headerlink" title="3-1-3火成岩的分类（4）"></a>3-1-3火成岩的分类（4）</h4><p>*<em>3-1-3-1超基性岩（超镁铁质）</em>***：二氧化硅含量&lt;45%</p>
-<p>科马提岩：具有鬣刺结构，快速冷凝的长条刺状橄榄石/辉石骸晶</p>
-<img src="https://bkimg.cdn.bcebos.com/pic/aa64034f78f0f7366b8752940255b319ebc4132d?x-bce-process=image/watermark,image_d2F0ZXIvYmFpa2UxMTY=,g_7,xp_5,yp_5/format,f_auto" alt="img" style="zoom: 50%;" />
-
-<p><strong>3-1-3-2基性岩（镁铁质）：</strong>二氧化硅含量45%~52%</p>
-<p>玄武岩：黑色，致密，密度大，有气孔构造发育；陆地喷发有柱状节理，海底喷发有枕状节理（顶凸底平）。<img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20180115%2F4887565a673e4498bd077e408da46128.jpeg&refer=http%3A%2F%2F5b0988e595225.cdn.sohucs.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1631084928&t=452999af90727099d27ea1e4be794304" alt="img"></p>
-<p><strong>3-1-3-3中性岩（如安山岩）</strong>：二氧化硅含量52%~65%</p>
-<p>安山岩：黏性大，爆发特点，有多气孔，气孔充填矿物则为杏仁体</p>
-<p><img src="https://ss2.baidu.com/-vo3dSag_xI4khGko9WTAnF6hhy/baike/s%3D220/sign=80a93e5f71f082022992963d7bfafb8a/e824b899a9014c0843e4f2d9087b02087af4f4eb.jpg" alt="img"></p>
-<p><strong>3-1-3-4酸性岩（如花岗岩）：</strong>二氧化硅含量&gt;65%</p>
-<p>流纹岩：黏性很大，浅（红）色，有流纹构造，有很多石英晶体（二氧化硅含量高）伴生鸡血石等矿物</p>
-<img src="https://gss0.baidu.com/70cFfyinKgQFm2e88IuM_a/forum/w=580/sign=8e989f18a61ea8d38a22740ca70b30cf/3e8e5d82b2b7d0a2b1962c3ecbef76094a369a74.jpg" alt="img" style="zoom:50%;" />
-
-<h4 id="3-1-4火山喷发的阶段性："><a href="#3-1-4火山喷发的阶段性：" class="headerlink" title="3-1-4火山喷发的阶段性："></a>3-1-4火山喷发的阶段性：</h4><p>喷发演化规律：基性–中性–酸性</p>
-<p>喷发后期坍塌形成破火山口，积水形成火山口湖（世界最大：贝加尔湖）</p>
-<h4 id="3-1-5世界火山岩分布带："><a href="#3-1-5世界火山岩分布带：" class="headerlink" title="3-1-5世界火山岩分布带："></a>3-1-5世界火山岩分布带：</h4><p>环太平洋火山带：主要是中酸性火山岩，多为安山岩</p>
-<p>洋脊火山带：太平洋、大西洋和印度洋的洋脊</p>
-<p>地中海-印尼火山带、红海沿岸和东非火山带</p>
-<p><strong>安山岩线：</strong></p>
-<p>洋中脊以基性玄武岩为主，靠近大陆的环太平洋岛屿和大陆边缘多喷发中性安山岩，两者交界线称为安山岩线</p>
-<p><img src="https://bkimg.cdn.bcebos.com/pic/a5c27d1ed21b0ef4c721401fd6c451da80cb3ea2?x-bce-process=image/watermark,image_d2F0ZXIvYmFpa2U5Mg==,g_7,xp_5,yp_5/format,f_auto" alt="img"></p>
-<h3 id="3-2侵入作用与侵入岩"><a href="#3-2侵入作用与侵入岩" class="headerlink" title="3-2侵入作用与侵入岩"></a>3-2侵入作用与侵入岩</h3><h4 id="3-2-1侵入岩分类"><a href="#3-2-1侵入岩分类" class="headerlink" title="3-2-1侵入岩分类"></a>3-2-1侵入岩分类</h4><p>深成侵入岩（<strong>深成岩</strong>）：&gt;10km深处形成</p>
-<p>浅成侵入岩（<strong>浅成岩</strong>）：&lt;3km深处形成</p>
-<p>超浅成侵入岩（<strong>次火山岩</strong>）：&lt;1.5km深处形成</p>
-<p>围岩：被岩浆侵入的岩石</p>
-<p><img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210810124423956.png" alt="image-20210810124423956"></p>
-<h4 id="3-2-2火成岩多样性原因："><a href="#3-2-2火成岩多样性原因：" class="headerlink" title="3-2-2火成岩多样性原因："></a>3-2-2火成岩多样性原因：</h4><h5 id="3-2-2-1：同化与混染作用"><a href="#3-2-2-1：同化与混染作用" class="headerlink" title="3-2-2-1：同化与混染作用"></a><strong>3-2-2-1：同化与混染作用</strong></h5><p>同化作用：岩浆&gt;&gt;围岩，围岩被岩浆吞噬同化</p>
-<p>混染作用：岩浆体积不够大，岩浆成分被围岩严重改变</p>
-<p>捕掳体：岩浆上升时通道壁崩落的围岩碎块，多出现在岩体边部</p>
-<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210810131930703.png" alt="image-20210810131930703" style="zoom: 25%;" />
-
-<p>顶垂体：岩浆上升使围岩整体上升，围岩体积大，岩浆无法消化围岩。被整体抬高的围岩就是顶垂体。</p>
-<h5 id="3-2-2-2岩浆混合作用"><a href="#3-2-2-2岩浆混合作用" class="headerlink" title="3-2-2-2岩浆混合作用"></a><strong>3-2-2-2岩浆混合作用</strong></h5><p>来自深部软流圈的玄武岩浆（基性）向上注入到地壳的花岗岩浆（酸性），形成混合岩浆岩</p>
-<h5 id="3-2-2-3拆沉作用"><a href="#3-2-2-3拆沉作用" class="headerlink" title="3-2-2-3拆沉作用"></a><strong>3-2-2-3拆沉作用</strong></h5><p>岩石圈地幔温度低于软流圈，岩石圈底部物质脱水导致密度增大。密度大于软流圈密度时会重力失衡，岩石圈下部断裂掉入软流圈。结果导致软流圈体积变大，岩浆上涌，界面抬升，固态岩石圈发生部分熔融，形成基性岩浆。</p>
-<h5 id="3-2-2-4结晶分异作用"><a href="#3-2-2-4结晶分异作用" class="headerlink" title="3-2-2-4结晶分异作用"></a><strong>3-2-2-4结晶分异作用</strong></h5><p>岩浆在冷凝过程中，按一定规律依次结晶出不同矿物</p>
-<p>鲍温反应系列：熔点高，密度大的矿物先结晶，形成垂直分带。</p>
-<p>1）连续反应系列：硅铝含量高（浅色矿物）</p>
-<p>例如六种长石从钙含量高到钠含量高，互相穿插，连续变化</p>
-<p>2）不连续反应系列：铁镁含量高（暗色矿物）</p>
-<p>化学成分和内部结构变化显著</p>
-<p>橄榄石–辉石–角闪石–黑云母（低温）</p>
-<p><img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210810130945049.png" alt="image-20210810130945049"></p>
-<h4 id="3-2-3伟晶岩"><a href="#3-2-3伟晶岩" class="headerlink" title="3-2-3伟晶岩"></a>3-2-3伟晶岩</h4><p>残余岩浆缓慢结晶形成的粗大晶体</p>
-<p>主要成分为长石、石英、白云母，结晶温度500~800℃，结晶缓慢</p>
-<p>特电气：富含成矿物质，常在此阶段形成</p>
-<h4 id="3-2-4侵入岩的产状"><a href="#3-2-4侵入岩的产状" class="headerlink" title="3-2-4侵入岩的产状"></a>3-2-4侵入岩的产状</h4><p>体积从大到小：</p>
-<p>岩株、岩基、岩脉（岩墙（垂直）、岩床（水平））</p>
-<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210810131813187.png" alt="image-20210810131813187" style="zoom:50%;" />
-
-<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210810132131777.png" alt="image-20210810132131777" style="zoom: 33%;" />
-
-<h3 id="3-3火成岩的结构与构造"><a href="#3-3火成岩的结构与构造" class="headerlink" title="3-3火成岩的结构与构造"></a>3-3火成岩的结构与构造</h3><h4 id="3-3-1火成岩的结构"><a href="#3-3-1火成岩的结构" class="headerlink" title="3-3-1火成岩的结构"></a>3-3-1火成岩的结构</h4><p>结构：指矿物的结晶程度、晶粒大小、晶体形态和晶粒间的相互关系。关键的是可以<strong>反映出岩石形成的条件</strong></p>
-<h5 id="按结晶程度："><a href="#按结晶程度：" class="headerlink" title="按结晶程度："></a><strong>按结晶程度：</strong></h5><p>全晶质：花岗岩、侵入岩、大颗粒喷出岩（斑晶）</p>
-<p>隐晶质-玻璃质：黑曜岩（未发生结晶的快速冷凝喷出岩）</p>
-<p>半晶质：次火山岩，介于两者之间</p>
-<h5 id="按晶粒大小："><a href="#按晶粒大小：" class="headerlink" title="按晶粒大小："></a><strong>按晶粒大小：</strong></h5><p>粗粒、中粒、细粒、微粒</p>
-<h5 id="按晶体完整程度："><a href="#按晶体完整程度：" class="headerlink" title="按晶体完整程度："></a><strong>按晶体完整程度：</strong></h5><p>自形：缓慢结晶，晶形规则</p>
-<p>他形：速冷，晶形不规则</p>
-<p>半自形：介于两者之间</p>
-<h5 id="按晶体的相对大小："><a href="#按晶体的相对大小：" class="headerlink" title="按晶体的相对大小："></a><strong>按晶体的相对大小：</strong></h5><p><strong>斑状结构：</strong>喷出岩的典型结构，含有粗大的晶体（斑晶，早期在深部形成）和斑晶周围细小的隐晶质颗粒（基质，岩浆到地面后快速冷凝形成）</p>
-<p><strong>似斑状结构：</strong>侵入岩的基质也是结晶态，是全晶质，成分与斑晶相同，但是结晶环境温度，颗粒小（图为花岗岩）</p>
-<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210810160136716.png" alt="image-20210810160136716" style="zoom:50%;" />
-
-<h4 id="3-3-2火成岩的构造"><a href="#3-3-2火成岩的构造" class="headerlink" title="3-3-2火成岩的构造"></a>3-3-2火成岩的构造</h4><p>构造：反应矿物集合体的形态、大小、空间分布。关键的是可以<strong>反映出岩石形成的环境</strong></p>
-<h5 id="枕状构造："><a href="#枕状构造：" class="headerlink" title="枕状构造："></a><strong>枕状构造：</strong></h5><p>水下喷发，一边滚动一边快速冷却收缩，说明是<strong>水下喷发环境</strong>。其特点是上凸底平，外壳是玻璃质，而内部是显晶质，有放射状或同心圆状的龟裂缝。</p>
-<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210810155943686.png" alt="image-20210810155943686" style="zoom:50%;" />
-
-<h5 id="气孔构造、杏仁状构造："><a href="#气孔构造、杏仁状构造：" class="headerlink" title="气孔构造、杏仁状构造："></a>气孔构造、杏仁状构造：</h5><p>陆相喷发环境</p>
-<h5 id="流纹构造："><a href="#流纹构造：" class="headerlink" title="流纹构造："></a>流纹构造：</h5><p>流纹岩中有不同的矿物成分、颜色、拉长的气孔成线状排列（长石或石英的碎斑晶+浆屑）</p>
-<img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fwww.china-shj.org.cn%2Fstorage%2Fthumbnails%2F_signatureaa%2F2018%2F05%2F14%2F1526260976KzbtVR.jpg&refer=http%3A%2F%2Fwww.china-shj.org.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1631174601&t=e16e511e5b0b99f6e0565075aa2210cb" alt="img" style="zoom: 33%;" />
-
-<h5 id="晶洞构造："><a href="#晶洞构造：" class="headerlink" title="晶洞构造："></a>晶洞构造：</h5><p>岩浆冷凝收缩形成空洞，常生长有晶簇，反映了<strong>拉张环境</strong></p>
-<h2 id="四-外动力作用与沉积岩"><a href="#四-外动力作用与沉积岩" class="headerlink" title="四.外动力作用与沉积岩"></a>四.外动力作用与沉积岩</h2><h3 id="4-1内动力作用与外动力作用"><a href="#4-1内动力作用与外动力作用" class="headerlink" title="4-1内动力作用与外动力作用"></a>4-1内动力作用与外动力作用</h3><p>内动力源：岩浆、层圈摩擦与化学作用、放射能</p>
-<p>内动力产物：火山岩、侵入岩；地震、褶皱、断裂、节理</p>
-<p><strong>外动力作用：</strong></p>
-<p>外动力源：太阳辐射能、地球转动能、日月引力能、重力势能等引起的力（科里奥利力、水流冲击、风浪、潮汐）</p>
-<p>作用场所：地球表面（大气圈、水圈、生物圈、地壳表面）</p>
-<p><strong>类型与过程：</strong></p>
-<p>风化作用（机械破碎、化学分解作用）–剥蚀作用–搬运作用–沉积作用–固结成岩（压固、胶结、重结晶、新矿物生长）</p>
-<p>注意：重结晶作用不一定在变质作用中，常温也能发生。</p>
-<p>产物：四类沉积岩及矿产（煤、油气、铁、砂矿）</p>
-<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210810164053201.png" alt="image-20210810164053201" style="zoom:50%;" />
-
-<p>图为水循环。</p>
-<p><strong>科里奥利效应：</strong></p>
-<p>由于地球自转，地表运动的流体受到偏离运动方向的力，即为科氏力。纬度和线速度不同，受到的科氏力作用方向也不同：南半球水体会向左偏，而北半球水体会向右偏。</p>
-<p><strong>水圈的作用：</strong>破坏岩石（机械破坏、化学破坏）、搬运岩石、沉积成岩。</p>
-<p>岩石圈：地壳+上地幔顶部的刚体部分，厚度约60-150km，是地学研究的主体。</p>
-<p><strong>六大沉积环境：</strong></p>
-<p>河流、冰川、地下水体、海洋、湖泊、沙漠</p>
-<h3 id="4-2沉积岩的特征"><a href="#4-2沉积岩的特征" class="headerlink" title="4-2沉积岩的特征"></a>4-2沉积岩的特征</h3><p><strong>物质来源：</strong>母岩风化物、生物骨骸、火山物质（火山碎屑岩）、宇宙物质（陨石等）</p>
-<p><strong>重要特征：</strong>有层理结构、含有化石</p>
-<p><strong>搬运作用：</strong></p>
-<p>1）底运：大颗粒砂砾岩跳跃式搬运，沿水流底部搬运。</p>
-<p>当&gt;2mm时成为砾岩；2~0.1mm称为砂岩</p>
-<p>2）悬运：0.01~0.1mm称为粉砂岩（黄土）</p>
-<p>3）溶运（离子态）：&lt;0.01mm，成为粘土岩、灰岩</p>
-<p><strong>固结作用：</strong>压固、胶结、重结晶、新矿物生长</p>
-<p><img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210810170136165.png" alt="image-20210810170136165"></p>
-<h4 id="4-2-1沉积岩特有矿物："><a href="#4-2-1沉积岩特有矿物：" class="headerlink" title="4-2-1沉积岩特有矿物："></a>4-2-1沉积岩特有矿物：</h4><p><strong>石膏、石盐、白云石、高岭石、蒙脱石</strong></p>
-<p>岩浆岩特有矿物：橄榄石、辉石（二氧化硅含量很低，易于化学反应，沉积岩中不存在）</p>
-<p>变质岩特有矿物：红柱石、堇青石、矽线石、十字石、蓝闪石</p>
-<p>三类岩石共有矿物：石英、长石、云母</p>
-<h4 id="4-2-2沉积岩的结构"><a href="#4-2-2沉积岩的结构" class="headerlink" title="4-2-2沉积岩的结构"></a>4-2-2沉积岩的结构</h4><p>大小区别：砾–砂–粉砂–泥</p>
-<p>（观察级别：肉眼–放大镜–显微镜–电子显微镜）</p>
-<p><strong>碎屑结构：</strong>岩石中的颗粒是机械沉积的碎屑物</p>
-<p>碎屑岩：砾岩、砂岩、粉砂岩、泥岩（页岩）</p>
-<h5 id="粗碎屑结构："><a href="#粗碎屑结构：" class="headerlink" title="粗碎屑结构："></a><strong>粗碎屑结构：</strong></h5><p>砾岩：<strong>粗碎屑</strong>+<strong>填隙物</strong>（基质，比碎屑小1-2个粒级的砂、细砂、粉砂等）+<strong>化学胶结物</strong>（泥、硅酸盐等）</p>
-<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210810172636224.png" alt="image-20210810172636224" style="zoom:50%;" />
-
-<h5 id="非碎屑结构："><a href="#非碎屑结构：" class="headerlink" title="非碎屑结构："></a><strong>非碎屑结构：</strong></h5><p>岩石的颗粒均是<strong>化学沉积作用形成</strong>，</p>
-<p><strong>颗粒非常小</strong>，碎屑物、填隙物、胶结物<strong>成分相同</strong>。</p>
-<p>是化学岩、生物化学岩所特有的。</p>
-<p>类型有两种：</p>
-<p>晶质结构：全有近等大的沉积晶体组成（方解石、白云石等）</p>
-<p>生物结构：由丰富的生物碎屑组成（生物屑灰岩）</p>
-<h5 id="分选性："><a href="#分选性：" class="headerlink" title="分选性："></a>分选性：</h5><p>碎屑大小的均匀程度，越均匀，分选性越好，说明搬运距离很远</p>
-<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210810173555336.png" alt="image-20210810173555336" style="zoom:50%;" />
-
-<h5 id="圆度："><a href="#圆度：" class="headerlink" title="圆度："></a>圆度：</h5><p>碎屑的圆化程度，越远者搬运距离越远。（ 棱角状–次棱角–次圆–圆）</p>
-<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210810173716396.png" alt="image-20210810173716396" style="zoom:50%;" />
-
-<h4 id="4-2-3沉积岩的构造"><a href="#4-2-3沉积岩的构造" class="headerlink" title="4-2-3沉积岩的构造"></a>4-2-3沉积岩的构造</h4><h5 id="4-2-3-1层理："><a href="#4-2-3-1层理：" class="headerlink" title="4-2-3-1层理："></a>4-2-3-1层理：</h5><p>层理指的是沉积岩的成层性</p>
-<p>红色层理常为氧化性环境；黑色层理常为还原性环境</p>
-<p><strong>平行层理：</strong>反映安静的水体沉积环境<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210810175225557.png" alt="image-20210810175225557"></p>
-<p><strong>交错层理：</strong>反映动荡的水动力环境，近岸或陆地环境</p>
-<p><img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210810175253112.png" alt="image-20210810175253112"></p>
-<p>顶截底切：底部相切，顶部截掉发散状态</p>
-<p><strong>递变层理：</strong>同一层内，碎屑粒级由下而上逐渐变小。说明形成环境的水体运动从强到弱/从弱到强周期变化，形成“韵律层”</p>
-<p><img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210810180323598.png" alt="image-20210810180323598"></p>
-<p><strong>波痕：</strong>波浪弯曲的层面，反映沉积环境动荡，不对称波痕可以确定流向、对称波痕可以确认地层顶底</p>
-<p><img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210810180403716.png" alt="image-20210810180403716"></p>
-<p><strong>泥裂：</strong>层面上多边形，剖面是上大下小的锥形体，反映了水体沉积物暴露出水面，失水变干收缩形成。</p>
-<p><strong>层间缝合线：</strong>岩层中的锯齿状曲线，与层面平行。分布在石灰岩、砂岩中。</p>
-<p>成因：压溶作用，二氧化碳和碳酸钙发生交代</p>
-<p>意义：确定地层产状，代表层面，区分上下</p>
-<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210812120752352.png" alt="image-20210812120752352" style="zoom:50%;" />
-
-<h5 id="4-3-2-2沉积构造："><a href="#4-3-2-2沉积构造：" class="headerlink" title="4-3-2-2沉积构造："></a>4-3-2-2沉积构造：</h5><p><strong>结核构造</strong></p>
-<p>沉积时，一些<strong>不同物质</strong>绕质点滚动沉积形成核状体。结核易于在含煤地层和石灰岩里产生。</p>
-<p>变化结核：结核脱水收缩，形成网状裂痕，称为<strong>“龟背石”</strong></p>
-<img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fq_70%2Cc_zoom%2Cw_640%2Fimages%2F20180327%2Fcf76fae2cbaa484f9f130d1f330ef534.jpeg&refer=http%3A%2F%2F5b0988e595225.cdn.sohucs.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1631333613&t=6dc814a2f7022fb53840db101ef176a2" alt="img" style="zoom:50%;" />
-
-<p><strong>鲕状构造</strong></p>
-<p>矿物以凝胶方式以某种碎屑物为核心沉积而形成的小颗粒（&lt;2mm）鱼籽状球状体，内部具有同心及发射状构造。</p>
-<p>形成环境：易形成于浅水动荡环境的胶体溶液中。</p>
-<p>常见于灰岩及赤铁矿中</p>
-<p><strong>冲刷痕、槽模：</strong></p>
-<p>沉积岩岩层的底面起伏状突起。</p>
-<p>有浅水动力的强烈作，表用一个沉积阶段的结束、新阶段的开始</p>
-<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210812122544325.png" alt="image-20210812122544325" style="zoom:50%;" />
-
-<p><strong>假晶：</strong></p>
-<p>残留的矿物外型，反映干旱环境，盐类逃逸被泥质充填体取代</p>
-<img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fnimg.ws.126.net%2F%3Furl%3Dhttp%3A%2F%2Fspider.ws.126.net%2F75de8abd9ea56396fad72d01d090535d.jpeg%26thumbnail%3D650x2147483647%26quality%3D80%26type%3Djpg&refer=http%3A%2F%2Fnimg.ws.126.net&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1631334182&t=495cc7e36ecc79dc73f6d95374693f1c" alt="img" style="zoom: 50%;" />
-
-<h3 id="4-3常见的沉积岩"><a href="#4-3常见的沉积岩" class="headerlink" title="4-3常见的沉积岩"></a>4-3常见的沉积岩</h3><h4 id="4-3-1碎屑岩"><a href="#4-3-1碎屑岩" class="headerlink" title="4-3-1碎屑岩"></a>4-3-1碎屑岩</h4><p>砾岩、砂岩、粉砂岩（颗粒大小不同）</p>
-<h4 id="4-3-2化学岩"><a href="#4-3-2化学岩" class="headerlink" title="4-3-2化学岩"></a>4-3-2化学岩</h4><p><strong>硅质岩：</strong>以SiO2为主体的沉积岩</p>
-<p>成因：生物骨体堆积或火山作用凝聚</p>
-<p><img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210812133459228.png" alt="image-20210812133459228"></p>
-<p>不同的水晶结晶：</p>
-<p>紫水晶（Fe多）、蔷薇水晶（Fe少）、烟水晶（含Mn）</p>
-<p><img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fgw3.alicdn.com%2Fbao%2Fuploaded%2Fi4%2FT16peLFydcXXXXXXXX_%21%210-item_pic.jpg_600x600.jpg&refer=http%3A%2F%2Fgw3.alicdn.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1631336820&t=51a57bfb18255c7292c0e3e45e22ba7e" alt="img" style="zoom: 33%;" /><img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fq_70%2Cc_zoom%2Cw_640%2Fimages%2F20181029%2F099390ccda174127947a6a84d10579a7.jpeg&refer=http%3A%2F%2F5b0988e595225.cdn.sohucs.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1631336686&t=13512a628b749ac59e968ab99c8edd3c" alt="img" style="zoom: 33%;" /><img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fcdn.duitang.com%2Fuploads%2Fitem%2F201410%2F31%2F20141031223142_yThcP.thumb.700_0.jpeg&refer=http%3A%2F%2Fcdn.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1631336770&t=c46402928fc3e8cbc181d27d8475e43d" alt="img" style="zoom: 25%;" /></p>
-<p>水晶硅质岩：玉髓、玛瑙、蛋白石、碧玉（隐晶）</p>
-<p>若不同颜色的隐晶呈同心圆构造，则为玛瑙</p>
-<p>产自澳洲的蛋白石成为欧泊</p>
-<p><strong>石灰岩：</strong></p>
-<p>由化学作用形成的方解石颗粒集合，胶结物是碳酸钙。</p>
-<p>亮晶：颗粒直径较大，透明的方解石颗粒</p>
-<p>泥晶：颗粒极小肉眼不可辨</p>
-<p>石灰岩常用于炼制水泥、石灰</p>
-<p>石灰岩和岩浆岩的接触处，会形成<strong>矽卡岩</strong>和铁铜矿床</p>
-<p><strong>白云岩：</strong>碳酸镁钙MgCa[CO3]2</p>
-<p>大部分白云岩是由方解石（碳酸钙）在含镁海水中镁离子交换产生的。</p>
-<p>野外露头的白云岩易于水化风化形成黑色刀砍状溶蚀沟</p>
-<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210812134956956.png" alt="image-20210812134956956" style="zoom:50%;" />
-
-<p>鉴别：白云岩和盐酸反应冒泡很微弱，而石灰岩反应剧烈</p>
-<h4 id="4-3-3生物化学岩"><a href="#4-3-3生物化学岩" class="headerlink" title="4-3-3生物化学岩"></a>4-3-3生物化学岩</h4><p>只有硅藻岩（硅藻土）、放射虫岩。分布很少。</p>
-<h4 id="4-3-4粘土岩"><a href="#4-3-4粘土岩" class="headerlink" title="4-3-4粘土岩"></a>4-3-4粘土岩</h4><p>以<strong>高岭土、蒙脱石</strong>为代表</p>
-<p>成分为小于0.01mm的颗粒，具有很多特性：</p>
-<p>可塑性、吸水性（蒙脱石吸水体积膨胀5~20倍）、吸附性、烧结性、耐火性</p>
-<p>当黏土岩固结形成层理，形成<strong>页岩</strong></p>
-<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210812135810816.png" alt="image-20210812135810816" style="zoom:50%;" />
-
-<h2 id="五-变质作用与变质岩"><a href="#五-变质作用与变质岩" class="headerlink" title="五.变质作用与变质岩"></a>五.变质作用与变质岩</h2><h3 id="5-1变质作用"><a href="#5-1变质作用" class="headerlink" title="5-1变质作用"></a>5-1变质作用</h3><h4 id="5-1-1变质作用定义"><a href="#5-1-1变质作用定义" class="headerlink" title="5-1-1变质作用定义"></a>5-1-1变质作用定义</h4><p><strong>变质作用：</strong>由于温度、压力的改变和化学流体的作用，使岩石的矿物成分、化学成分、结构构造<strong>在固态状态下变化</strong>，形成新矿物新岩石的地质作用。</p>
-<p><strong>变质三要素：T、P、流体</strong></p>
-<p><strong>热源：</strong>来自地球内部的地热增温、岩浆热、构造摩擦热、放射热。</p>
-<p><strong>深度：</strong>发生在中地壳层次或下地壳层次，一般至少<strong>大于地下10km</strong>（温度超过300℃达到变质条件）。</p>
-<p>变质岩约占岩石中的四分之一（火成岩三分之二，沉积岩不到十分之一）</p>
-<p>研究变质岩可以了解地壳深处的温度压力、物理化学条件、恢复原岩。变质作用还可以使矿产变富变大、将普通岩石变为宝玉石。</p>
-<p>变质岩的两个大分类：</p>
-<p><strong>正变质岩：</strong>原岩为火成岩的变质岩</p>
-<p><strong>副变质岩：</strong>原岩为沉积岩的变质岩</p>
-<p>陨石撞击产生的变质作用主要是压力导致的，大部分变质岩是温度导致的。</p>
-<h4 id="5-1-2温度"><a href="#5-1-2温度" class="headerlink" title="5-1-2温度"></a>5-1-2温度</h4><p><strong>温度区间：</strong>低于150℃不变质；高于900℃则会熔化。</p>
-<p>在温度的作用下，</p>
-<p>1）非晶体会变为结晶体；</p>
-<p>2）结晶体颗粒会变大（重结晶）</p>
-<p>3）物质与结构在温度作用下重组，形成新矿物</p>
-<h4 id="5-1-3压力"><a href="#5-1-3压力" class="headerlink" title="5-1-3压力"></a>5-1-3压力</h4><p>静压力：上层岩石重量引起，随深度增加而增加</p>
-<p>流体压力：<strong>流体是物质成分进行交换的自由场所</strong></p>
-<p>定向压力：作用在岩石的六个方向的力</p>
-<p>同轴定向压力/非同轴（不对称）定向压力：</p>
-<p><strong>蓝片岩（高压低温）</strong>：</p>
-<p>温度低，近地表的板块摩擦导致的角闪石压力变质为<strong>蓝闪石</strong>片状矿物，是古俯冲-撞击带的重要标志</p>
-<p><strong>超高压变质岩：</strong>含柯世英、金刚石的榴灰岩</p>
-<p>注意：金伯利岩（次火山岩）中的金刚石是岩浆成因，不是变质成因。</p>
-<h4 id="5-1-4具有化学活动性的流体"><a href="#5-1-4具有化学活动性的流体" class="headerlink" title="5-1-4具有化学活动性的流体"></a><strong>5-1-4具有化学活动性的流体</strong></h4><p>以H2O、CO2为主，并含其他易挥发易流动的物质</p>
-<p>流体分布：岩石粒间或缝隙中、矿物结构中、岩浆分逸而来。</p>
-<p><strong>交代作用：</strong>化学物质的<strong>带进带出</strong>，发生物质交换</p>
-<h3 id="5-2变质作用的变化"><a href="#5-2变质作用的变化" class="headerlink" title="5-2变质作用的变化"></a>5-2变质作用的变化</h3><h4 id="5-2-1化学成分的变化"><a href="#5-2-1化学成分的变化" class="headerlink" title="5-2-1化学成分的变化"></a>5-2-1化学成分的变化</h4><p>1）体积大、密度小的矿物变成体积小、密度大的矿物</p>
-<p>例：橄榄石+钙长石—-石榴子石</p>
-<p>形成新矿物：岩石释放挥发成分达到平衡，形成新矿物</p>
-<p>例：高岭土–红柱石、石英和水</p>
-<p>方解石+石英——硅灰石+二氧化碳</p>
-<p>2）重结晶作用：变质作用一定会发生重结晶</p>
-<p>小晶体变成大晶体</p>
-<p>石灰岩—大理岩（汉白玉）</p>
-<p>石英砂—石英岩</p>
-<p>3）交代作用（如花岗岩侵入石灰岩）</p>
-<p>中酸性岩浆侵入灰岩，形成矽卡岩，并伴生大量的金属矿石矿床（铁矿、铜矿、锡矿、钨矿等）</p>
-<p>4）变质分异作用</p>
-<p>岩石成分重新组合，从原先的均匀构造变为不均匀构造</p>
-<p>例如：粉砂岩—条带状变质岩（如条带状铁矿床，鞍山铁矿）</p>
-<h4 id="5-2-2矿物结构的变化"><a href="#5-2-2矿物结构的变化" class="headerlink" title="5-2-2矿物结构的变化"></a>5-2-2矿物结构的变化</h4><p><strong>片理</strong>和<strong>变质矿物</strong>是变质岩的两大特征！</p>
-<p><strong>特征变质矿物：</strong></p>
-<p>红柱石（低温接触热变质）、蓝晶石（中温中压）、矽线石（高温）</p>
-<p>化学成分不变，但结构发生变化<strong>（等化学系）</strong></p>
-<h4 id="5-2-3变质岩的结构"><a href="#5-2-3变质岩的结构" class="headerlink" title="5-2-3变质岩的结构"></a>5-2-3变质岩的结构</h4><p><strong>变晶结构：</strong></p>
-<p>原有岩石经变质作用在固态下重结晶形成的晶质结构</p>
-<p><strong>变余结构：</strong></p>
-<p>残留有部分原岩特征的结构，如板岩特有的变余泥质结构、砂质结构</p>
-<p><strong>脆裂结构：</strong></p>
-<p>由于动力变质作用使岩石发生机械破碎产生的结构（矿物颗粒扭曲变形）</p>
-<p><strong>交代结构：</strong></p>
-<p>变质作用过程中，通过化学交代作用形成的结构</p>
-<h4 id="5-2-4变质岩的构造"><a href="#5-2-4变质岩的构造" class="headerlink" title="5-2-4变质岩的构造"></a>5-2-4变质岩的构造</h4><h5 id="5-2-4-1变成构造："><a href="#5-2-4-1变成构造：" class="headerlink" title="5-2-4-1变成构造："></a><strong>5-2-4-1变成构造：</strong></h5><p>原岩的结构（如层理）消失，形成新的构造如片理、片麻理等。</p>
-<p>随变质程度而加深：</p>
-<p><strong>斑点构造</strong>—<strong>板理构造</strong>（低温）—<strong>片理构造</strong>（长石&lt;石英）/**片麻构造**（长石&gt;石英）</p>
-<p>片：黑云母等片状晶体      麻：石英、长石的麻点</p>
-<p>高温下形成<strong>片麻构造</strong>属于<strong>高级变质岩</strong></p>
-<p>麻粒岩（<strong>块状构造</strong>）–更高温</p>
-<h5 id="5-2-4-2变余构造"><a href="#5-2-4-2变余构造" class="headerlink" title="5-2-4-2变余构造"></a><strong>5-2-4-2变余构造</strong></h5><h3 id="5-3变质作用类型及变质岩代表岩石"><a href="#5-3变质作用类型及变质岩代表岩石" class="headerlink" title="5-3变质作用类型及变质岩代表岩石"></a>5-3变质作用类型及变质岩代表岩石</h3><h4 id="5-3-1接触变质作用"><a href="#5-3-1接触变质作用" class="headerlink" title="5-3-1接触变质作用"></a>5-3-1接触变质作用</h4><p><strong>产生代表变质岩为：矽卡岩、大理岩、角岩</strong></p>
-<p><strong>5-3-1接触热变质：</strong></p>
-<p>泥岩—斑点板岩/角岩</p>
-<p>石灰岩—大理岩</p>
-<p><strong>5-3-2接触交代变质：</strong></p>
-<p>矽卡岩：中酸性岩浆与冷围岩之间发生物质成分的交换形成</p>
-<p>变质矿物：硅灰石、石榴石、角闪石等</p>
-<p>外带碳酸钙多，主要是大理岩</p>
-<p>内带二氧化硅多，主要是石英</p>
-<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210813122009094.png" alt="image-20210813122009094" style="zoom: 50%;" />
-
-<h4 id="5-3-2区域变质作用"><a href="#5-3-2区域变质作用" class="headerlink" title="5-3-2区域变质作用"></a><strong>5-3-2区域变质作用</strong></h4><p><strong>产生代表变质岩为板岩、千枚岩、片岩、片麻岩、麻粒岩</strong></p>
-<p>在变质作用三要素下，在区域范围内发生的变质作用</p>
-<p>超高压、高温作用：碳—金刚石</p>
-<p>高压、低温条件：角闪石、钠长石—蓝闪石</p>
-<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210813185955215.png" alt="image-20210813185955215" style="zoom:50%;" />
-
-<p>高温低压条件：粘土矿物—红柱石</p>
-<p>高温中压条件：粘土矿物—蓝晶石</p>
-<p><strong>低级变质作用：</strong>生成<strong>板岩</strong>，显微鳞片变晶、变余结构。</p>
-<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210813185518319.png" alt="image-20210813185518319" style="zoom:50%;" />
-
-<p><strong>千枚岩</strong>：具有千枚状构造，完全重结晶，出现绢云母、绿泥石。</p>
-<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210813185546848.png" alt="image-20210813185546848" style="zoom:50%;" />
-
-<p><strong>中级变质作用：</strong>生成<strong>片岩</strong>，具有变晶结构、片状构造，原岩矿物与结构完全重组。新生矿物：石英、云母、长石、石榴石、十字石</p>
-<p>等。</p>
-<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210813185713251.png" alt="image-20210813185713251" style="zoom:50%;" />
-
-<p><strong>高级变质岩：</strong>生成<strong>片麻岩</strong>，长石与石英的总含量超过50%。</p>
-<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210813185825443.png" alt="image-20210813185825443" style="zoom:50%;" />
-
-<p>眼球构造是花岗岩等火成岩变质形成的特征（正变质岩）</p>
-<p><strong>麻粒岩：</strong>变质程度最深，主要有紫苏辉石、铁铝榴石、长石、石英等粒状矿物。变质温度即将到达熔化温度。（片状黑云母不存在）</p>
-<h4 id="5-3-3动力变质作用"><a href="#5-3-3动力变质作用" class="headerlink" title="5-3-3动力变质作用"></a>5-3-3动力变质作用</h4><p><strong>主要代表变质岩为糜棱岩、蓝闪石片岩。</strong></p>
-<p>伴随构造活动产生的韧性剪切变质-变形作用。</p>
-<p><strong>糜棱岩：</strong>韧性剪切变形条件下形成的<strong>晶格位错</strong>变质岩。</p>
-<p>特征：片理发育，偏光显微下波状消光，细粒化，存在核幔构造。</p>
-<p>变质的片理上发育有拉伸<strong>线理</strong>。</p>
-<p><img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210813191124752.png" alt="image-20210813191124752"></p>
-<p>动态（韧性）变质作用的三个特征：“线理、片理、不对称组构”</p>
-<h4 id="5-3-4混合岩化作用："><a href="#5-3-4混合岩化作用：" class="headerlink" title="5-3-4混合岩化作用："></a>5-3-4混合岩化作用：</h4><p>当温度大于900摄氏度时，区域高级变质岩一部分高温熔融，另一部分未熔化的现象。形成特殊的混合变质岩。</p>
-<p><strong>基体</strong>为未熔化的变质岩（暗色）；</p>
-<p>而<strong>脉体</strong>为部分熔融的长石和石英（浅色）</p>
-<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210813191743675.png" alt="image-20210813191743675" style="zoom:50%;" />
-
-<h2 id="三大类岩石的总结："><a href="#三大类岩石的总结：" class="headerlink" title="三大类岩石的总结："></a>三大类岩石的总结：</h2><p><img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210813192958251.png" alt="image-20210813192958251"></p>
-<p><img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210813192921589.png" alt="image-20210813192921589"></p>
-]]></content>
-      <categories>
-        <category>地理学</category>
-      </categories>
-      <tags>
-        <tag>学习笔记</tag>
-        <tag>地质</tag>
-        <tag>矿物</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Python算法结构与常用库</title>
-    <url>/2023/04/27/Python%E7%AE%97%E6%B3%95%E6%A8%A1%E5%9D%97%E4%B8%8E%E5%B8%B8%E7%94%A8%E5%BA%93/</url>
-    <content><![CDATA[<h1 id="python-算法模块与常用库"><a href="#python-算法模块与常用库" class="headerlink" title="python 算法模块与常用库"></a>python 算法模块与常用库</h1><p>包括各种常用算法案例，以及常用库的使用说明</p>
-<h1 id="1-常用算法实例"><a href="#1-常用算法实例" class="headerlink" title="1.常用算法实例"></a>1.常用算法实例</h1><h2 id="1-1质数判断算法"><a href="#1-1质数判断算法" class="headerlink" title="1.1质数判断算法"></a>1.1质数判断算法</h2><p>基本思路：首先用if判断最特殊的0和1，它们都不是质数。</p>
-<p>其次，再使用循环对每个数的可能因数全部进行判断，从2到x-1，如果循环途中发现有可以整除（即为x的因数），则返回False并跳出循环。</p>
-<p>如果循环结束也没有跳出，那么说明没有因数，x是质数，返回True。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">isprime</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">if</span> x==<span class="number">0</span> <span class="keyword">or</span> x==<span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>,x):</span><br><span class="line">            <span class="keyword">if</span> x%i==<span class="number">0</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="1-2进制算法"><a href="#1-2进制算法" class="headerlink" title="1.2进制算法"></a>1.2进制算法</h2><h3 id="十进制转N进制"><a href="#十进制转N进制" class="headerlink" title="十进制转N进制"></a>十进制转N进制</h3><p>总思路为逆向取余法，对十进制数字反复除以进制数n，直至整除为0，将余数逆向排列，即可得到n进制转换结果。需要注意的是超过十进制转换时，需要把超过10的余数转换为字母表达。这一部分使用循环进行余数序列的对应替换。<strong>另一种算法是直接用列表解析生成对照序列，再利用序列的索引进行一一对应替换。</strong></p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a=<span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;请输入要转换的十进制数&quot;</span>))</span><br><span class="line">n=<span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;要转换为几进制数？&quot;</span>))</span><br><span class="line">b=[]</span><br><span class="line">Str=<span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    b.append(a%n)</span><br><span class="line">    a=a//n</span><br><span class="line">    <span class="keyword">if</span> a&lt;n:</span><br><span class="line">        b.append(a)</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(b)):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>,<span class="number">36</span>):</span><br><span class="line">        letter=<span class="built_in">chr</span>(<span class="built_in">ord</span>(<span class="string">&#x27;a&#x27;</span>)+(j-<span class="number">10</span>))</span><br><span class="line">        <span class="keyword">if</span> b[-<span class="number">1</span>-i]==j:</span><br><span class="line">            b[-<span class="number">1</span>-i]=letter</span><br><span class="line">    <span class="built_in">print</span>(b[-<span class="number">1</span>-i],end=<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">--------------------------------------------------------------------------</span><br><span class="line">a=<span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;请输入要转换的十进制数&quot;</span>))</span><br><span class="line">n=<span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;要转换为几进制数？&quot;</span>))</span><br><span class="line">b=[]</span><br><span class="line">base=[<span class="built_in">str</span>(x) <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>)]+[<span class="built_in">chr</span>(x) <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">ord</span>(<span class="string">&#x27;a&#x27;</span>),<span class="built_in">ord</span>(<span class="string">&#x27;a&#x27;</span>)+<span class="number">26</span>)]</span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    b.append(base[a%n-<span class="number">1</span>])</span><br><span class="line">    a=a//n </span><br><span class="line">    <span class="keyword">if</span> a&lt;n:</span><br><span class="line">        b.append(base[a-<span class="number">1</span>])</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"><span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(b)):</span><br><span class="line">    <span class="built_in">print</span>(b[-<span class="number">1</span>-k],end=<span class="string">&#x27;&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-<h3 id="N进制转十进制"><a href="#N进制转十进制" class="headerlink" title="N进制转十进制"></a>N进制转十进制</h3><p>主要思路为：位权展开法，每一位乘上对应的权。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">n=<span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;您将要输入N进制数N=？&quot;</span>))</span><br><span class="line">a=<span class="built_in">input</span>(<span class="string">&quot;请输入要转换为十进制的N进制数&quot;</span>)</span><br><span class="line">base=[<span class="built_in">str</span>(x) <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>)]+[<span class="built_in">chr</span>(x) <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">ord</span>(<span class="string">&#x27;a&#x27;</span>),<span class="built_in">ord</span>(<span class="string">&#x27;a&#x27;</span>)+<span class="number">26</span>)]</span><br><span class="line">a=<span class="built_in">list</span>(a)</span><br><span class="line">b=[]</span><br><span class="line">s=<span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(a)-<span class="number">1</span>,-<span class="number">1</span>,-<span class="number">1</span>):</span><br><span class="line">    a[i]=<span class="built_in">int</span>(base.index(a[i]))</span><br><span class="line">    s=s+<span class="built_in">int</span>(a[i])*(n**(<span class="built_in">len</span>(a)-<span class="number">1</span>-i))</span><br><span class="line"><span class="built_in">print</span>(s)</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="1-3因子算法"><a href="#1-3因子算法" class="headerlink" title="1.3因子算法"></a>1.3因子算法</h2><h3 id="最小公倍数算法："><a href="#最小公倍数算法：" class="headerlink" title="最小公倍数算法："></a>最小公倍数算法：</h3><p>设置循环从较大数开始找，直到找到最小公倍数跳出循环。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">gbs</span>(<span class="params">a,b</span>):</span><br><span class="line">    <span class="keyword">if</span> a&lt;b:</span><br><span class="line">        a,b=b,a</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(a+<span class="number">1</span>,a*b+<span class="number">1</span>):</span><br><span class="line">        <span class="keyword">if</span> i%a==<span class="number">0</span> <span class="keyword">and</span> i%b==<span class="number">0</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;最小公倍数为&quot;</span>,i)</span><br><span class="line">            <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="最大公约数算法："><a href="#最大公约数算法：" class="headerlink" title="最大公约数算法："></a>最大公约数算法：</h3><p>设置循环从较小数开始倒序找，直到找到最大公约数跳出循环</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">gys</span>(<span class="params">a,b</span>):</span><br><span class="line">    <span class="keyword">if</span> a&lt;b:</span><br><span class="line">        a,b=b,a</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(b,<span class="number">0</span>,-<span class="number">1</span>):</span><br><span class="line">        <span class="keyword">if</span> a%i==<span class="number">0</span> <span class="keyword">and</span> b%i==<span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> i</span><br><span class="line">            <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="辗转相除法："><a href="#辗转相除法：" class="headerlink" title="辗转相除法："></a>辗转相除法：</h3><p>更简洁高效的最大公约数算法。原理是以较大数除以较小数开始循环，每次将除数移交给被除数，再把余数移交给除数，辗转相除，直到余数为0，则最后一次的除数就是最大公约数。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">gys</span>(<span class="params">a,b</span>):</span><br><span class="line">    <span class="keyword">if</span> a&lt;b:</span><br><span class="line">        a,b=b,a</span><br><span class="line">    <span class="keyword">while</span> b: </span><br><span class="line">        a,b=b,a%b</span><br><span class="line"><span class="keyword">return</span> a</span><br></pre></td></tr></table></figure>
-
-<h3 id="用最大公约数求最小公倍数："><a href="#用最大公约数求最小公倍数：" class="headerlink" title="用最大公约数求最小公倍数："></a>用最大公约数求最小公倍数：</h3><p>两个数的最大公约数与最小公倍数的乘积，即为两个数的乘积：</p>
-<p>axb=(最大公约数)x(最小公倍数)</p>
-<h2 id="1-4-回文算法"><a href="#1-4-回文算法" class="headerlink" title="1.4 回文算法"></a>1.4 回文算法</h2><p>pythond的回文算法非常简单，转换为列表利用内置的颠倒函数便可轻松实现。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">hws</span>(<span class="params">x</span>):</span><br><span class="line">    x=<span class="built_in">list</span>(<span class="built_in">str</span>(x))</span><br><span class="line">    y=<span class="built_in">list</span>(<span class="built_in">reversed</span>(x))</span><br><span class="line">    <span class="keyword">if</span> x==y:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure>
-
-<p>或者，也可以使用索引进行一一对比，采用递归思路：</p>
-<p>从两端向中间递归，如果发现不同就触发return回False；如果一直递归到最中间也没找到不同，就返回Ture。每次递归把输入字符串去除首尾，进行下一轮迭代；返回结果时，反向从内向外报告。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">hws</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(x)&lt;<span class="number">2</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="keyword">if</span> x[<span class="number">0</span>]!=x[-<span class="number">1</span>]:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">return</span> hws(x[<span class="number">1</span>:-<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="1-5-排序算法"><a href="#1-5-排序算法" class="headerlink" title="1.5 排序算法"></a>1.5 排序算法</h2><p>Python自带有各种序列的排序方法函数，但是出于对算法的理解角度，也应该掌握各类排序算法。</p>
-<h3 id="冒泡排序法"><a href="#冒泡排序法" class="headerlink" title="冒泡排序法"></a>冒泡排序法</h3><p>双重循环结构，每次都将序列最左边的数向右进行冒泡（相邻比较，如果左边小于右边，就交换，等效于较大数向右移动）。此过程中较大数会慢慢“浮”到序列右端，很像冒泡。</p>
-<p>外层循环：循环n=len(arr)次，确保每个值都会进行排序。</p>
-<p>内层循环：跟外层循环进行的次数有关。外层循环每冒泡一次，则最右端就会确定一个较大值的位置，无需继续冒泡。</p>
-<p>注意：列表在函数中相当于全局变量，被修改则会牵连原列表，因而无需返回值。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">bubbleSort</span>(<span class="params">arr</span>):</span><br><span class="line">    n=<span class="built_in">len</span>(arr)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,n-i-<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">if</span> arr[j]&gt;arr[j+<span class="number">1</span>]:</span><br><span class="line">                arr[j],arr[j+<span class="number">1</span>]=arr[j+<span class="number">1</span>],arr[j]</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="插入排序法"><a href="#插入排序法" class="headerlink" title="插入排序法"></a>插入排序法</h3><p>类似于我们平时打牌时对扑克牌进行排序，每次插入一个新值，需要找到其适当的中间位置并插入。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">insertSort</span>(<span class="params">arr</span>):</span><br><span class="line">    length=<span class="built_in">len</span>(arr)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,length):</span><br><span class="line">        x=arr[i]</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(i,-<span class="number">1</span>,-<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">if</span> x&lt;arr[j-<span class="number">1</span>]:</span><br><span class="line">                arr[j]=arr[j-<span class="number">1</span>]</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        arr[j]=x</span><br></pre></td></tr></table></figure>
-
-<p>这串代码的逻辑是，序列分为两个区域：左边为已排序区，右边为待排序区。第一层循环的参数i控制正在插空的被排序对象是第几个，第二层循环的参数j倒序变化，控制插空位移。首先，i从1开始取，0号元素已经默认为排序区；然后，指针i不断向右移动，先把待排序对象arr[i]单独取出来，和已排序区进行从右向左的插空判断： </p>
-<p><strong>如果待排序对象arr[i]过小，</strong>arr[j-1]向右移动来为将来的arr[i]插入提供空位。不必担心arr[i]本身会因为移动而被替换，因为已经用x来存储arr[i]。</p>
-<p><strong>如果待排序对象arr[i]过大</strong>，直接跳出循环，找到插入位置了，就把arr[i]=x放在arr[j]这个位置插入。内层循环结束，进入下一轮arr[i+1]的插入。</p>
-<h2 id="1-6-查找算法"><a href="#1-6-查找算法" class="headerlink" title="1.6 查找算法"></a>1.6 查找算法</h2><h3 id="二分查找法"><a href="#二分查找法" class="headerlink" title="二分查找法"></a>二分查找法</h3><p>对有序数组进行快速查找时，使用二分法可以大大提高效率，每次比较都可以使搜索范围缩小一半。</p>
-<p>案例代码使用递归函数，输入：查找序列arr, 序列待查找对象x。l与r是函数内部的形参</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">binarySearch</span>(<span class="params">arr,l,r,x</span>):</span><br><span class="line">    <span class="keyword">if</span> r&gt;=l:</span><br><span class="line">        mid=<span class="built_in">int</span>(l+(r-l)/<span class="number">2</span>)</span><br><span class="line">        <span class="keyword">if</span> arr[mid]==x:</span><br><span class="line">            <span class="keyword">return</span> mid</span><br><span class="line">        <span class="keyword">elif</span> arr[mid]&gt;x:</span><br><span class="line">            <span class="keyword">return</span> binarySearch(arr,<span class="number">1</span>,mid-<span class="number">1</span>,x)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> binarySearch(arr,mid+<span class="number">1</span>,r,x)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="1-7-累加算法"><a href="#1-7-累加算法" class="headerlink" title="1.7 累加算法"></a>1.7 累加算法</h2><p>这个就不写了，简单的循环即可。主要任务是找数列递推公式，比如下面这个斐波那契数列:</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">nterms=<span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;你需要几项斐波那契数列？&quot;</span>))</span><br><span class="line">n1，n2=<span class="number">0</span>，<span class="number">1</span></span><br><span class="line">count=<span class="number">2</span></span><br><span class="line"><span class="keyword">if</span> nterms&lt;=<span class="number">0</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;输入不合法，请输入一个正数&quot;</span>)</span><br><span class="line"><span class="keyword">elif</span> nterms==<span class="number">1</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;斐波那契数列：&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(n1)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;斐波那契数列：&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(n1,<span class="string">&quot;,&quot;</span>,n2,end=<span class="string">&#x27; &#x27;</span>)</span><br><span class="line">    <span class="keyword">while</span> count&lt;nterms:</span><br><span class="line">        nth=n1+n2</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;,&quot;</span>,nth,end=<span class="string">&#x27; &#x27;</span>)</span><br><span class="line">        n1，n2=n2，nth</span><br><span class="line">        count+=<span class="number">1</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="2-常用库函数"><a href="#2-常用库函数" class="headerlink" title="2.常用库函数"></a>2.常用库函数</h1><p>库的使用：import 库名称;  使用库函数时为:  库名称.函数名()</p>
-<h2 id="2-1-math库"><a href="#2-1-math库" class="headerlink" title="2.1 math库"></a>2.1 math库</h2><p>math库的函数主要用于数学计算，包含常用的数学常数以及常用数学函数：指对数、三角函数等</p>
-<h3 id="指对数"><a href="#指对数" class="headerlink" title="指对数"></a>指对数</h3><p>math.exp(x):  返回自然对数的x次幂</p>
-<p>math.pow(x,y):  返回x的y次幂</p>
-<p>math.sqrt(x):  返回x的平方根</p>
-<h3 id="三角函数"><a href="#三角函数" class="headerlink" title="三角函数"></a>三角函数</h3><p>sin(x),cos(x),tan(x)：三角函数</p>
-<p>asin(x),acos(x),atan(x)：反三角函数</p>
-<h3 id="数值表示函数"><a href="#数值表示函数" class="headerlink" title="数值表示函数"></a>数值表示函数</h3><p>math.fabs(x):  返回x的绝对值</p>
-<p>math.gcd(a,b):  返回a和b的最大公约数</p>
-<p>math.floor(): 向下取整</p>
-<p>math.ceil():  向上取整</p>
-<h2 id="2-2-random库"><a href="#2-2-random库" class="headerlink" title="2.2 random库"></a>2.2 random库</h2><p>randint(a,b):  返回一个a到b之间的随机整数</p>
-<p>uniform(a,b):  返回一个a到b之间的随机小数</p>
-<p>random():  随机生成一个[0,1.0]之间的小数</p>
-<h2 id="2-3-os库"><a href="#2-3-os库" class="headerlink" title="2.3 os库"></a>2.3 os库</h2><p>os.getcwd()： 获取当前工作目录，默认为程序所在目录</p>
-<p>os.chdir(’新目录‘):  更改当前工作目录至新目录</p>
-<p>os.listdir():  列出当前工作目录下的文件或文件夹</p>
-<p>os.rmdir(‘某目录’)：删除目录</p>
-<p>os.remove(‘某文件’):  删除文件</p>
-<h2 id="2-4-datetime库"><a href="#2-4-datetime库" class="headerlink" title="2.4 datetime库"></a>2.4 datetime库</h2><p>该库分为三个类：date , time , datetime</p>
-<p>使用案例：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line">newdt=datetime.datetime.now()</span><br><span class="line"><span class="comment">#代表datetime库中datetime类下的now方法，获取日期和时间</span></span><br><span class="line"><span class="built_in">print</span>(datetime.datetime.time(newdt))</span><br><span class="line"><span class="comment">#代表datetime库中datetime类下的time方法，拆出字符串中的时间</span></span><br><span class="line">datetime.timedelta(weeks,days,hours,minutes,seconds)</span><br><span class="line"><span class="comment">#用于计算时间差的函数，该函数会自动计算某段时间前的时间。</span></span><br></pre></td></tr></table></figure>
-
-<p>此外，time库也有一些常用的函数，比如time.sleep()，可以使程序暂停休眠一段时间再继续运行</p>
-<h2 id="2-5-NumPy库"><a href="#2-5-NumPy库" class="headerlink" title="2.5 NumPy库"></a>2.5 NumPy库<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210626200200930.png" alt="image-20210626200200930" style="zoom:25%;" /></h2><p>用于科学计算的基础包，可以处理矩阵和数组</p>
-<p><strong>NumPy 的主要对象：</strong></p>
-<p>同构多维数组（元素表）。所有类型都相同，由非负整数元组索引。在NumPy维度中称为<strong>轴</strong>。</p>
-<p>​    例如，3D空间中的点的坐标[1, 2, 1]具有一个轴。该轴有3个元素，所以我们说它的长度为3。在下面所示的例子中，数组有2个轴。第一轴的长度为2，第二轴的长度为3。</p>
-<p>[[ 1, 0, 0],</p>
-<p> [ 0, 1, 2]]</p>
-<p>拥有数组创建、数组打印、数组操作等功能，可用于线性代数计算、矩阵操作等。</p>
-<h2 id="2-6-SciPy-library库"><a href="#2-6-SciPy-library库" class="headerlink" title="2.6 SciPy library库"></a>2.6 SciPy library库<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210626200614717.png" alt="image-20210626200614717" style="zoom:25%;" /></h2><p>基于NumPy的拓展模块，增加了数学和工程上的运算，比如拟合、<strong>积分</strong>、常微分方程求解、插值等。</p>
-<p>简单的定积分：SciPy的子模块integrate中的quad()函数</p>
-<p>quad(f,a,b)：对函数f从a积分到b</p>
-<p>dblquad(f,a,b,g,h): 计算二重积分，二元函数f，x从a积分到b，y从g(x)积分到h(x)</p>
-<h2 id="2-7-Matplotlib-库"><a href="#2-7-Matplotlib-库" class="headerlink" title="2.7 Matplotlib 库"></a>2.7 Matplotlib 库<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210626201253294.png" alt="image-20210626201253294" style="zoom:25%;" /></h2><p>主要用于绘图，可以简单高效地将数据图形化，可视化。</p>
-<p>最常用plot()命令</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#pyplot生成可视化效果：</span></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">plt.plot([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>])</span><br><span class="line">plt.ylabel(<span class="string">&#x27;some numbers&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-
-<p><img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210626201558056.png" alt="image-20210626201558056"></p>
-<p>可以设置绘图的各种参数，如线形、颜色、坐标轴等。</p>
-<p>除此之外，还可以绘制各种统计图、三维曲线、曲面等。</p>
-<h2 id="2-8-Pandas库"><a href="#2-8-Pandas库" class="headerlink" title="2.8 Pandas库"></a>2.8 Pandas库<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210626202023168.png" alt="image-20210626202023168" style="zoom:25%;" /></h2><p>主要用于数据挖掘和数据分析，大数据处理统计。</p>
-<p>其主要的两大模块为：Series和DataFrame</p>
-<p>Series是类似于<strong>一维数组</strong>的对象，是由一组数据以及一组一直相关的数据标签（索引）组成的。索引是默认从0开始的整数序列，Series是一种<strong>有序的变长字典</strong>。</p>
-<p>DataFrame是一个<strong>表格型的数据结构</strong>，包含一组有序序列，并且同时拥有行索引和列索引。</p>
-]]></content>
-      <categories>
-        <category>计算机科学</category>
-      </categories>
-      <tags>
-        <tag>Python</tag>
-        <tag>编程</tag>
-        <tag>学习笔记</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>计算化学学习笔记</title>
     <url>/2023/04/27/%E8%AE%A1%E7%AE%97%E5%8C%96%E5%AD%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<h2 id="一-序言："><a href="#一-序言：" class="headerlink" title="一.序言："></a>一.序言：</h2><h3 id="1-1软件安装"><a href="#1-1软件安装" class="headerlink" title="1-1软件安装"></a>1-1软件安装</h3><p>GaussView：分子建模软件</p>
@@ -945,8 +541,7 @@
 <p>​        <strong>若要研究电子不配对的情况，则泛函前面写一个U，如写UB3LYP(非限制性)</strong></p>
 <p>表格内是不同原子的Xyz笛卡尔坐标</p>
 <p>图示是对乙烷进行单点计算的最简输入文件。</p>
-<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210815155308244.png" alt="image-20210815155308244" style="zoom:50%;" />
-
+<p><img src="/pic/image-20210815155308244.png" alt="最简输入文件"></p>
 <p>文件拖入gaussian点击开始便开始运算，出现normal termination则计算结束。</p>
 <h3 id="3-2输出文件的读取"><a href="#3-2输出文件的读取" class="headerlink" title="3-2输出文件的读取"></a><strong>3-2输出文件的读取</strong></h3><p>1）result-summary</p>
 <p>SP：单点能计算</p>
@@ -971,17 +566,14 @@
 <p>结构参数有原子坐标、键长、键角、二面角等。</p>
 <h4 id="4-1-1限制性势能面"><a href="#4-1-1限制性势能面" class="headerlink" title="4-1-1限制性势能面"></a>4-1-1限制性势能面</h4><p><strong>限制性势能面：</strong>只考虑分子中部分结构参数的变化</p>
 <p><strong>单变量势能曲线：</strong>只改变一个结构参数，计算分子能量或某一性质的变化。</p>
-<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210815151509334.png" alt="image-20210815151509334" style="zoom:50%;" />
-
+<p><img src="/pic/image-20210815151509334.png" alt="单变量势能曲线"></p>
 <p><strong>内禀反应坐标曲线（IRC）：</strong>常用于有机化学</p>
-<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210815151703396.png" alt="image-20210815151703396" style="zoom:50%;" />
-
+<p><img src="/pic/image-20210815151703396.png" alt="内禀反应坐标曲线"></p>
 <p><strong>双变量势能曲面：</strong></p>
 <p>能量极小点（山谷）：一阶偏导为0.二阶偏导&gt;0</p>
 <p>过渡态（Transition State）：一阶鞍点，驻点</p>
-<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210815152130045.png" alt="image-20210815152130045" style="zoom:50%;" />
-
-<h4 id="4-1-2不同电子态的势能面"><a href="#4-1-2不同电子态的势能面" class="headerlink" title="4-1-2不同电子态的势能面"></a>4-1-2不同电子态的势能面</h4><p><img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210815152556992.png" alt="image-20210815152556992"></p>
+<p><img src="/pic/image-20210815152130045.png" alt="双变量势能曲面"></p>
+<h4 id="4-1-2不同电子态的势能面"><a href="#4-1-2不同电子态的势能面" class="headerlink" title="4-1-2不同电子态的势能面"></a>4-1-2不同电子态的势能面</h4><p><img src="/pic/image-20210815152556992.png" alt="势能面与光化学过程"></p>
 <p><strong>垂直激发：</strong>构型不变（横坐标不变），能量升高。</p>
 <p><strong>绝热激发：</strong>由基态极小值点到激发态极小值点，构型发生变化。</p>
 <p><strong>内转化：</strong>基态和激发态在某一构型处能量相等，对外无热量交换便发生转化。</p>
@@ -1012,12 +604,10 @@
 <p>当写出calcall时，无需再进行freq频率分析，即可查看结果。</p>
 <p><strong>过渡态的特征：</strong></p>
 <p>只有一个大于100的虚频，振动方向朝着反应物和产物，结构在反应物和产物之间。</p>
-<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210815173831802.png" alt="image-20210815173831802" style="zoom:50%;" />
-
+<p><img src="/pic/image-20210815173831802.png" alt="SN2反应过渡态"></p>
 <p><strong>过渡态的检验：IRC计算</strong></p>
 <p>IRC就是在质权坐标下链接势能面相邻两个极小点能量最低的路径，相当于原子运动无限慢时的路径，而过渡态就是IRC的最高点。</p>
-<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210815182837039.png" alt="image-20210815182837039" style="zoom:50%;" />
-
+<p><img src="/pic/image-20210815182837039.png" alt="IRC计算"></p>
 <p>IRC的关键词：</p>
 <p>irc(calcall,stepsize=15,maxpoint=15)，计算级别必须和TS严格一致！</p>
 <p>其中：stepsize：步长，默认为10，步长越小曲线越光滑</p>
@@ -1029,7 +619,7 @@
 <p>简正模式：分子质心和取向不变，原子以相同频率在平衡附近振动。</p>
 <p>分子振动形式：对称伸展、平面剪式运动、平面摇摆、非平面扭转等</p>
 <p><strong>振动频率：</strong></p>
-<p>振动的频率为<img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210818165527431.png" alt="image-20210818165527431" style="zoom: 33%;" />,若k为负数，则v也是负数，称为<strong>虚频</strong></p>
+<p>振动的频率为<img src="/pic/image-20210818165527431.png">,若k为负数，则v也是负数，称为<strong>虚频</strong></p>
 <p>势能面极小点没有虚频，而对于绝大多数的过渡态都存在1个虚频。</p>
 <p>虚频意味着振动不平衡，会在势能面上下滑。</p>
 <p><strong>频率计算关键词：</strong></p>
@@ -1043,7 +633,7 @@
 <p>%chk=bingansuan.chk<br>#p b3lyp/6-31g* opt freq scrf(SMD,solvent=toluene)</p>
 <p>结果查看：results—vibrations,可以查看动画</p>
 <p>点击Spectra显示IR光谱，与实验（红外吸收光谱）相反</p>
-<p><img src="C:\Users\13959\AppData\Roaming\Typora\typora-user-images\image-20210819145106591.png" alt="image-20210819145106591"></p>
+<p><img src="/pic/image-20210819145106591.png" alt="计算拟合红外光谱"></p>
 <p>右键properties：IR peak Half-Wideth at Half Height（展宽）</p>
 <p>右键save data可以直接导出txt数据文件</p>
 <p>记事本打开输出文件：查找frequencies：振动频率</p>
@@ -1059,8 +649,7 @@
 <p><strong>使用Origin绘图：</strong></p>
 <p>光谱曲线的y轴坐标倒置，红外强度的line正置，设置y轴区间使图像充分展开，x轴为4000~0cm-1。</p>
 <p>保存图片为bmp文件时，清晰度很高。</p>
-<img src="D:\g16w\Lab\freq test\Graph1.bmp" alt="Graph1" style="zoom:67%;" />
-
+<p><img src="/pic/IR.jpg" alt="绘制IR计算结果"></p>
 <h3 id="5-2振动圆二色谱"><a href="#5-2振动圆二色谱" class="headerlink" title="5-2振动圆二色谱"></a><strong>5-2振动圆二色谱</strong></h3><p>两束强度、速度、频率和相位完全一致的圆偏振光复合形成平面偏振光，在光学各向异性介质（手性物质）中传播，其综合光变为椭圆偏振光。L光和R光在介质中传播速度不同，手性物质对某波长的两种光吸光率A不同，分别为AL和AR，则△A=AL-AR，称为圆二色性。</p>
 <p><strong>计算案例：计算丙氨酸的振动圆二色谱</strong></p>
 <p>#p b3lyp/6-31g* opt freq=VCD</p>
@@ -1122,6 +711,382 @@
       <tags>
         <tag>学习笔记</tag>
         <tag>计算化学</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>普通地质学学习笔记</title>
+    <url>/2023/04/27/%E6%99%AE%E9%80%9A%E5%9C%B0%E8%B4%A8%E5%AD%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h1 id="普通地质学学习笔记"><a href="#普通地质学学习笔记" class="headerlink" title="普通地质学学习笔记"></a>普通地质学学习笔记</h1><h2 id="一-绪论"><a href="#一-绪论" class="headerlink" title="一.绪论"></a>一.绪论</h2><h3 id="1-1研究内容与方法"><a href="#1-1研究内容与方法" class="headerlink" title="1-1研究内容与方法"></a>1-1研究内容与方法</h3><h4 id="地球的物质："><a href="#地球的物质：" class="headerlink" title="地球的物质："></a>地球的物质：</h4><p>元素-矿物-岩石-地壳</p>
+<p>五大类岩石</p>
+<p>三大类岩石</p>
+<h4 id="地球的结构："><a href="#地球的结构：" class="headerlink" title="地球的结构："></a>地球的结构：</h4><p>固体地球（地壳、地幔、地核）、大气圈、水圈、生物圈</p>
+<h4 id="地球的构造："><a href="#地球的构造：" class="headerlink" title="地球的构造："></a>地球的构造：</h4><p>层圈分布、运动变化、动力</p>
+<h4 id="地质事件："><a href="#地质事件：" class="headerlink" title="地质事件："></a>地质事件：</h4><p>构造–岩浆事件</p>
+<h3 id="1-2我国地学研究的地域优势"><a href="#1-2我国地学研究的地域优势" class="headerlink" title="1-2我国地学研究的地域优势"></a>1-2我国地学研究的地域优势</h3><p><strong>青藏高原、黄土高原、秦岭大别山高压-超高压变质带、云南澄江及辽西热河动物群、陆相生油盆地、滇黔桂喀斯特地貌、华南花岗岩</strong></p>
+<h2 id="二-矿物"><a href="#二-矿物" class="headerlink" title="二.矿物"></a>二.矿物</h2><h3 id="2-1绪论"><a href="#2-1绪论" class="headerlink" title="2-1绪论"></a>2-1绪论</h3><p>克拉克值（ppm）：地壳元素丰度（单位：g/t或百万分之一）</p>
+<h3 id="2-2矿物的概念"><a href="#2-2矿物的概念" class="headerlink" title="2-2矿物的概念"></a>2-2矿物的概念</h3><p><strong>晶体：</strong></p>
+<p>其内部的原子或离子在三维空间呈周期性平移重复排列的固体</p>
+<p><strong>矿物：</strong></p>
+<p>****<strong>由地质作用形成的</strong>、在正常情况下呈结晶质的元素或无机化合物</p>
+<p><strong>煤是有机化合物，不是矿物；冰是固体结晶，是矿物</strong></p>
+<p><strong>准矿物:</strong></p>
+<p>在产出状态、成分和化学组成等方面均与矿物有相同的特征，但不具有标准结晶的均匀固体。<strong>如蛋白石、玛瑙等</strong></p>
+<h3 id="2-3矿物的基本特征（6）"><a href="#2-3矿物的基本特征（6）" class="headerlink" title="2-3矿物的基本特征（6）"></a>2-3矿物的基本特征（6）</h3><p><strong>1.最基本特征：地质作用、有序结构、无机、固体</strong></p>
+<p><strong>2.自然界的绝大多数矿物都是晶体（准晶体很少）</strong></p>
+<p>肉眼常见矿物：</p>
+<p>石英、长石、云母（花岗岩）</p>
+<p>方解石（石灰岩）</p>
+<p>橄榄石、辉石、角闪石（岩浆岩）</p>
+<p>黄铁矿、赤铁矿、磁铁矿</p>
+<p>注意：纯黄铁矿中含有46.67%的铁和53.33%的硫。一般将黄铁矿作为生产硫磺和硫酸的原料，<strong>而不是用作提炼铁的原料</strong>，因为提炼铁有更好的铁矿石。</p>
+<p><strong>3.矿物的化学成分基本稳定，但多含有杂质</strong></p>
+<p><strong>4.矿物具有同质多象的特征</strong></p>
+<p><strong>5.常见矿物可以分为三大类</strong></p>
+<p>自然元素矿物</p>
+<p>简单分子化合物（氧化物、氢氧化物、硫化物、卤化物）</p>
+<p>含氧盐矿物（硅酸盐矿物、碳酸盐矿物、硫酸盐矿物）</p>
+<p><strong>6.符合特定条件</strong>（色彩鲜艳、折光率高、透明度高、硬度高、化学性质稳定）的矿物，可成为宝玉石</p>
+<h3 id="2-4-矿物的鉴定特征"><a href="#2-4-矿物的鉴定特征" class="headerlink" title="2-4 矿物的鉴定特征"></a>2-4 矿物的鉴定特征</h3><p><strong>看、掂、刻</strong></p>
+<h4 id="2-4-0外形："><a href="#2-4-0外形：" class="headerlink" title="2-4-0外形："></a>2-4-0外形：</h4><p>单晶体（一维方向伸展：针状；二维方向伸展：片状、板状；三维方向伸展：粒状）</p>
+<p>集合体（一维：纤维状；二维：鳞片状；三维的：粒状）</p>
+<p>特殊形态集合体：放射状；晶簇状；鲕（er）状（如下图）豆状；钟乳状；葡萄状；结核状</p>
+<p><img src="/pic/dizhi1.JPG" alt="鲕（er）状">dizhi1.JPG)</p>
+<h4 id="2-4-1光学特征："><a href="#2-4-1光学特征：" class="headerlink" title="2-4-1光学特征："></a><strong>2-4-1光学特征：</strong></h4><p><strong>透明度：</strong>光线是否能透过矿物0.03mm的薄片</p>
+<p><strong>光泽：</strong>矿物的反光能力（金属光泽/非金属光泽）</p>
+<p>非金属光泽：玻璃光泽（长石）、油脂光泽（石英断口）、丝绢光泽（云母）、土状光泽（高岭土）</p>
+<p><strong>颜色：</strong></p>
+<p>自色：化学成分及结构决定的矿物本色</p>
+<p>他色：混入微量元素、杂质后的矿物颜色</p>
+<p>假色：表面氧化或吸附他物的颜色</p>
+<p>条痕色：矿物粉末的颜色。用瓷板划之得到条痕色（硬度要低于瓷板5~6，透明矿物多硬度高于瓷板）</p>
+<p><strong>双折射：</strong>不同方向折射率不一样产生光程差，呈现双影（如冰洲石，无色透明的方解石变种）</p>
+<p><img src="/pic/dizhi2.JPG" alt="冰洲石的双折射"></p>
+<p><strong>荧光：</strong>切断光源后发光消失（如白钨矿和萤石紫外线下发荧光，金刚石在X射线下发蓝色荧光）</p>
+<p><strong>磷光：</strong>切断光源后仍然发光片刻</p>
+<h4 id="2-4-2力学性质："><a href="#2-4-2力学性质：" class="headerlink" title="2-4-2力学性质："></a><strong>2-4-2力学性质：</strong></h4><p><strong>硬度：</strong>莫氏硬度十级</p>
+<p>1级：滑石                                           6级：长石</p>
+<p>2级：石膏                                           7级：石英</p>
+<p>3级：方解石                                       8级：黄晶</p>
+<p>4级：萤石                                           9级：刚玉</p>
+<p>5级：磷灰石                                       10级：金刚石</p>
+<p>鉴定工具：指甲（2.5），小刀（5~5.5），玻璃（6）</p>
+<p><strong>解理：</strong>外力打击下矿物沿质点结合力最弱网面的定向开裂构造。</p>
+<p>极完全解理、完全解理、无解理<img src="/pic/image-20210806172912573.png" alt="辉石与角闪石的解理面夹角"></p>
+<p>辉石解理夹角：87°（约直角）、角闪石解理夹角：56°（约60°）</p>
+<p><strong>断口：</strong>外力下矿物不规则裂开，解理不发育</p>
+<p>石英有断口，长石会定向开裂</p>
+<p><strong>弹性：</strong>受力后恢复原状（如云母）</p>
+<p><strong>挠性（范性）：</strong>受力不能恢复原状（如蛭石）</p>
+<p><strong>延展性：</strong>可用外力任意改变性质形状（如黄金）</p>
+<h3 id="2-5矿物的用途"><a href="#2-5矿物的用途" class="headerlink" title="2-5矿物的用途"></a>2-5矿物的用途</h3><h4 id="2-5-1环境气候示踪矿物"><a href="#2-5-1环境气候示踪矿物" class="headerlink" title="2-5-1环境气候示踪矿物"></a>2-5-1环境气候示踪矿物</h4><p>干旱炎热：石膏、石盐</p>
+<p>海洋环境：方解石</p>
+<p>板块边界俯冲带：蓝闪石、硬玉（高压低温）</p>
+<p>大陆地壳深俯冲：柯石英、金刚石（超高压）</p>
+<h4 id="2-5-2常见宝玉石："><a href="#2-5-2常见宝玉石：" class="headerlink" title="2-5-2常见宝玉石："></a>2-5-2常见宝玉石：</h4><p>硬玉（翡翠）：一种呈隐晶致密的纤维状辉石微晶集合体（成分：单斜辉石中的碱性辉石）（硬度6.5~7）</p>
+<p>软玉（缅玉、和田玉、昆仑玉）：一种呈纤维状的阳起石或透闪石微晶集合体。（硬度5.5~6）</p>
+<h2 id="三-岩浆作用和火成岩"><a href="#三-岩浆作用和火成岩" class="headerlink" title="三.岩浆作用和火成岩"></a>三.岩浆作用和火成岩</h2><h3 id="3-1喷出作用与喷出岩"><a href="#3-1喷出作用与喷出岩" class="headerlink" title="3-1喷出作用与喷出岩"></a>3-1喷出作用与喷出岩</h3><h4 id="3-1-1岩浆的定义："><a href="#3-1-1岩浆的定义：" class="headerlink" title="3-1-1岩浆的定义："></a>3-1-1岩浆的定义：</h4><p>形成于地表下50km~200km，具有较大粘性的高温熔融硅酸盐物质</p>
+<p>形成条件：650~1400℃，压力1.0GPa</p>
+<h5 id="岩浆作用："><a href="#岩浆作用：" class="headerlink" title="岩浆作用："></a>岩浆作用：</h5><p>岩浆发育、运动、固结成火成岩的作用</p>
+<p>火山作用：岩浆喷出地表的过程</p>
+<p>侵入作用：岩浆在地下深处冷凝结晶固结的过程</p>
+<h4 id="3-1-2火成岩的定义："><a href="#3-1-2火成岩的定义：" class="headerlink" title="3-1-2火成岩的定义："></a>3-1-2火成岩的定义：</h4><p>火山岩：岩浆喷出地表、冷凝固结形成的岩石</p>
+<p>1）火山碎屑岩：喷至空中炸碎的岩浆与围岩碎块堆积而成</p>
+<p>2）熔岩：岩浆在地表溢流冷凝成岩</p>
+<p>侵入岩：地下深处冷凝结晶形成的岩浆岩</p>
+<h5 id="火山喷发物的构成："><a href="#火山喷发物的构成：" class="headerlink" title="火山喷发物的构成："></a>火山喷发物的构成：</h5><p>岩浆：</p>
+<p>固体：火山通道周围的岩石落入岩浆后，喷发至空中</p>
+<p>凝灰岩（火山灰）：颗粒&lt;2mm</p>
+<p>火山角砾岩:2~50mm</p>
+<p>火山集块岩：&gt;50mm</p>
+<p>火山弹：呈纺锤状</p>
+<p>浮岩：气体快速逃逸，有大量孔洞冷凝呈火山渣</p>
+<h5 id="喷发条件："><a href="#喷发条件：" class="headerlink" title="喷发条件："></a>喷发条件：</h5><p>地壳运动</p>
+<p>岩浆粘度：</p>
+<p>硅氧四面体（SiO2）含量高，粘度大，难流动，呈酸性，呈花岗质，多喷发相（高粘度到达地面后会猛烈喷发）。</p>
+<p>硅氧四面体（SiO2）含量低，粘度小，易流动，呈基性，呈玄武质量，多为溢流相（容易顺着地面流淌，高原常为玄武岩组成）</p>
+<p><strong>柱状节理：</strong></p>
+<p>基性熔岩粘度小，会快速冷凝，形成与流动面垂直的六边形柱体<img src="/pic/dizhi3.JPG" alt="柱状节理"></p>
+<p>岩浆冷凝过程中还会产生<strong>绳状构造、麻花构造</strong>。这些构造常常是由于<strong>粘度小</strong>的基性熔岩不同部位冷凝、流动速度不同产生应力差导致的</p>
+<p><img src="/pic/dizhi4.JPG" alt="绳状构造"></p>
+<p><strong>火山通道</strong>：岩浆流出的地方</p>
+<p>岩浆在通道近地面冷凝产生火山颈，形成<strong>次火山岩</strong>（介于喷出岩和侵入岩之间）</p>
+<p>若高压喷出的是地下的泥砂和水，则形成<strong>泥火山</strong></p>
+<p>多次原位火山喷发则会形成<strong>复式火山锥</strong>（如意大利维苏威火山），多次喷发之间有间歇期，间歇期中会发生沉积岩堆积，产生沉积岩夹层。 </p>
+<h5 id="两种喷发方式："><a href="#两种喷发方式：" class="headerlink" title="两种喷发方式："></a>两种喷发方式：</h5><p><strong>裂隙式喷发：</strong>岩浆沿断裂带的喷溢，固体喷发物少（如大洋洋中脊）</p>
+<p><strong>中心式喷发：</strong>形成平缓的盾形火山堆，近火山口固体喷发物多，形成火山碎屑岩；远火山口能量小，溢流变为熔岩。</p>
+<h4 id="3-1-3火成岩的分类（4）"><a href="#3-1-3火成岩的分类（4）" class="headerlink" title="3-1-3火成岩的分类（4）"></a>3-1-3火成岩的分类（4）</h4><p>*<em>3-1-3-1超基性岩（超镁铁质）</em>***：二氧化硅含量&lt;45%</p>
+<p>科马提岩：具有鬣刺结构，快速冷凝的长条刺状橄榄石/辉石骸晶</p>
+<p><img src="/pic/dizhi5.JPG" alt="鬣刺结构"></p>
+<p><strong>3-1-3-2基性岩（镁铁质）：</strong>二氧化硅含量45%~52%</p>
+<p>玄武岩：黑色，致密，密度大，有气孔构造发育；陆地喷发有柱状节理，海底喷发有枕状节理（顶凸底平）。<img src="/pic/dizhi6.JPG" alt="枕状节理"></p>
+<p><strong>3-1-3-3中性岩（如安山岩）</strong>：二氧化硅含量52%~65%</p>
+<p>安山岩：黏性大，爆发特点，有多气孔，气孔充填矿物则为杏仁体</p>
+<p><img src="/pic/dizhi7.JPG" alt="杏仁体"></p>
+<p><strong>3-1-3-4酸性岩（如花岗岩）：</strong>二氧化硅含量&gt;65%</p>
+<p>流纹岩：黏性很大，浅（红）色，有流纹构造，有很多石英晶体（二氧化硅含量高）伴生鸡血石等矿物</p>
+<p><img src="/pic/dizhi8.JPG" alt="流纹岩"></p>
+<h4 id="3-1-4火山喷发的阶段性："><a href="#3-1-4火山喷发的阶段性：" class="headerlink" title="3-1-4火山喷发的阶段性："></a>3-1-4火山喷发的阶段性：</h4><p>喷发演化规律：基性–中性–酸性</p>
+<p>喷发后期坍塌形成破火山口，积水形成火山口湖（世界最大：贝加尔湖）</p>
+<h4 id="3-1-5世界火山岩分布带："><a href="#3-1-5世界火山岩分布带：" class="headerlink" title="3-1-5世界火山岩分布带："></a>3-1-5世界火山岩分布带：</h4><p>环太平洋火山带：主要是中酸性火山岩，多为安山岩</p>
+<p>洋脊火山带：太平洋、大西洋和印度洋的洋脊</p>
+<p>地中海-印尼火山带、红海沿岸和东非火山带</p>
+<p><strong>安山岩线：</strong></p>
+<p>洋中脊以基性玄武岩为主，靠近大陆的环太平洋岛屿和大陆边缘多喷发中性安山岩，两者交界线称为安山岩线</p>
+<p><img src="/pic/dizhi9.JPG" alt="安山岩线"></p>
+<h3 id="3-2侵入作用与侵入岩"><a href="#3-2侵入作用与侵入岩" class="headerlink" title="3-2侵入作用与侵入岩"></a>3-2侵入作用与侵入岩</h3><h4 id="3-2-1侵入岩分类"><a href="#3-2-1侵入岩分类" class="headerlink" title="3-2-1侵入岩分类"></a>3-2-1侵入岩分类</h4><p>深成侵入岩（<strong>深成岩</strong>）：&gt;10km深处形成</p>
+<p>浅成侵入岩（<strong>浅成岩</strong>）：&lt;3km深处形成</p>
+<p>超浅成侵入岩（<strong>次火山岩</strong>）：&lt;1.5km深处形成</p>
+<p>围岩：被岩浆侵入的岩石</p>
+<p><img src="/pic/image-20210810124423956.png" alt="侵入岩的分类"></p>
+<h4 id="3-2-2火成岩多样性原因："><a href="#3-2-2火成岩多样性原因：" class="headerlink" title="3-2-2火成岩多样性原因："></a>3-2-2火成岩多样性原因：</h4><h5 id="3-2-2-1：同化与混染作用"><a href="#3-2-2-1：同化与混染作用" class="headerlink" title="3-2-2-1：同化与混染作用"></a><strong>3-2-2-1：同化与混染作用</strong></h5><p>同化作用：岩浆&gt;&gt;围岩，围岩被岩浆吞噬同化</p>
+<p>混染作用：岩浆体积不够大，岩浆成分被围岩严重改变</p>
+<p>捕掳体：岩浆上升时通道壁崩落的围岩碎块，多出现在岩体边部</p>
+<p><img src="/pic/image-20210810131930703.png" alt="花样岩体中的玄武岩包体"></p>
+<p>顶垂体：岩浆上升使围岩整体上升，围岩体积大，岩浆无法消化围岩。被整体抬高的围岩就是顶垂体。</p>
+<h5 id="3-2-2-2岩浆混合作用"><a href="#3-2-2-2岩浆混合作用" class="headerlink" title="3-2-2-2岩浆混合作用"></a><strong>3-2-2-2岩浆混合作用</strong></h5><p>来自深部软流圈的玄武岩浆（基性）向上注入到地壳的花岗岩浆（酸性），形成混合岩浆岩</p>
+<h5 id="3-2-2-3拆沉作用"><a href="#3-2-2-3拆沉作用" class="headerlink" title="3-2-2-3拆沉作用"></a><strong>3-2-2-3拆沉作用</strong></h5><p>岩石圈地幔温度低于软流圈，岩石圈底部物质脱水导致密度增大。密度大于软流圈密度时会重力失衡，岩石圈下部断裂掉入软流圈。结果导致软流圈体积变大，岩浆上涌，界面抬升，固态岩石圈发生部分熔融，形成基性岩浆。</p>
+<h5 id="3-2-2-4结晶分异作用"><a href="#3-2-2-4结晶分异作用" class="headerlink" title="3-2-2-4结晶分异作用"></a><strong>3-2-2-4结晶分异作用</strong></h5><p>岩浆在冷凝过程中，按一定规律依次结晶出不同矿物</p>
+<p>鲍温反应系列：熔点高，密度大的矿物先结晶，形成垂直分带。</p>
+<p>1）连续反应系列：硅铝含量高（浅色矿物）</p>
+<p>例如六种长石从钙含量高到钠含量高，互相穿插，连续变化</p>
+<p>2）不连续反应系列：铁镁含量高（暗色矿物）</p>
+<p>化学成分和内部结构变化显著</p>
+<p>橄榄石–辉石–角闪石–黑云母（低温）</p>
+<p><img src="/pic/image-20210810130945049.png" alt="侵入作用与侵入岩"></p>
+<h4 id="3-2-3伟晶岩"><a href="#3-2-3伟晶岩" class="headerlink" title="3-2-3伟晶岩"></a>3-2-3伟晶岩</h4><p>残余岩浆缓慢结晶形成的粗大晶体</p>
+<p>主要成分为长石、石英、白云母，结晶温度500~800℃，结晶缓慢</p>
+<p>特电气：富含成矿物质，常在此阶段形成</p>
+<h4 id="3-2-4侵入岩的产状"><a href="#3-2-4侵入岩的产状" class="headerlink" title="3-2-4侵入岩的产状"></a>3-2-4侵入岩的产状</h4><p>体积从大到小：</p>
+<p>岩株、岩基、岩脉（岩墙（垂直）、岩床（水平））</p>
+<p><img src="/pic/image-20210810131813187.png" alt="岩浆岩的产状"></p>
+<p><img src="/pic/image-20210810132131777.png" alt="岩墙"></p>
+<h3 id="3-3火成岩的结构与构造"><a href="#3-3火成岩的结构与构造" class="headerlink" title="3-3火成岩的结构与构造"></a>3-3火成岩的结构与构造</h3><h4 id="3-3-1火成岩的结构"><a href="#3-3-1火成岩的结构" class="headerlink" title="3-3-1火成岩的结构"></a>3-3-1火成岩的结构</h4><p>结构：指矿物的结晶程度、晶粒大小、晶体形态和晶粒间的相互关系。关键的是可以<strong>反映出岩石形成的条件</strong></p>
+<h5 id="按结晶程度："><a href="#按结晶程度：" class="headerlink" title="按结晶程度："></a><strong>按结晶程度：</strong></h5><p>全晶质：花岗岩、侵入岩、大颗粒喷出岩（斑晶）</p>
+<p>隐晶质-玻璃质：黑曜岩（未发生结晶的快速冷凝喷出岩）</p>
+<p>半晶质：次火山岩，介于两者之间</p>
+<h5 id="按晶粒大小："><a href="#按晶粒大小：" class="headerlink" title="按晶粒大小："></a><strong>按晶粒大小：</strong></h5><p>粗粒、中粒、细粒、微粒</p>
+<h5 id="按晶体完整程度："><a href="#按晶体完整程度：" class="headerlink" title="按晶体完整程度："></a><strong>按晶体完整程度：</strong></h5><p>自形：缓慢结晶，晶形规则</p>
+<p>他形：速冷，晶形不规则</p>
+<p>半自形：介于两者之间</p>
+<h5 id="按晶体的相对大小："><a href="#按晶体的相对大小：" class="headerlink" title="按晶体的相对大小："></a><strong>按晶体的相对大小：</strong></h5><p><strong>斑状结构：</strong>喷出岩的典型结构，含有粗大的晶体（斑晶，早期在深部形成）和斑晶周围细小的隐晶质颗粒（基质，岩浆到地面后快速冷凝形成）</p>
+<p><strong>似斑状结构：</strong>侵入岩的基质也是结晶态，是全晶质，成分与斑晶相同，但是结晶环境温度，颗粒小（图为花岗岩）</p>
+<p><img src="/pic/image-20210810160136716.png" alt="花岗岩的似斑状结构"></p>
+<h4 id="3-3-2火成岩的构造"><a href="#3-3-2火成岩的构造" class="headerlink" title="3-3-2火成岩的构造"></a>3-3-2火成岩的构造</h4><p>构造：反应矿物集合体的形态、大小、空间分布。关键的是可以<strong>反映出岩石形成的环境</strong></p>
+<h5 id="枕状构造："><a href="#枕状构造：" class="headerlink" title="枕状构造："></a><strong>枕状构造：</strong></h5><p>水下喷发，一边滚动一边快速冷却收缩，说明是<strong>水下喷发环境</strong>。其特点是上凸底平，外壳是玻璃质，而内部是显晶质，有放射状或同心圆状的龟裂缝。</p>
+<p><img src="/pic/image-20210810155943686.png" alt="枕状玄武岩"></p>
+<h5 id="气孔构造、杏仁状构造："><a href="#气孔构造、杏仁状构造：" class="headerlink" title="气孔构造、杏仁状构造："></a>气孔构造、杏仁状构造：</h5><p>陆相喷发环境</p>
+<h5 id="流纹构造："><a href="#流纹构造：" class="headerlink" title="流纹构造："></a>流纹构造：</h5><p>流纹岩中有不同的矿物成分、颜色、拉长的气孔成线状排列（长石或石英的碎斑晶+浆屑）</p>
+<p><img src="/pic/dizhi10" alt="流纹构造"></p>
+<h5 id="晶洞构造："><a href="#晶洞构造：" class="headerlink" title="晶洞构造："></a>晶洞构造：</h5><p>岩浆冷凝收缩形成空洞，常生长有晶簇，反映了<strong>拉张环境</strong></p>
+<h2 id="四-外动力作用与沉积岩"><a href="#四-外动力作用与沉积岩" class="headerlink" title="四.外动力作用与沉积岩"></a>四.外动力作用与沉积岩</h2><h3 id="4-1内动力作用与外动力作用"><a href="#4-1内动力作用与外动力作用" class="headerlink" title="4-1内动力作用与外动力作用"></a>4-1内动力作用与外动力作用</h3><p>内动力源：岩浆、层圈摩擦与化学作用、放射能</p>
+<p>内动力产物：火山岩、侵入岩；地震、褶皱、断裂、节理</p>
+<p><strong>外动力作用：</strong></p>
+<p>外动力源：太阳辐射能、地球转动能、日月引力能、重力势能等引起的力（科里奥利力、水流冲击、风浪、潮汐）</p>
+<p>作用场所：地球表面（大气圈、水圈、生物圈、地壳表面）</p>
+<p><strong>类型与过程：</strong></p>
+<p>风化作用（机械破碎、化学分解作用）–剥蚀作用–搬运作用–沉积作用–固结成岩（压固、胶结、重结晶、新矿物生长）</p>
+<p>注意：重结晶作用不一定在变质作用中，常温也能发生。</p>
+<p>产物：四类沉积岩及矿产（煤、油气、铁、砂矿）</p>
+<p><img src="/pic/image-20210810164053201.png" alt="水循环"></p>
+<p>图为水循环。</p>
+<p><strong>科里奥利效应：</strong></p>
+<p>由于地球自转，地表运动的流体受到偏离运动方向的力，即为科氏力。纬度和线速度不同，受到的科氏力作用方向也不同：南半球水体会向左偏，而北半球水体会向右偏。</p>
+<p><strong>水圈的作用：</strong>破坏岩石（机械破坏、化学破坏）、搬运岩石、沉积成岩。</p>
+<p>岩石圈：地壳+上地幔顶部的刚体部分，厚度约60-150km，是地学研究的主体。</p>
+<p><strong>六大沉积环境：</strong></p>
+<p>河流、冰川、地下水体、海洋、湖泊、沙漠</p>
+<h3 id="4-2沉积岩的特征"><a href="#4-2沉积岩的特征" class="headerlink" title="4-2沉积岩的特征"></a>4-2沉积岩的特征</h3><p><strong>物质来源：</strong>母岩风化物、生物骨骸、火山物质（火山碎屑岩）、宇宙物质（陨石等）</p>
+<p><strong>重要特征：</strong>有层理结构、含有化石</p>
+<p><strong>搬运作用：</strong></p>
+<p>1）底运：大颗粒砂砾岩跳跃式搬运，沿水流底部搬运。</p>
+<p>当&gt;2mm时成为砾岩；2~0.1mm称为砂岩</p>
+<p>2）悬运：0.01~0.1mm称为粉砂岩（黄土）</p>
+<p>3）溶运（离子态）：&lt;0.01mm，成为粘土岩、灰岩</p>
+<p><strong>固结作用：</strong>压固、胶结、重结晶、新矿物生长</p>
+<p><img src="/pic/image-20210810170136165.png" alt="固结成岩"></p>
+<h4 id="4-2-1沉积岩特有矿物："><a href="#4-2-1沉积岩特有矿物：" class="headerlink" title="4-2-1沉积岩特有矿物："></a>4-2-1沉积岩特有矿物：</h4><p><strong>石膏、石盐、白云石、高岭石、蒙脱石</strong></p>
+<p>岩浆岩特有矿物：橄榄石、辉石（二氧化硅含量很低，易于化学反应，沉积岩中不存在）</p>
+<p>变质岩特有矿物：红柱石、堇青石、矽线石、十字石、蓝闪石</p>
+<p>三类岩石共有矿物：石英、长石、云母</p>
+<h4 id="4-2-2沉积岩的结构"><a href="#4-2-2沉积岩的结构" class="headerlink" title="4-2-2沉积岩的结构"></a>4-2-2沉积岩的结构</h4><p>大小区别：砾–砂–粉砂–泥</p>
+<p>（观察级别：肉眼–放大镜–显微镜–电子显微镜）</p>
+<p><strong>碎屑结构：</strong>岩石中的颗粒是机械沉积的碎屑物</p>
+<p>碎屑岩：砾岩、砂岩、粉砂岩、泥岩（页岩）</p>
+<h5 id="粗碎屑结构："><a href="#粗碎屑结构：" class="headerlink" title="粗碎屑结构："></a><strong>粗碎屑结构：</strong></h5><p>砾岩：<strong>粗碎屑</strong>+<strong>填隙物</strong>（基质，比碎屑小1-2个粒级的砂、细砂、粉砂等）+<strong>化学胶结物</strong>（泥、硅酸盐等）</p>
+<p><img src="/pic/image-20210810172636224.png" alt="粗碎屑结构"></p>
+<h5 id="非碎屑结构："><a href="#非碎屑结构：" class="headerlink" title="非碎屑结构："></a><strong>非碎屑结构：</strong></h5><p>岩石的颗粒均是<strong>化学沉积作用形成</strong>，</p>
+<p><strong>颗粒非常小</strong>，碎屑物、填隙物、胶结物<strong>成分相同</strong>。</p>
+<p>是化学岩、生物化学岩所特有的。</p>
+<p>类型有两种：</p>
+<p>晶质结构：全有近等大的沉积晶体组成（方解石、白云石等）</p>
+<p>生物结构：由丰富的生物碎屑组成（生物屑灰岩）</p>
+<h5 id="分选性："><a href="#分选性：" class="headerlink" title="分选性："></a>分选性：</h5><p>碎屑大小的均匀程度，越均匀，分选性越好，说明搬运距离很远</p>
+<p><img src="/pic/image-20210810173555336.png"></p>
+<h5 id="圆度："><a href="#圆度：" class="headerlink" title="圆度："></a>圆度：</h5><p>碎屑的圆化程度，越远者搬运距离越远。（ 棱角状–次棱角–次圆–圆）</p>
+<p><img src="/pic/image-20210810173716396.png"></p>
+<h4 id="4-2-3沉积岩的构造"><a href="#4-2-3沉积岩的构造" class="headerlink" title="4-2-3沉积岩的构造"></a>4-2-3沉积岩的构造</h4><h5 id="4-2-3-1层理："><a href="#4-2-3-1层理：" class="headerlink" title="4-2-3-1层理："></a>4-2-3-1层理：</h5><p>层理指的是沉积岩的成层性</p>
+<p>红色层理常为氧化性环境；黑色层理常为还原性环境</p>
+<p><strong>平行层理：</strong>反映安静的水体沉积环境<img src="/pic/image-20210810175225557.png"></p>
+<p><strong>交错层理：</strong>反映动荡的水动力环境，近岸或陆地环境</p>
+<p><img src="/pic/image-20210810175253112.png"></p>
+<p>顶截底切：底部相切，顶部截掉发散状态</p>
+<p><strong>递变层理：</strong>同一层内，碎屑粒级由下而上逐渐变小。说明形成环境的水体运动从强到弱/从弱到强周期变化，形成“韵律层”</p>
+<p><img src="/pic/image-20210810180323598.png"></p>
+<p><img src="/pic/image-20210810180403716.png"></p>
+<p><strong>泥裂：</strong>层面上多边形，剖面是上大下小的锥形体，反映了水体沉积物暴露出水面，失水变干收缩形成。</p>
+<p><strong>层间缝合线：</strong>岩层中的锯齿状曲线，与层面平行。分布在石灰岩、砂岩中。</p>
+<p>成因：压溶作用，二氧化碳和碳酸钙发生交代</p>
+<p>意义：确定地层产状，代表层面，区分上下</p>
+<p><img src="/pic/image-20210812120752352.png"></p>
+<h5 id="4-3-2-2沉积构造："><a href="#4-3-2-2沉积构造：" class="headerlink" title="4-3-2-2沉积构造："></a>4-3-2-2沉积构造：</h5><p><strong>结核构造</strong></p>
+<p>沉积时，一些<strong>不同物质</strong>绕质点滚动沉积形成核状体。结核易于在含煤地层和石灰岩里产生。</p>
+<p>变化结核：结核脱水收缩，形成网状裂痕，称为<strong>“龟背石”</strong></p>
+<p><img src="/pic/dizhi11.JPG"></p>
+<p><strong>鲕状构造</strong></p>
+<p>矿物以凝胶方式以某种碎屑物为核心沉积而形成的小颗粒（&lt;2mm）鱼籽状球状体，内部具有同心及发射状构造。</p>
+<p>形成环境：易形成于浅水动荡环境的胶体溶液中。</p>
+<p>常见于灰岩及赤铁矿中</p>
+<p><strong>冲刷痕、槽模：</strong></p>
+<p>沉积岩岩层的底面起伏状突起。</p>
+<p>有浅水动力的强烈作，表用一个沉积阶段的结束、新阶段的开始</p>
+<p><img src="/pic/image-20210812122544325.png"></p>
+<p><strong>假晶：</strong></p>
+<p>残留的矿物外型，反映干旱环境，盐类逃逸被泥质充填体取代</p>
+<p><img src="/pic/dizhi12.JPG"></p>
+<h3 id="4-3常见的沉积岩"><a href="#4-3常见的沉积岩" class="headerlink" title="4-3常见的沉积岩"></a>4-3常见的沉积岩</h3><h4 id="4-3-1碎屑岩"><a href="#4-3-1碎屑岩" class="headerlink" title="4-3-1碎屑岩"></a>4-3-1碎屑岩</h4><p>砾岩、砂岩、粉砂岩（颗粒大小不同）</p>
+<h4 id="4-3-2化学岩"><a href="#4-3-2化学岩" class="headerlink" title="4-3-2化学岩"></a>4-3-2化学岩</h4><p><strong>硅质岩：</strong>以SiO2为主体的沉积岩</p>
+<p>成因：生物骨体堆积或火山作用凝聚</p>
+<p><img src="/pic/image-20210812133459228.png"></p>
+<p>不同的水晶结晶：</p>
+<p>紫水晶（Fe多）、蔷薇水晶（Fe少）、烟水晶（含Mn）</p>
+<p><img src="/pic/dizhi13.JPG"></p>
+<p>水晶硅质岩：玉髓、玛瑙、蛋白石、碧玉（隐晶）</p>
+<p>若不同颜色的隐晶呈同心圆构造，则为玛瑙</p>
+<p>产自澳洲的蛋白石成为欧泊</p>
+<p><strong>石灰岩：</strong></p>
+<p>由化学作用形成的方解石颗粒集合，胶结物是碳酸钙。</p>
+<p>亮晶：颗粒直径较大，透明的方解石颗粒</p>
+<p>泥晶：颗粒极小肉眼不可辨</p>
+<p>石灰岩常用于炼制水泥、石灰</p>
+<p>石灰岩和岩浆岩的接触处，会形成<strong>矽卡岩</strong>和铁铜矿床</p>
+<p><strong>白云岩：</strong>碳酸镁钙MgCa[CO3]2</p>
+<p>大部分白云岩是由方解石（碳酸钙）在含镁海水中镁离子交换产生的。</p>
+<p>野外露头的白云岩易于水化风化形成黑色刀砍状溶蚀沟</p>
+<p><img src="/pic/image-20210812134956956.png"></p>
+<p>鉴别：白云岩和盐酸反应冒泡很微弱，而石灰岩反应剧烈</p>
+<h4 id="4-3-3生物化学岩"><a href="#4-3-3生物化学岩" class="headerlink" title="4-3-3生物化学岩"></a>4-3-3生物化学岩</h4><p>只有硅藻岩（硅藻土）、放射虫岩。分布很少。</p>
+<h4 id="4-3-4粘土岩"><a href="#4-3-4粘土岩" class="headerlink" title="4-3-4粘土岩"></a>4-3-4粘土岩</h4><p>以<strong>高岭土、蒙脱石</strong>为代表</p>
+<p>成分为小于0.01mm的颗粒，具有很多特性：</p>
+<p>可塑性、吸水性（蒙脱石吸水体积膨胀5~20倍）、吸附性、烧结性、耐火性</p>
+<p>当黏土岩固结形成层理，形成<strong>页岩</strong></p>
+<p><img src="/pic/image-20210812135810816.png"></p>
+<h2 id="五-变质作用与变质岩"><a href="#五-变质作用与变质岩" class="headerlink" title="五.变质作用与变质岩"></a>五.变质作用与变质岩</h2><h3 id="5-1变质作用"><a href="#5-1变质作用" class="headerlink" title="5-1变质作用"></a>5-1变质作用</h3><h4 id="5-1-1变质作用定义"><a href="#5-1-1变质作用定义" class="headerlink" title="5-1-1变质作用定义"></a>5-1-1变质作用定义</h4><p><strong>变质作用：</strong>由于温度、压力的改变和化学流体的作用，使岩石的矿物成分、化学成分、结构构造<strong>在固态状态下变化</strong>，形成新矿物新岩石的地质作用。</p>
+<p><strong>变质三要素：T、P、流体</strong></p>
+<p><strong>热源：</strong>来自地球内部的地热增温、岩浆热、构造摩擦热、放射热。</p>
+<p><strong>深度：</strong>发生在中地壳层次或下地壳层次，一般至少<strong>大于地下10km</strong>（温度超过300℃达到变质条件）。</p>
+<p>变质岩约占岩石中的四分之一（火成岩三分之二，沉积岩不到十分之一）</p>
+<p>研究变质岩可以了解地壳深处的温度压力、物理化学条件、恢复原岩。变质作用还可以使矿产变富变大、将普通岩石变为宝玉石。</p>
+<p>变质岩的两个大分类：</p>
+<p><strong>正变质岩：</strong>原岩为火成岩的变质岩</p>
+<p><strong>副变质岩：</strong>原岩为沉积岩的变质岩</p>
+<p>陨石撞击产生的变质作用主要是压力导致的，大部分变质岩是温度导致的。</p>
+<h4 id="5-1-2温度"><a href="#5-1-2温度" class="headerlink" title="5-1-2温度"></a>5-1-2温度</h4><p><strong>温度区间：</strong>低于150℃不变质；高于900℃则会熔化。</p>
+<p>在温度的作用下，</p>
+<p>1）非晶体会变为结晶体；</p>
+<p>2）结晶体颗粒会变大（重结晶）</p>
+<p>3）物质与结构在温度作用下重组，形成新矿物</p>
+<h4 id="5-1-3压力"><a href="#5-1-3压力" class="headerlink" title="5-1-3压力"></a>5-1-3压力</h4><p>静压力：上层岩石重量引起，随深度增加而增加</p>
+<p>流体压力：<strong>流体是物质成分进行交换的自由场所</strong></p>
+<p>定向压力：作用在岩石的六个方向的力</p>
+<p>同轴定向压力/非同轴（不对称）定向压力：</p>
+<p><strong>蓝片岩（高压低温）</strong>：</p>
+<p>温度低，近地表的板块摩擦导致的角闪石压力变质为<strong>蓝闪石</strong>片状矿物，是古俯冲-撞击带的重要标志</p>
+<p><strong>超高压变质岩：</strong>含柯世英、金刚石的榴灰岩</p>
+<p>注意：金伯利岩（次火山岩）中的金刚石是岩浆成因，不是变质成因。</p>
+<h4 id="5-1-4具有化学活动性的流体"><a href="#5-1-4具有化学活动性的流体" class="headerlink" title="5-1-4具有化学活动性的流体"></a><strong>5-1-4具有化学活动性的流体</strong></h4><p>以H2O、CO2为主，并含其他易挥发易流动的物质</p>
+<p>流体分布：岩石粒间或缝隙中、矿物结构中、岩浆分逸而来。</p>
+<p><strong>交代作用：</strong>化学物质的<strong>带进带出</strong>，发生物质交换</p>
+<h3 id="5-2变质作用的变化"><a href="#5-2变质作用的变化" class="headerlink" title="5-2变质作用的变化"></a>5-2变质作用的变化</h3><h4 id="5-2-1化学成分的变化"><a href="#5-2-1化学成分的变化" class="headerlink" title="5-2-1化学成分的变化"></a>5-2-1化学成分的变化</h4><p>1）体积大、密度小的矿物变成体积小、密度大的矿物</p>
+<p>例：橄榄石+钙长石—-石榴子石</p>
+<p>形成新矿物：岩石释放挥发成分达到平衡，形成新矿物</p>
+<p>例：高岭土–红柱石、石英和水</p>
+<p>方解石+石英——硅灰石+二氧化碳</p>
+<p>2）重结晶作用：变质作用一定会发生重结晶</p>
+<p>小晶体变成大晶体</p>
+<p>石灰岩—大理岩（汉白玉）</p>
+<p>石英砂—石英岩</p>
+<p>3）交代作用（如花岗岩侵入石灰岩）</p>
+<p>中酸性岩浆侵入灰岩，形成矽卡岩，并伴生大量的金属矿石矿床（铁矿、铜矿、锡矿、钨矿等）</p>
+<p>4）变质分异作用</p>
+<p>岩石成分重新组合，从原先的均匀构造变为不均匀构造</p>
+<p>例如：粉砂岩—条带状变质岩（如条带状铁矿床，鞍山铁矿）</p>
+<h4 id="5-2-2矿物结构的变化"><a href="#5-2-2矿物结构的变化" class="headerlink" title="5-2-2矿物结构的变化"></a>5-2-2矿物结构的变化</h4><p><strong>片理</strong>和<strong>变质矿物</strong>是变质岩的两大特征！</p>
+<p><strong>特征变质矿物：</strong></p>
+<p>红柱石（低温接触热变质）、蓝晶石（中温中压）、矽线石（高温）</p>
+<p>化学成分不变，但结构发生变化<strong>（等化学系）</strong></p>
+<h4 id="5-2-3变质岩的结构"><a href="#5-2-3变质岩的结构" class="headerlink" title="5-2-3变质岩的结构"></a>5-2-3变质岩的结构</h4><p><strong>变晶结构：</strong></p>
+<p>原有岩石经变质作用在固态下重结晶形成的晶质结构</p>
+<p><strong>变余结构：</strong></p>
+<p>残留有部分原岩特征的结构，如板岩特有的变余泥质结构、砂质结构</p>
+<p><strong>脆裂结构：</strong></p>
+<p>由于动力变质作用使岩石发生机械破碎产生的结构（矿物颗粒扭曲变形）</p>
+<p><strong>交代结构：</strong></p>
+<p>变质作用过程中，通过化学交代作用形成的结构</p>
+<h4 id="5-2-4变质岩的构造"><a href="#5-2-4变质岩的构造" class="headerlink" title="5-2-4变质岩的构造"></a>5-2-4变质岩的构造</h4><h5 id="5-2-4-1变成构造："><a href="#5-2-4-1变成构造：" class="headerlink" title="5-2-4-1变成构造："></a><strong>5-2-4-1变成构造：</strong></h5><p>原岩的结构（如层理）消失，形成新的构造如片理、片麻理等。</p>
+<p>随变质程度而加深：</p>
+<p><strong>斑点构造</strong>—<strong>板理构造</strong>（低温）—<strong>片理构造</strong>（长石&lt;石英）/**片麻构造**（长石&gt;石英）</p>
+<p>片：黑云母等片状晶体      麻：石英、长石的麻点</p>
+<p>高温下形成<strong>片麻构造</strong>属于<strong>高级变质岩</strong></p>
+<p>麻粒岩（<strong>块状构造</strong>）–更高温</p>
+<h5 id="5-2-4-2变余构造"><a href="#5-2-4-2变余构造" class="headerlink" title="5-2-4-2变余构造"></a><strong>5-2-4-2变余构造</strong></h5><h3 id="5-3变质作用类型及变质岩代表岩石"><a href="#5-3变质作用类型及变质岩代表岩石" class="headerlink" title="5-3变质作用类型及变质岩代表岩石"></a>5-3变质作用类型及变质岩代表岩石</h3><h4 id="5-3-1接触变质作用"><a href="#5-3-1接触变质作用" class="headerlink" title="5-3-1接触变质作用"></a>5-3-1接触变质作用</h4><p><strong>产生代表变质岩为：矽卡岩、大理岩、角岩</strong></p>
+<p><strong>5-3-1接触热变质：</strong></p>
+<p>泥岩—斑点板岩/角岩</p>
+<p>石灰岩—大理岩</p>
+<p><strong>5-3-2接触交代变质：</strong></p>
+<p>矽卡岩：中酸性岩浆与冷围岩之间发生物质成分的交换形成</p>
+<p>变质矿物：硅灰石、石榴石、角闪石等</p>
+<p>外带碳酸钙多，主要是大理岩</p>
+<p>内带二氧化硅多，主要是石英</p>
+<p><img src="/pic/image-20210813122009094.png"></p>
+<h4 id="5-3-2区域变质作用"><a href="#5-3-2区域变质作用" class="headerlink" title="5-3-2区域变质作用"></a><strong>5-3-2区域变质作用</strong></h4><p><strong>产生代表变质岩为板岩、千枚岩、片岩、片麻岩、麻粒岩</strong></p>
+<p>在变质作用三要素下，在区域范围内发生的变质作用</p>
+<p>超高压、高温作用：碳—金刚石</p>
+<p>高压、低温条件：角闪石、钠长石—蓝闪石</p>
+<p>![](/pic/image-20210813185955215.png</p>
+<p>高温低压条件：粘土矿物—红柱石</p>
+<p>高温中压条件：粘土矿物—蓝晶石</p>
+<p><strong>低级变质作用：</strong>生成<strong>板岩</strong>，显微鳞片变晶、变余结构。</p>
+<p><img src="/pic/image-20210813185518319.png"></p>
+<p><strong>千枚岩</strong>：具有千枚状构造，完全重结晶，出现绢云母、绿泥石。</p>
+<p><img src="/pic/image-20210813185546848.png"></p>
+<p><strong>中级变质作用：</strong>生成<strong>片岩</strong>，具有变晶结构、片状构造，原岩矿物与结构完全重组。新生矿物：石英、云母、长石、石榴石、十字石</p>
+<p>等。</p>
+<p><img src="/pic/image-20210813185713251.png"></p>
+<p><strong>高级变质岩：</strong>生成<strong>片麻岩</strong>，长石与石英的总含量超过50%。</p>
+<p><img src="/pic/image-20210813185825443.png"></p>
+<p>眼球构造是花岗岩等火成岩变质形成的特征（正变质岩）</p>
+<p><strong>麻粒岩：</strong>变质程度最深，主要有紫苏辉石、铁铝榴石、长石、石英等粒状矿物。变质温度即将到达熔化温度。（片状黑云母不存在）</p>
+<h4 id="5-3-3动力变质作用"><a href="#5-3-3动力变质作用" class="headerlink" title="5-3-3动力变质作用"></a>5-3-3动力变质作用</h4><p><strong>主要代表变质岩为糜棱岩、蓝闪石片岩。</strong></p>
+<p>伴随构造活动产生的韧性剪切变质-变形作用。</p>
+<p><strong>糜棱岩：</strong>韧性剪切变形条件下形成的<strong>晶格位错</strong>变质岩。</p>
+<p>特征：片理发育，偏光显微下波状消光，细粒化，存在核幔构造。</p>
+<p>变质的片理上发育有拉伸<strong>线理</strong>。</p>
+<p><img src="/pic/image-20210813191124752.png"></p>
+<p>动态（韧性）变质作用的三个特征：“线理、片理、不对称组构”</p>
+<h4 id="5-3-4混合岩化作用："><a href="#5-3-4混合岩化作用：" class="headerlink" title="5-3-4混合岩化作用："></a>5-3-4混合岩化作用：</h4><p>当温度大于900摄氏度时，区域高级变质岩一部分高温熔融，另一部分未熔化的现象。形成特殊的混合变质岩。</p>
+<p><strong>基体</strong>为未熔化的变质岩（暗色）；</p>
+<p>而<strong>脉体</strong>为部分熔融的长石和石英（浅色）</p>
+<p><img src="/pic/image-20210813191743675.png"></p>
+<h2 id="三大类岩石的总结："><a href="#三大类岩石的总结：" class="headerlink" title="三大类岩石的总结："></a>三大类岩石的总结：</h2><p><img src="/pic/image-20210813192958251.png"></p>
+<p><img src="/pic/image-20210813192921589.png"></p>
+]]></content>
+      <categories>
+        <category>地理学</category>
+      </categories>
+      <tags>
+        <tag>学习笔记</tag>
+        <tag>地质</tag>
+        <tag>矿物</tag>
       </tags>
   </entry>
 </search>
