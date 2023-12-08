@@ -136,8 +136,8 @@
 <p>​      删除列表中下标为index的元素，<strong>不写index默认删除最后一项</strong>，<strong>并返回删除元素的值</strong>（pop:弹出）</p>
 <p><strong>list.remove(obj)：</strong></p>
 <p>​      删除列表中等于obj的元素</p>
-<h3 id="4）列表反序："><a href="#4）列表反序：" class="headerlink" title="4）列表反序："></a>4）列表反序：</h3><p><strong>list.reserve()：</strong></p>
-<p>与内建函数reserved(list)不同：使用list.reserve()方法，则会直接反序原列表，因为列表是可变对象。</p>
+<h3 id="4）列表反序："><a href="#4）列表反序：" class="headerlink" title="4）列表反序："></a>4）列表反序：</h3><p><strong>list.reverse()：</strong></p>
+<p>与内建函数reversed(list)不同：使用list.reverse()方法，则会直接反序原列表，因为列表是可变对象。</p>
 <h3 id="5）列表排序"><a href="#5）列表排序" class="headerlink" title="5）列表排序"></a>5）列表排序</h3><p><strong>list.sort(key=None/len/str , reverse=True/False)：</strong></p>
 <p>与内建函数sorted(list)不同：使用list.sort()方法，则会直接排序原列表，但这样做会覆盖原列表。</p>
 <h2 id="1-2列表使用"><a href="#1-2列表使用" class="headerlink" title="1.2列表使用"></a>1.2列表使用</h2><p>1.成员判断(in)，序列连接(+)，序列重复(*)<br>2.整体操作：<br>list.sort()，list.reverse()，list.extend(iterable)（将可迭代对象分割为列表并合并入原列表），其返回值均为none，只修改原列表；<br>sorted(list)返回新列表，reversed(list)返回反转列表的迭代器，len(list)返回列表元素个数。</p>
