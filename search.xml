@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>母亲节快乐2023</title>
+    <title>Happy Mother&#39;s day 2023</title>
     <url>/2023/05/15/Mother2023/</url>
     <content><![CDATA[<p>这是一篇错峰（过期）的双重节日祝福，一方面是补5月10日老妈的Birthday，另一方面是补5月14日的Mothers’ day，复习考试伤不起啊。</p>
 <p>很惭愧这两天都没能回家去陪伴，甚至对数字节日健忘的我一开始还忘了老妈的生日（我还一直天真的以为记得母亲节，殊不知忘了更重要的。。。）</p>
@@ -27,7 +27,7 @@
 ]]></content>
   </entry>
   <entry>
-    <title>Python数据结构</title>
+    <title>Python数据结构 Python data structure</title>
     <url>/2023/04/27/Python%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</url>
     <content><![CDATA[<h1 id="python-序列"><a href="#python-序列" class="headerlink" title="python 序列"></a>python 序列</h1><p>包括字符串，列表，元组，range对象，字典，集合等数据类型</p>
 <p>补充记忆知识点**整数数据类型：</p>
@@ -332,16 +332,16 @@
 <h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><p>1.matrix = [ [1,2,3,4], [5,6,7,8], [9,10,11,12] ]用列表解析一行实现矩阵转置<br>用zip实现矩阵转置</p>
 ]]></content>
       <categories>
-        <category>计算机科学</category>
+        <category>Computer Science</category>
       </categories>
       <tags>
         <tag>Python</tag>
-        <tag>编程</tag>
-        <tag>学习笔记</tag>
+        <tag>Code writing</tag>
+        <tag>Study notes</tag>
       </tags>
   </entry>
   <entry>
-    <title>Python算法结构与常用库</title>
+    <title>Python算法结构与常用库 Python algorithm structure and common libraries</title>
     <url>/2023/04/27/Python%E7%AE%97%E6%B3%95%E6%A8%A1%E5%9D%97%E4%B8%8E%E5%B8%B8%E7%94%A8%E5%BA%93/</url>
     <content><![CDATA[<h1 id="python-算法模块与常用库"><a href="#python-算法模块与常用库" class="headerlink" title="python 算法模块与常用库"></a>python 算法模块与常用库</h1><p>包括各种常用算法案例，以及常用库的使用说明</p>
 <h1 id="1-常用算法实例"><a href="#1-常用算法实例" class="headerlink" title="1.常用算法实例"></a>1.常用算法实例</h1><h2 id="1-1质数判断算法"><a href="#1-1质数判断算法" class="headerlink" title="1.1质数判断算法"></a>1.1质数判断算法</h2><p>基本思路：首先用if判断最特殊的0和1，它们都不是质数。</p>
@@ -449,16 +449,16 @@
 <p>DataFrame是一个<strong>表格型的数据结构</strong>，包含一组有序序列，并且同时拥有行索引和列索引。</p>
 ]]></content>
       <categories>
-        <category>计算机科学</category>
+        <category>Computer science</category>
       </categories>
       <tags>
         <tag>Python</tag>
-        <tag>编程</tag>
-        <tag>学习笔记</tag>
+        <tag>Code writing</tag>
+        <tag>Study notes</tag>
       </tags>
   </entry>
   <entry>
-    <title>普通地质学学习笔记</title>
+    <title>普通地质学学习笔记 General geology study notes</title>
     <url>/2023/04/27/%E6%99%AE%E9%80%9A%E5%9C%B0%E8%B4%A8%E5%AD%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<h1 id="普通地质学学习笔记"><a href="#普通地质学学习笔记" class="headerlink" title="普通地质学学习笔记"></a>普通地质学学习笔记</h1><h2 id="一-绪论"><a href="#一-绪论" class="headerlink" title="一.绪论"></a>一.绪论</h2><h3 id="1-1研究内容与方法"><a href="#1-1研究内容与方法" class="headerlink" title="1-1研究内容与方法"></a>1-1研究内容与方法</h3><h4 id="地球的物质："><a href="#地球的物质：" class="headerlink" title="地球的物质："></a>地球的物质：</h4><p>元素-矿物-岩石-地壳</p>
 <p>五大类岩石</p>
@@ -494,7 +494,7 @@
 <h4 id="2-4-0外形："><a href="#2-4-0外形：" class="headerlink" title="2-4-0外形："></a>2-4-0外形：</h4><p>单晶体（一维方向伸展：针状；二维方向伸展：片状、板状；三维方向伸展：粒状）</p>
 <p>集合体（一维：纤维状；二维：鳞片状；三维的：粒状）</p>
 <p>特殊形态集合体：放射状；晶簇状；鲕（er）状（如下图）豆状；钟乳状；葡萄状；结核状</p>
-<p><img src="/pic/dizhi1.JPG" alt="鲕（er）状">dizhi1.JPG)</p>
+<p><img src="/pic/dizhi1.JPG" alt="鲕（er）状"></p>
 <h4 id="2-4-1光学特征："><a href="#2-4-1光学特征：" class="headerlink" title="2-4-1光学特征："></a><strong>2-4-1光学特征：</strong></h4><p><strong>透明度：</strong>光线是否能透过矿物0.03mm的薄片</p>
 <p><strong>光泽：</strong>矿物的反光能力（金属光泽/非金属光泽）</p>
 <p>非金属光泽：玻璃光泽（长石）、油脂光泽（石英断口）、丝绢光泽（云母）、土状光泽（高岭土）</p>
@@ -825,16 +825,16 @@
 <p><img src="/pic/image-20210813192921589.png"></p>
 ]]></content>
       <categories>
-        <category>地理学</category>
+        <category>Geology</category>
       </categories>
       <tags>
-        <tag>学习笔记</tag>
-        <tag>地质</tag>
-        <tag>矿物</tag>
+        <tag>Study notes</tag>
+        <tag>Geology</tag>
+        <tag>Mineral</tag>
       </tags>
   </entry>
   <entry>
-    <title>计算化学学习笔记</title>
+    <title>计算化学学习笔记 Computational chemistry study notes</title>
     <url>/2023/04/27/%E8%AE%A1%E7%AE%97%E5%8C%96%E5%AD%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<h2 id="一-序言："><a href="#一-序言：" class="headerlink" title="一.序言："></a>一.序言：</h2><h3 id="1-1软件安装"><a href="#1-1软件安装" class="headerlink" title="1-1软件安装"></a>1-1软件安装</h3><p>GaussView：分子建模软件</p>
 <p>Gaussian：对建好的化学模型进行计算</p>
@@ -1108,11 +1108,11 @@
 <p>操作记录停止：log off</p>
 ]]></content>
       <categories>
-        <category>化学</category>
+        <category>Chemistry</category>
       </categories>
       <tags>
-        <tag>学习笔记</tag>
-        <tag>计算化学</tag>
+        <tag>Study notes</tag>
+        <tag>Computational chemistry</tag>
       </tags>
   </entry>
 </search>
